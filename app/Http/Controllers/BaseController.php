@@ -9,6 +9,6 @@ class BaseController extends Controller
 {
     public function index(Base $base)
     {
-        return $base->get();
+        return view('bases.index')->with(['bases' => $base->get()]);
     }
 }

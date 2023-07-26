@@ -18,4 +18,9 @@ use App\Http\Controllers\BaseController;
 //     return view('welcome');
 // });
 
-Route::get('/base', [BaseController::class, 'index']);
+Route::get('/', [BaseController::class, 'index']);
+
+# 以下のコメントアウトしたコードは使わないはず
+// Route::get('/', function() {
+//     return view('bases.index');
+// });
