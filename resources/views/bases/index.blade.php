@@ -5,6 +5,7 @@
         <title>Student Information</title>
         <!-- Fonts -->
         <link href="https://googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}"
     </head>
     <body>
         <h1>Student Information</h1>
