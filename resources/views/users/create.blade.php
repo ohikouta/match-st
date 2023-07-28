@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>Create User Information</h1>
-        <form action="/bases" method="post">
+        <form action="{{ route('users.store') }}" method="post">
             @csrf
             <!-- ユーザーがデータを入力するためのフォームを記述します -->
             <!-- 名前、大学名 -->

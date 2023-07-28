@@ -19,10 +19,12 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 
-Route::get('/', [BaseController::class, 'index']);
+// Route::get('/', [BaseController::class, 'index']);
+Route::get('/', [BaseController::class, 'index'])->name('users.index');
 
 # 以下のコメントアウトしたコードは使わないはず
 // Route::get('/', function() {
 //     return view('bases.index');
 // });
-Route::get('/users/create', [UserController::class, 'create']);
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
