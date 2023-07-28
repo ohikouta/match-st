@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::get('/', [BaseController::class, 'index']);
 // Route::get('/', function() {
 //     return view('bases.index');
 // });
+Route::get('/users/create', [UserController::class, 'create']);
