@@ -27,4 +27,5 @@ Route::get('/', [BaseController::class, 'index'])->name('users.index');
 //     return view('bases.index');
 // });
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{base}', [UserController::class, 'show']);

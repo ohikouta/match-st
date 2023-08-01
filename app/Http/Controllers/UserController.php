@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Base; // Baseモデルをインポート
 use Illuminate\Support\Facades\DB; // DBクラスをインポート
@@ -13,10 +14,11 @@ class UserController extends Controller
         return view('users.create');
     }
     
-    public function store(Request $request)
+    /*
+    public function store(Request $request, Base $base)
     {
-        // Storeメソッドが実行されたことを確認するための合図的なコード
-    　　dd('Storeメソッドが実行されました');
+        dd($request->all());
+
         // バリデーションが必要な場合はここでバリデーションを行う
         
         // データベースのトランザクションを開始
@@ -48,4 +50,21 @@ class UserController extends Controller
         
         // フォームからのデータをモデルに保存
     }
+    */
+    
+    public function show(Base $base)
+	{
+		return view('users/show')->with(['base' => $base]);
+		// 'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス
+	}
+    
+    
+    public function store(Request $request, Base $base)
+    {
+        $input = $request['base'];
+        $base->fill($input)->save();
+        return redirect('/users/' . $base->id);
+        
+    }
+    
 }
