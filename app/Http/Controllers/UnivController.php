@@ -10,7 +10,8 @@ class UnivController extends Controller
 {
     public function show($univName)
     {
-        $university = Univ::where('univ_name', $univName);
+        
+        $university = Univ::where('univ_name', $univName)->first();
         if (!$university) {
             abort(404);
         }
