@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UnivController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,4 @@ Route::get('/users/create', [UserController::class, 'create'])->name('users.crea
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // ルートパスに対して/users/{base}が来たら、showを返す
 Route::get('/users/{base}', [UserController::class, 'show']);
+Route::get('/univ/{univName}', [UnivController::class, 'show']);

@@ -12,7 +12,7 @@
         <div class='self'>
             @foreach ($bases as $base)
                 <h2>{{ $base->name }}</h2>
-                <p>{{ $base->univ }}</p>
+                <a href="/univ/show">{{ $base->univ }}</a>
             @endforeach
         </div>
         <!-- /users/create へのリンクを絶対URLで生成 -->
