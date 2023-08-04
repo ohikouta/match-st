@@ -28,4 +28,5 @@ Route::get('/', [BaseController::class, 'index'])->name('users.index');
 // });
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+// ルートパスに対して/users/{base}が来たら、showを返す
 Route::get('/users/{base}', [UserController::class, 'show']);
