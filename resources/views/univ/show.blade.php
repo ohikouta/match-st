@@ -11,6 +11,7 @@
         <h1 class="title"></h1>
         <div class="content">
             
+            <p>{{ $university->univ_name }}</p>
             
         </div>
         <!--<div class="edit">-->
