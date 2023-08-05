@@ -8,10 +8,10 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1 class="title"></h1>
+        <h1 class="title">{{ $university->univ_name }}</h1>
         <div class="content">
             
-            <p>{{ $university->univ_name }}</p>
+            <p>{{ $university->locate }}</p>
             
         </div>
         <!--<div class="edit">-->
