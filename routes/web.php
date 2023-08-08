@@ -37,3 +37,5 @@ Route::get('/univ/{univName}', [UnivController::class, 'show'])->name('univ.show
 // イベントに関する導線
 Route::get('/events/index', [EventController::class, 'index']);
 Route::get('/events/plan', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::get('/events/{event}', [EventController::class, 'showResult']);
