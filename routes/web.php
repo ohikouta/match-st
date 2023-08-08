@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnivController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,9 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // ルートパスに対して/users/{base}が来たら、showを返す
 Route::get('/users/{base}', [UserController::class, 'show']);
 Route::get('/univ/{univName}', [UnivController::class, 'show'])->name('univ.show');
+
+// イベントに関する導線
+Route::get('/events/index', [EventController::class, 'index']);
+Route::get('/events/plan', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::get('/events/{event}', [EventController::class, 'showResult']);
