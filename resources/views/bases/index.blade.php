@@ -20,6 +20,6 @@
         <!-- /users/create へのリンクを絶対URLで生成 -->
         <a href="{{ url('/users/create') }}">新規ユーザー登録</a>
         <a href="{{ url('/events/index') }}">イベント</a>
-        <div class='paginate'>{{ $bases->links() }}</div>
+        <div class='paginate'>{{ $bases->links('pagination::bootstrap-4') }}</div>
     </body>
 </html>
