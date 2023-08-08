@@ -9,6 +9,6 @@ class BaseController extends Controller
 {
     public function index(Base $base)
     {
-        return view('bases.index')->with(['bases' => $base->getPaginateByLimit(2)]);
+        return view('bases.index')->with(['bases' => $base->getPaginateByLimit(10)]);
     }
 }
