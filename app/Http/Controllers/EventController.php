@@ -17,6 +17,18 @@ class EventController extends Controller
         return view('events.plan');
     }
     
+    public function showResult(Event $event)
+    {
+        return view('events.show')->with(['event' => $event]);
+    }
+
+    public function store(Request $request, Event $event)
+    {
+        $input = $request['event'];
+        $event->fill($input)->save();
+        return redirect('/events/' . $event->id);
+    }
+    
     public function look(Event $event)
     {
         return view('events.look')->with(['events' => $event->getPaginateBylimit(5)]);
