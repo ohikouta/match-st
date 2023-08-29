@@ -13,7 +13,8 @@
             <!-- ユーザーがデータを入力するためのフォームを記述します -->
             <!-- 名前、大学名 -->
             <input type="text" name=base[name] placeholder="名前">
-            <input type="text" name=base[univ] placeholder="大学名">
+            <input type="text" name=univ[univ_name] placeholder="大学名">
+            <input type="text" name=univ[locate] placeholder="大学都道府県">
             <button type="submit">登録</button>
         </form>
         

@@ -22,13 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/login', function () {
+//     return view('welcome')->name('login');
+// });
+
+Route::get('/', [BaseController::class, 'start'])->name('bases.start');
+
+// Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // コントローラーごとのルーティング
 Route::controller(BaseController::class)->middleware(['auth'])->group(function(){
-   Route::get('/', 'index')->name('users.index');
+  Route::get('/users/index', 'index')->name('users.index');
 });
 
 Route::controller(UserController::class)->middleware(['auth'])->group(function(){
