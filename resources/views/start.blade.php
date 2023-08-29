@@ -22,5 +22,7 @@
     </head>
     <body class="antialiased">
         <h1>IEEE</h1>
+        <!-- ログイン画面へ推移するボタンを配置したい -->
+        <a href="{{ url('/users/index') }}">ログイン</a>
     </body>
 </html>
