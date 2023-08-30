@@ -18,8 +18,12 @@
         <div>
             <h2>所属団体一覧</h2>
         </div>
-        <div>
+        <div　class='event'>
             <h2>イベント</h2>
+            @foreach ($events as $event)
+                <h3>{{ $event->name }}</h3>
+                <p>{{ $event->summary }}</p>
+            @endforeach
         </div>
     </body>
 </html>
