@@ -6,13 +6,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Base; // Baseモデルをインポート
 use App\Models\Univ; // Univモデルをインポート
+use App\Models\User; // Userモデルをインポート
 use Illuminate\Support\Facades\DB; // DBクラスをインポート
+use Illuminate\Support\Facades\Auth; // ログインユーザーの情報取得
 
 class UserController extends Controller
 {
-    public function create()
+    public function profile()
     {
-        return view('users.create');
+        // ログインユーザーの情報を取得
+        $user = Auth::user();
+        return view('users.profile', ['user' => $user]);
     }
     
     public function show(Base $base)
@@ -42,5 +46,7 @@ class UserController extends Controller
         return redirect('/users/' . $base->id);
         
     }
+    
+    
     
 }

@@ -9,16 +9,16 @@
     </head>
     <body>
         <h1>Student Information</h1>
-        <div class='self'>
-            @foreach ($bases as $base)
-                <h2>{{ $base->name }}</h2>
-                <a href="{{ route('univ.show' , ['univName' => $base->univ]) }}">
-                    {{ $base->univ }}
-                </a>
-            @endforeach
-        </div>
+        <!--<div class='self'>-->
+        <!--    @foreach ($bases as $base)-->
+        <!--        <h2>{{ $base->name }}</h2>-->
+        <!--        <a href="{{ route('univ.show' , ['univName' => $base->univ]) }}">-->
+        <!--            {{ $base->univ }}-->
+        <!--        </a>-->
+        <!--    @endforeach-->
+        <!--</div>-->
         <!-- /users/create へのリンクを絶対URLで生成 -->
-        <a href="{{ url('/users/create') }}">新規ユーザー登録</a>
+        <a href="{{ url('/users/profile') }}">プロフィール編集</a>
         <a href="{{ url('/events/index') }}">イベントを企画する</a>
         <a href="{{ url('/events/look') }}">イベント一覧</a>
         <div class='paginate'>{{ $bases->links('pagination::bootstrap-4') }}</div>
