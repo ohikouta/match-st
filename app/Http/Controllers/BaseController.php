@@ -15,6 +15,6 @@ class BaseController extends Controller
     
     public function index(Base $base)
     {
-        return view('users.index')->with(['bases' => $base->getPaginateByLimit(10)]);
+        return view('bases.index')->with(['bases' => $base->getPaginateByLimit(10)]);
     }
 }
