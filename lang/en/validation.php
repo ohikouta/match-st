@@ -31,6 +31,7 @@ return [
         'numeric' => 'The :attribute must be between :min and :max.',
         'string' => 'The :attribute must be between :min and :max characters.',
     ],
+    'birthday' => 'This is a custom massage.',
     'boolean' => 'The :attribute field must be true or false.',
     'confirmed' => 'The :attribute confirmation does not match.',
     'current_password' => 'The password is incorrect.',
