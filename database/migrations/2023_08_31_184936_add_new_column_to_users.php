@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('univ');
+            $table->date('birthdate');
+            $table->enum(
+                'grade', 
+                [
+                    '学部1年',
+                    '学部2年',
+                    '学部3年',
+                    '学部4年',
+                    '修士1年',
+                    '修士2年',
+                    '博士1年',
+                    '博士2年',
+                    '博士3年',
+                ]);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
+    }
+};
