@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1>イベント掲示板</h1>
+        <p>変更しました！</p>
         <div class='self'>
             @foreach ($events as $event)
                 <h2>{{ $event->name }}</h2>

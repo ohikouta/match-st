@@ -22,5 +22,22 @@
         <a href="{{ url('/events/index') }}">イベントを企画する</a>
         <a href="{{ url('/events/look') }}">イベント一覧</a>
         <div class='paginate'>{{ $bases->links('pagination::bootstrap-4') }}</div>
+         <p>---------------------------------------------------------</p>
+        <div class="exhibition">
+            <h2>展示エリア</h2>
+            <p>--------------------------------</p>
+            <div class="communities">
+                <h3>コミュニティ</h3>
+                <p>資格畑</p>
+                <p>プロダクト工房</p>
+                <p>トピック畑</p>
+            </div>
+            <p>--------------------------------</p>
+            <div class="events">
+                <h3>イベント</h3>
+                <h4>募集中のイベント</h4>
+                <h4>過去のイベント</h4>
+            </div>
+        </div>
     </body>
 </html>
