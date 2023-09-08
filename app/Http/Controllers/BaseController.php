@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Base;
 // eventデータベースの情報も使いたいから
 use App\Models\Event;
+use App\Models\Community;
 
 class BaseController extends Controller
 {
@@ -15,8 +16,9 @@ class BaseController extends Controller
         return view('start')->with(['events' => $event->getPaginateByLimit(5)]);
     }
     
-    public function index(Base $base)
+    public function index(Base $base, Community $community)
     {
-        return view('bases.index')->with(['bases' => $base->getPaginateByLimit(10)]);
+        $communitiesData = $community->getDataSomehow();
+        return view('bases.index')->with(['bases' => $base->getPaginateByLimit(10), 'communities' => $communitiesData]);
     }
 }
