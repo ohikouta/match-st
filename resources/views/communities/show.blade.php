@@ -8,13 +8,13 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     </head>
     <body>
-        <h1>イベント掲示板</h1>
-        <p>変更しました！</p>
+        <h1>{{ $community->category }}</h1>
+        <p>所属する場合は、管理者の許可が必要です</p>
         <div class='self'>
-            @foreach ($events as $event)
-                <h2>{{ $event->name }}</h2>
-            @endforeach
+            <p>{{ $community->explanation }}</p>
         </div>
-        <div class='paginate'>{{ $events->links('pagination::bootstrap-4') }}</div>
+        <div class="footer">
+            <a href="/">戻る</a>
+        </div>
     </body>
 </html>

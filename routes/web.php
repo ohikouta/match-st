@@ -58,6 +58,9 @@ Route::controller(EventController::class)->middleware(['auth'])->group(function(
    Route::get('/events/{event}', 'showResult');
 });
 
+Route::controller(CommunityController::class)->middleware(['auth'])->group(function(){
+    Route::get('communities/{category}', 'show')->name('communities.show');
+});
 
 
 

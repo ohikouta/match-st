@@ -29,6 +29,22 @@
             <x-text-input id="univ" class="block mt-1 w-full" type="text" name="univ" :value="old('univ')" />
             <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
         </div>
+        
+        <!-- Grade -->
+        <div class="mt-4">
+            <x-input-label for="grade" :value="__('Grade')" />
+            <select name="grade" id="grade" class="block mt-1 w-full">
+                <option value="学部1年">学部1年</option>
+                <option value="学部2年">学部2年</option>
+                <option value="学部3年">学部3年</option>
+                <option value="学部4年">学部4年</option>
+                <option value="修士1年">修士1年</option>
+                <option value="修士2年">修士2年</option>
+                <option value="博士1年">博士1年</option>
+                <option value="博士2年">博士2年</option>
+                <option value="博士3年">博士3年</option>
+            </select>
+        </div>
 
 
         <!-- Password -->

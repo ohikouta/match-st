@@ -10,7 +10,7 @@ class UnivController extends Controller
 {
     public function show($univName)
     {
-        
+        // $university ->  Univモデルのuniv_nameカラムから、$univNameに最初に合致するレコードを取り出す
         $university = Univ::where('univ_name', $univName)->first();
         if (!$university) {
             abort(404);
