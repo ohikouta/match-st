@@ -13,6 +13,7 @@
         <a href="{{ url('/users/profile') }}">プロフィール編集</a>
         <a href="{{ url('/events/index') }}">イベントを企画する</a>
         <a href="{{ url('/events/look') }}">イベント一覧</a>
+        <a href="{{ url('/individuals/plan') }}">コミュニティをつくる</a>
         <div class='paginate'>{{ $bases->links('pagination::bootstrap-4') }}</div>
          <p>---------------------------------------------------------</p>
         <div class="exhibition">

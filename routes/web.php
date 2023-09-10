@@ -5,6 +5,8 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnivController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\IndividualController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +62,11 @@ Route::controller(EventController::class)->middleware(['auth'])->group(function(
 
 Route::controller(CommunityController::class)->middleware(['auth'])->group(function(){
     Route::get('communities/{category}', 'show')->name('communities.show');
+});
+
+Route::controller(IndividualController::class)->middleware(['auth'])->group(function(){
+    Route::get('individuals/plan', 'show');
+    
 });
 
 
