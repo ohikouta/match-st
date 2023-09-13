@@ -5,19 +5,26 @@
         <title>Student Information</title>
         <!-- Fonts -->
         <link href="https://googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <h1>Student Information</h1>
-        <!-- /users/create へのリンクを絶対URLで生成 -->
-        <a href="{{ url('/users/profile') }}">プロフィール編集</a>
-        <a href="{{ url('/events/index') }}">イベントを企画する</a>
-        <a href="{{ url('/events/look') }}">イベント一覧</a>
-        <a href="{{ url('/individuals/plan') }}">コミュニティをつくる</a>
-        <div class='paginate'>{{ $bases->links('pagination::bootstrap-4') }}</div>
+        <div class="bg-blue-500 text-white p-4">
+            <h1 class="text-4xl font-bold">Student Information</h1>
+            <!-- /users/create へのリンクを絶対URLで生成 -->
+            <a href="{{ url('/users/profile') }}">プロフィール編集</a>
+            <a href="{{ url('/events/index') }}">イベントを企画する</a>
+            <a href="{{ url('/events/look') }}">イベント一覧</a>
+            <a href="{{ url('/individuals/plan') }}">コミュニティをつくる</a>
+        </div>
+
          <p>---------------------------------------------------------</p>
         <div class="exhibition">
             <h2>展示エリア</h2>
+            <p>--------------------------------</p>
+            <div class="bg-blue-500 text-white p-4">
+                This is a Tailwind CSS styled element.
+            </div>
             <p>--------------------------------</p>
             <div class="communities">
                 <h3>コミュニティ</h3>
