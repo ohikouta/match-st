@@ -29,7 +29,8 @@ class BaseController extends Controller
         $qualificationData = Individual::where('category', 'qualification')->paginate(3);
         $productData = Individual::where('category', 'product')->paginate(3);
         $topicData = Individual::where('category', 'topic')->paginate(3);
-        
+        $futureEvent = Event::where('event_date', '>', now())->get();
+        $pastEvent = Event::where('event_date', '<', now())->get();
         
         return view('bases.index')
         ->with(['bases' => $base->getPaginateByLimit(3), 
@@ -37,7 +38,9 @@ class BaseController extends Controller
                 'qualificationData' => $qualificationData,
                 'productData' => $productData,
                 'topicData' => $topicData,
-                'events' => $event->getPaginateByLimit(5)
+                'events' => $event->getPaginateByLimit(5),
+                'futureEvent' => $futureEvent,
+                'pastEvent' => $pastEvent,
                 ]);
     }
 }

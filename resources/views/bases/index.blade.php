@@ -55,11 +55,39 @@
                 
             
             </div>
-            <p>--------------------------------</p>
-            <div class="events">
-                <h3 class="text-2xl font-bold bg-yellow-200 p-4">イベント</h3>
-                <h4>募集中のイベント</h4>
-                <h4>過去のイベント</h4>
+            <h3 class="text-2xl font-bold bg-yellow-200 p-4 mx-auto">イベント</h3>
+            <div class="events flex justify-center">
+                <div class="">
+                    <h4 class="text-xl font-bold flex justify-center p-6">募集中のイベント</h4>
+                    <table class="border-collapse border-b">
+                        <thead class="">
+                            <tr>
+                                <th class="border-b-4 border-blue-500 p-2">イベント名</th>
+                                <th class="border-b-4 border-blue-500 p-2">開催日</th>
+                                <th class="border-b-4 border-blue-500 p-2">概要</th>
+                                <th class="border-b-4 border-blue-500 p-2">ステータス</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($futureEvent as $event)
+                        <tr class="">
+                            <td class="font-bold border-b p-4">{{ $event->name }}</td>
+                            <td class="border-b p-4">{{ $event->event_date }}</td>
+                            <td class="border-b p-4">{{ $event->summary }}</td>
+                            <td class="border-b p-4">募集中</td>
+                        </tr>
+                        @endforeach
+                            
+                        </tbody>
+                    </table>
+                    
+                    <h4 class="text-xl font-bold flex justify-center p-6">過去のイベント</h4>
+                    @foreach ($pastEvent as $event)
+                        <h5 class="text-lg font-bold">{{ $event->name }}</h5>
+                        <p class="">{{ $event->summary }}</p>
+                    @endforeach
+                    
+                </div>
             </div>
         </div>
     </body>
