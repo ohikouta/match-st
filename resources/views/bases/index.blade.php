@@ -26,29 +26,42 @@
         <div class="exhibition">
             <h2>展示エリア</h2>
             <div class="communities">
-                <h3 class="text-2xl font-bold bg-yellow-200 p-4">コミュニティ</h3>
-                <div class="flex justify-center">
+                <h3 class="text-2xl font-bold bg-yellow-200 p-4 flex justify-center">コミュニティ</h3>
+                <div class="">
                     <div>
                         <h4 class="text-xl font-bold">～資格～</h4>
-                        @foreach ($qualificationData as $qualification)
-                            <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
-                            <p class="">{{ $qualification->summary }}</p>
-                        @endforeach
+                        <div class="flex justify-center">
+                            @foreach ($qualificationData as $qualification)
+                                <div>
+                                    <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
+                                    <p class="">{{ $qualification->summary }}</p>
+                                    <img src="{{ $qualification->image }}">
+                                </div>
+                            @endforeach
+                            <img src="/match-st/public/uploads/git.png">
+                        </div>
                     </div>
-                    <div>
+                    <div class="bg-cover bg-center h-48 w-48" style="background-image: url('/match-st/public/uploads/itpass.png');">
                         <h4 class="text-xl font-bold">～製品～</h4>
-                        @foreach ($productData as $product)
-                            <h5 class="text-lg font-bold">{{ $product->title }}</h5>
-                            <p class="">{{ $product->summary }}</p>
-                        @endforeach
+                        <div class="flex justify-center">
+                            @foreach ($productData as $product)
+                                <div>
+                                    <h5 class="text-lg font-bold">{{ $product->title }}</h5>
+                                    <p class="">{{ $product->summary }}</p>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div>
-                    <h4 class="text-xl font-bold">～話題～</h4>
-                    <!--ルートパラメータを利用する、univNameであり、代入している値は$base->univ　-->
-                    @foreach ($topicData as $topic)
-                        <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
-                        <p class="">{{ $topic->summary }}</p>
-                    @endforeach
+                        <h4 class="text-xl font-bold">～話題～</h4>
+                        <div class="flex justify-center">
+                            @foreach ($topicData as $topic)
+                                <div>
+                                    <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
+                                    <p class="">{{ $topic->summary }}</p>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                     
