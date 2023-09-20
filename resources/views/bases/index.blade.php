@@ -55,11 +55,18 @@
                 
             
             </div>
-            <p>--------------------------------</p>
             <div class="events">
                 <h3 class="text-2xl font-bold bg-yellow-200 p-4">イベント</h3>
                 <h4>募集中のイベント</h4>
+                @foreach ($futureEvent as $event)
+                    <h5 class="text-lg font-bold">{{ $event->name }}</h5>
+                    <p class="">{{ $event->summary }}</p>
+                @endforeach
                 <h4>過去のイベント</h4>
+                @foreach ($pastEvent as $event)
+                    <h5 class="text-lg font-bold">{{ $event->name }}</h5>
+                    <p class="">{{ $event->summary }}</p>
+                @endforeach
             </div>
         </div>
     </body>
