@@ -20,4 +20,6 @@ class Community extends Model
         // 適切なデータ取得ロジックを実装
         return Community::all(); // 例: すべてのコミュニティを取得する場合
     }
+    
+    
 }

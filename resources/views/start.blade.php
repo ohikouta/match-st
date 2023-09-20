@@ -8,26 +8,31 @@
         <!-- Fonts -->
     </head>
     <body class="antialiased">
-        <h1 class="bg-blue-500 text-white p-4">IEEE</h1>
+        <div class="bg-blue-500 text-white p-4">
+            <h1 class="text-4xl font-bold">IEEE</h1>
+            <div class="link flex justify-end">
+                <!--<a href="{{ url('/users/index') }}" class="bg-red-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out">ログイン</a>-->
+                <a href="{{ url('/users/index') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out">ログイン</a>
+                <a href="{{ url('/register') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out">新規登録</a>
+            </div>
+        </div>
         <!-- ログイン画面へ推移するボタンを配置したい -->
-        <div class="link">
-            <!--<a href="{{ url('/users/index') }}" class="bg-red-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out">ログイン</a>-->
-            <a href="{{ url('/users/index') }}" class="bg-blue-300">ログイン</a>
-            <a href="{{ url('/register') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4 transition duration-300 ease-in-out">新規登録</a>
-        </div>
-        <div class=community>
-            <h2>コミュニティ一覧</h2>
+        <div class="main-container bg-green-200 flex">
+            <div class="community w-1/2 p-4 bg-green-300 rounded-lg">
+                <h2 class="text-3xl font-bold">コミュニティ一覧</h2>
+                @foreach ($individuals as $individual)
+                    <h3 class="text-xl font-bold">{{ $individual->title }}</h3>
+                    <p>{{ $individual->summary }}</p>
+                @endforeach
+            </div>
+            <div class='event w-1/2 p-4 bg-green-300 rounded-lg'>
+                <h2 class="text-3xl font-bold">イベント</h2>
+                @foreach ($events as $event)
+                    <h3 class="text-xl font-bold">{{ $event->name }}</h3>
+                    <p>{{ $event->summary }}</p>
+                @endforeach
+            </div>
             
-        </div>
-        <div>
-            <h2>所属団体一覧</h2>
-        </div>
-        <div　class='event'>
-            <h2>イベント</h2>
-            @foreach ($events as $event)
-                <h3>{{ $event->name }}</h3>
-                <p>{{ $event->summary }}</p>
-            @endforeach
         </div>
     </body>
 </html>
