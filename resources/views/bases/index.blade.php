@@ -12,95 +12,108 @@
         <div class="bg-blue-500 text-white p-4">
             <h1 class="text-4xl font-bold">IEEE</h1>
             <!-- /users/create へのリンクを絶対URLで生成 -->
-            
         </div>
-        <div class="bg-green-400 text-bold p-4">
-            <a href="{{ url('/users/profile') }}">プロフィール編集</a>
-            <a href="{{ url('/events/index') }}">イベントを企画する</a>
-            <a href="{{ url('/events/look') }}">イベント一覧</a>
-            <a href="{{ url('/individuals/plan') }}">コミュニティをつくる</a>
-            
+        <div class="bg-blue-500 p-4">
+            <a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>
+            <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
+            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
+            <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
 
-         <p>---------------------------------------------------------</p>
-        <div class="exhibition">
-            <h2>展示エリア</h2>
-            <div class="communities">
-                <h3 class="text-2xl font-bold bg-yellow-200 p-4 flex justify-center">コミュニティ</h3>
-                <div class="">
-                    <div>
-                        <h4 class="text-xl font-bold">～資格～</h4>
-                        <div class="flex justify-center">
-                            @foreach ($qualificationData as $qualification)
-                                <div>
-                                    <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
-                                    <p class="">{{ $qualification->summary }}</p>
-                                    <img src="{{ $qualification->image }}">
-                                </div>
-                            @endforeach
-                            <img src="/match-st/public/uploads/git.png">
+        <div class="flex justify-center w-4/5 ml-10 mr-10">
+            <!-- コミュニティとイベントのブロック -->
+            <div class="flex flex-col flex-7">
+                <div class="communities">
+                    <h3 class="text-2xl font-bold bg-yellow-200 p-4 flex justify-center">コミュニティ</h3>
+                    <div class="">
+                        <div>
+                            <h4 class="text-xl font-bold text-center">～資格～</h4>
+                            <div class="flex justify-center p-4">
+                                @foreach ($qualificationData as $qualification)
+                                    <div class="bg-cover bg-center h-48 w-48 relative flex flex-col items-center justify-center mx-4" style="background-image: url('{{ asset($qualification->image) }}')">
+                                        <div class="text-white bg-blue-400 bg-opacity-90 w-full text-center rounded-md">
+                                            <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
+                                            <p class="text-sm">{{ $qualification->summary }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-center">～製品～</h4>
+                            <div class="flex justify-center my-4">
+                                @foreach ($productData as $product)
+                                    <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
+                                        <img src='{{ asset($product->image) }}' class="h-48 w-48">
+                                        <div class="bg-black text-white bg-opacity-50 h-20">
+                                            <h5 class="text-lg font-bold">{{ $product->title }}</h5>
+                                            <p class="text-sm">{{ $product->summary }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-center">～話題～</h4>
+                            <div class="flex justify-center my-4">
+                                @foreach ($topicData as $topic)
+                                    <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
+                                        <img src='{{ asset($topic->image) }}' class="h-48 w-48">
+                                        <div class="bg-black text-white bg-opacity-50 h-20">
+                                            <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
+                                            <p class="text-sm">{{ $topic->summary }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-cover bg-center h-48 w-48" style="background-image: url('/match-st/public/uploads/itpass.png');">
-                        <h4 class="text-xl font-bold">～製品～</h4>
-                        <div class="flex justify-center">
-                            @foreach ($productData as $product)
-                                <div>
-                                    <h5 class="text-lg font-bold">{{ $product->title }}</h5>
-                                    <p class="">{{ $product->summary }}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold">～話題～</h4>
-                        <div class="flex justify-center">
-                            @foreach ($topicData as $topic)
-                                <div>
-                                    <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
-                                    <p class="">{{ $topic->summary }}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+                <!-- イベントレイアウト -->
                 </div>
-                    
-                
-            
-            </div>
-            <h3 class="text-2xl font-bold bg-yellow-200 p-4 mx-auto">イベント</h3>
-            <div class="events flex justify-center">
-                <div class="">
-                    <h4 class="text-xl font-bold flex justify-center p-6">募集中のイベント</h4>
-                    <table class="border-collapse border-b">
-                        <thead class="">
-                            <tr>
-                                <th class="border-b-4 border-blue-500 p-2">イベント名</th>
-                                <th class="border-b-4 border-blue-500 p-2">開催日</th>
-                                <th class="border-b-4 border-blue-500 p-2">概要</th>
-                                <th class="border-b-4 border-blue-500 p-2">ステータス</th>
+                <div class="events">
+                    <h3 class="text-2xl font-bold bg-yellow-200 p-4 mx-auto">イベント</h3>
+                    <div class="">
+                        <h4 class="text-xl font-bold flex justify-center p-6">募集中のイベント</h4>
+                        <table class="border-collapse border-b">
+                            <thead class="">
+                                <tr>
+                                    <th class="border-b-4 border-blue-500 p-2">イベント名</th>
+                                    <th class="border-b-4 border-blue-500 p-2">開催日</th>
+                                    <th class="border-b-4 border-blue-500 p-2">概要</th>
+                                    <th class="border-b-4 border-blue-500 p-2">ステータス</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($futureEvent as $event)
+                            <tr class="">
+                                <td class="font-bold border-b p-4">{{ $event->name }}</td>
+                                <td class="border-b p-4">{{ $event->event_date }}</td>
+                                <td class="border-b p-4">{{ $event->summary }}</td>
+                                <td class="border-b p-4">募集中</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($futureEvent as $event)
-                        <tr class="">
-                            <td class="font-bold border-b p-4">{{ $event->name }}</td>
-                            <td class="border-b p-4">{{ $event->event_date }}</td>
-                            <td class="border-b p-4">{{ $event->summary }}</td>
-                            <td class="border-b p-4">募集中</td>
-                        </tr>
+                            @endforeach
+                                
+                            </tbody>
+                        </table>
+                        
+                        <h4 class="text-xl font-bold flex justify-center p-6">過去のイベント</h4>
+                        @foreach ($pastEvent as $event)
+                            <h5 class="text-lg font-bold">{{ $event->name }}</h5>
+                            <p class="">{{ $event->summary }}</p>
                         @endforeach
-                            
-                        </tbody>
-                    </table>
-                    
-                    <h4 class="text-xl font-bold flex justify-center p-6">過去のイベント</h4>
-                    @foreach ($pastEvent as $event)
-                        <h5 class="text-lg font-bold">{{ $event->name }}</h5>
-                        <p class="">{{ $event->summary }}</p>
-                    @endforeach
-                    
+                        
+                    </div>
                 </div>
+            </div>
+            <div class="flex-3 ml-40 mt-10 border border border-solid border-gray-300 shadow-md">
+                <div>
+                    <img src="{{ asset('{{ $ }}') }}" class="h-20 w-20">
+                    <h4 class="font-bold text-lg">{{ $ }}</h4>
+                </div>
+                <h3 class="font-bold text-lg">所属コミュニティ</h3>
+                <h3 class="font-bold text-lg">参加予定のイベント</h3>
+                    
+                <p>個人情報のセクションを画面左側に表示します</p>
             </div>
         </div>
     </body>

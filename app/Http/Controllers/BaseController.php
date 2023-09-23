@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Base;
+use App\Models\User;
 // eventデータベースの情報も使いたいから
 use App\Models\Community;
 use App\Models\Event;
@@ -22,7 +23,7 @@ class BaseController extends Controller
             
     }
     
-    public function index(Base $base, Community $community, Individual $individual, Event $event)
+    public function index(Base $base, Community $community, Individual $individual, Event $event User $user)
     {
         $communitiesData = $community->getDataSomehow();
         
