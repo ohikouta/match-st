@@ -38,5 +38,17 @@ class EventController extends Controller
         return view('events.look')->with(['events' => $event->getPaginateBylimit(5)]);
     }
     
+    public function update(Request $request, $id)
+    {
+        $community = Community::find($id);
+        
+        $imagePath = $request->file('image')->store('images');
+        
+        $community->image_path = $imagePath;
+        $community->save();
+        
+        return redirect()->route('');
+    }
+    
 
 }
