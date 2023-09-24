@@ -106,9 +106,9 @@
                 </div>
             </div>
             <div class="flex-3 ml-40 mt-10 border border border-solid border-gray-300 shadow-md">
-                <div>
-                    <img src="{{ asset('{{ $ }}') }}" class="h-20 w-20">
-                    <h4 class="font-bold text-lg">{{ $ }}</h4>
+                <div class="flex justify-center">
+                    <img src="{{ asset( $userData->image ) }}" class="rounded-full h-20 w-20">
+                    <h4 class="font-bold text-lg">{{ $userData->name }}</h4>
                 </div>
                 <h3 class="font-bold text-lg">所属コミュニティ</h3>
                 <h3 class="font-bold text-lg">参加予定のイベント</h3>
