@@ -22,4 +22,9 @@ class Individual extends Model
     {
         return $this->orderby('updated_at', 'DESC')->paginate($limit_count);
     }
+    
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

@@ -105,10 +105,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-3 ml-40 mt-10 border border border-solid border-gray-300 shadow-md">
-                <div class="flex justify-center">
-                    <img src="{{ asset( $userData->image ) }}" class="rounded-full h-20 w-20">
-                    <h4 class="font-bold text-lg">{{ $userData->name }}</h4>
+            <div class="flex-3 ml-40 mt-5 border border border-solid border-gray-300 shadow-md">
+                <div class="m-3">
+                    <img src="{{ asset( $userData->image ) }}" class="rounded-full overflow-hidden h-[210px] w-[210px] mx-auto my-auto">
+                    <h4 class="font-bold text-xl text-center">{{ $userData->name }}</h4>
                 </div>
                 <h3 class="font-bold text-lg">所属コミュニティ</h3>
                 <h3 class="font-bold text-lg">参加予定のイベント</h3>
