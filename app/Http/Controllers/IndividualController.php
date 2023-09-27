@@ -23,4 +23,15 @@ class IndividualController extends Controller
     {
         return view('individuals.result')->with(['individual' => $individual]);
     }
+    
+    public function showDetail($id)
+    {
+        $individual = Individual::find($id);
+        
+        if (!$individual) {
+            return abort(404);
+        }
+        
+        return view('individuals.show', compact('individual'));
+    }
 }

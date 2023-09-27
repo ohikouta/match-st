@@ -6,6 +6,7 @@
         <!-- Fonts -->
         <link href="https://googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="https://kit.fontawesome.com/48447305da.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
@@ -13,15 +14,15 @@
             <h1 class="text-4xl font-bold">IEEE</h1>
             <!-- /users/create へのリンクを絶対URLで生成 -->
         </div>
+        <!-- ナビゲーションセクション -->
         <div class="bg-blue-500 p-4">
-            <a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>
+            <!--<a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>-->
             <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
             <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
-
-        <div class="flex justify-center w-4/5 ml-10 mr-10">
-            <!-- コミュニティとイベントのブロック -->
+        <div class="flex justify-between w-9/10 ml-10 mr-10">
+            <!-- コミュニティとイベントセクション -->
             <div class="flex flex-col flex-7">
                 <div class="communities">
                     <h3 class="text-2xl font-bold bg-yellow-200 p-4 flex justify-center">コミュニティ</h3>
@@ -30,13 +31,18 @@
                             <h4 class="text-xl font-bold text-center">～資格～</h4>
                             <div class="flex justify-center p-4">
                                 @foreach ($qualificationData as $qualification)
-                                    <div class="bg-cover bg-center h-48 w-48 relative flex flex-col items-center justify-center mx-4" style="background-image: url('{{ asset($qualification->image) }}')">
-                                        <div class="text-white bg-blue-400 bg-opacity-90 w-full text-center rounded-md">
-                                            <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
-                                            <p class="text-sm">{{ $qualification->summary }}</p>
+                                    <a href="{{ route('individuals.show', ['individual' => $qualification->id]) }}">
+                                        <div class="bg-cover bg-center h-48 w-48 relative flex flex-col items-center justify-center mx-4" style="background-image: url('{{ asset($qualification->image) }}')">
+                                            <div class="text-white bg-blue-400 bg-opacity-90 w-full text-center rounded-md">
+                                                <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
+                                                <p class="text-sm">{{ $qualification->summary }}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
+                            </div>
+                            <div class="pagination">
+                                {{ $qualificationData->links() }}
                             </div>
                         </div>
                         <div>
@@ -52,6 +58,9 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="pagination flex justify-center">
+                                {{ $productData->links() }}
+                            </div>
                         </div>
                         <div>
                             <h4 class="text-xl font-bold text-center">～話題～</h4>
@@ -65,6 +74,9 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                            <div class="pagination flex justify-center">
+                                {{ $topicData->links() }}
                             </div>
                         </div>
                     </div>
@@ -105,15 +117,17 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-3 ml-40 mt-5 border border border-solid border-gray-300 shadow-md">
+            <!-- 個人プロフィールセクション -->
+            <div class="flex-3 ml-20 mt-5 border border border-solid border-gray-300 shadow-md">
                 <div class="m-3">
                     <img src="{{ asset( $userData->image ) }}" class="rounded-full overflow-hidden h-[210px] w-[210px] mx-auto my-auto">
-                    <h4 class="font-bold text-xl text-center">{{ $userData->name }}</h4>
+                    <h4 class="font-bold text-xl text-center mt-6">{{ $userData->name }}</h4>
+                    <a href="{{ url('/users/profile') }}" class="btn btn-primary flex justify-center">
+                        <i class="fas fa-edit"></i>プロフィール編集
+                    </a>
                 </div>
                 <h3 class="font-bold text-lg">所属コミュニティ</h3>
                 <h3 class="font-bold text-lg">参加予定のイベント</h3>
-                    
-                <p>個人情報のセクションを画面左側に表示します</p>
             </div>
         </div>
     </body>

@@ -23,14 +23,20 @@ class BaseController extends Controller
             
     }
     
-    public function index(Base $base, Community $community, Individual $individual, Event $event, User $user)
+    public function index(Request $request, Base $base, Community $community, Individual $individual, Event $event, User $user)
     {
         $user = auth()->user();
         $communitiesData = $community->getDataSomehow();
         
-        $qualificationData = Individual::where('category', 'qualification')->paginate(3);
-        $productData = Individual::where('category', 'product')->paginate(3);
-        $topicData = Individual::where('category', 'topic')->paginate(3);
+        $qualificationData = Individual::where('category', 'qualification')->paginate(3, ["*"], 'qualification-page')
+                                                                ->appends(["product-page" => $request->input('product-page')])
+                                                                ->appends(["topic-page" => $request->input('topic-page')]);
+        $productData = Individual::where('category', 'product')->paginate(3, ["*"], 'product-page')
+                                                                ->appends(["qualification-page" => $request->input('qualification-page')])
+                                                                ->appends(["topic-page" => $request->input('topic-page')]);
+        $topicData = Individual::where('category', 'topic')->paginate(3, ["*"], 'topic-page')
+                                                                ->appends(["qualification-page" => $request->input('qualification-page')])
+                                                                ->appends(["product-page" => $request->input('product-page')]);
         $futureEvent = Event::where('event_date', '>', now())->get();
         $pastEvent = Event::where('event_date', '<', now())->get();
         
