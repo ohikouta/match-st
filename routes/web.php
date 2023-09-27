@@ -68,6 +68,7 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
     Route::get('/individuals/plan', 'show');
     Route::post('/individuals', 'store');
     Route::get('/individuals/{individual}', 'showResult');
+    Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
 });
 
 
