@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Individual;
 use App\Models\User;
+use App\Models\Post;
 
 class IndividualController extends Controller
 {
@@ -27,7 +28,7 @@ class IndividualController extends Controller
     
     public function showDetail($id)
     {
-        $individual = Individual::find($id);
+        $individual = Individual::with('posts')->find($id);
         
         if (!$individual) {
             return abort(404);

@@ -28,9 +28,15 @@ class Individual extends Model
         return $this->belongsToMany(User::class);
     }
     
-    // usersテーブルのデータとの紐づけ: user_id
+    // usersテーブルのデータとの紐づけ: admin_id
     public function user()
     {
         return $this->belongsTo(User::class, 'admin_id');
+    }
+    
+    // postsテーブルのデータと紐づけ: individual_id
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'individual_id');
     }
 }
