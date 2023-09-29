@@ -7,6 +7,7 @@ use App\Http\Controllers\UnivController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\IndividualController;
+use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,11 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
     Route::post('/individuals', 'store');
     Route::get('/individuals/{individual}', 'showResult');
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
+});
+
+Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){
+    Route::post('/timeline', 'store');
+    Route::post('/comment', 'addComment');
 });
 
 
