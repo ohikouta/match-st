@@ -50,4 +50,12 @@ class IndividualController extends Controller
         
         return response()->json(['message'=>'参加リクエストを送信しました'], 201);
     }
+    
+    public function showAdmin(MembershipRequest $membershiprequest, $id)
+    {
+        // $requests = MembershipRequest::find($id);
+        
+        return view('individuals.show');
+    }
+    
 }
