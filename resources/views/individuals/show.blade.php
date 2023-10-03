@@ -5,9 +5,11 @@
         <title>Student Information</title>
         <!-- Fonts -->
         <link href="https://googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <script type="module" src="{{ asset('js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://kit.fontawesome.com/48447305da.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
          <div class="bg-blue-500 text-white p-4">
@@ -45,36 +47,39 @@
                                     </div>
                                     <p class="text-gray-800 p-2">{{ $post->content }}</p>
                                     <!-- Replyボタン -->
-                                    <button class="text-blue-500" id="reply-button">Reply</button>
+                                    
+                                    <button class="text-blue-500 block flex justify-between pl-15" id="reply-button">
+                                        <p class="inline ml-2">Reply</p>
+                                        <i class="far fa-comment-dots ml-2"></i>
+                                    </button>
+                                    
                                     <!-- コメント表示（非表示）-->
-                                    <div id="comment-list" class="hidden">
+                                    <div id="comment-list" class="comment-section hidden">
                                         <p>返信一覧</p>
                                         <!-- コメント一覧を表示（非表示） -->
                                         @foreach ($post->comments as $comment)
                                             <p>{{ $comment->content }}</p>
                                         @endforeach
+                                        <div id="comment-form" class="">
+                                            <form method="POST" action="/comment">
+                                                @csrf
+                                                <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                <button type="submit" class="btn btn primary mt-2">送信</button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <!-- コメントフォーム（非表示） -->
-                                    <div id="comment-form" class="hidden">
-                                        <form method="POST" action="/comment">
-                                            @csrf
-                                            <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
-                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                            <button type="submit" class="btn btn primary mt-2">送信</button>
-                                        </form>
-                                    </div>
                                 </li>
                             @endforeach
                             <!-- JS -->
                             <script>
                             document.querySelectorAll('#reply-button').forEach(function(button) {
                                 button.addEventListener('click', function() {
-                                    // 対応するコメントフォームとコメント表示を切り替え
-                                    const commentForm = this.nextElementSibling.nextElementSibling;
-                                    const commentList = commentForm.nextElementSibling;
+                                    // 対応するコメントフォームとコメント表示を切
+                                    const commentSection = this.nextElementSibling;
                             
-                                    commentForm.classList.toggle('hidden');
-                                    commentList.classList.toggle('hidden');
+                                    commentSection.classList.toggle('hidden');
                                 });
                             });
                             </script>
@@ -95,11 +100,19 @@
                     <input type="hidden" name="individual_id" value="{{ $individual->id }}">
                     <button type="submit" class="btn btn-primary mt-3">投稿する</button>
                 </form>
-               
             </div>
         </div>
+       
+        <form id="myform" method="POST" action="{{ route('individuals.join', ['individual' => $individual->id]) }}">
+        <script>
+            var individualId = "{{ route('individuals.join', ['individual' => $individual->id]) }}"
+        </script>
+            @csrf
+            <button id="joinRequestButton">参加リクエスト送信</button>
+            
+        </form>
         <!-- フッター -->
-        <footer class="flex flex-col items-center justify-center bg-blue-500 p-10 sticky bottom-0">
+        <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>

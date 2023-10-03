@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Individual;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\MembershipRequest;
 
 class IndividualController extends Controller
 {
@@ -35,5 +36,18 @@ class IndividualController extends Controller
         }
         
         return view('individuals.show', compact('individual'));
+    }
+    
+    public function sendJoinRequest(Request $request, Individual $individual)
+    {
+        // リクエストを作成し、データベースに保存
+        $membershipRequest = new MembershipRequest([
+           'user_id' => auth()->user()->id,
+           'individual_id' => $individual->id,
+           'status' => 'pending',
+        ]);
+        $membershipRequest->save();
+        
+        return response()->json(['message'=>'参加リクエストを送信しました'], 201);
     }
 }

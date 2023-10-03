@@ -70,6 +70,7 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
     Route::post('/individuals', 'store');
     Route::get('/individuals/{individual}', 'showResult');
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
+    Route::post('/individuals/{individual}/join}', 'sendJoinRequest')->name('individuals.join');
 });
 
 Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){

@@ -1,13 +1,15 @@
-import './bootstrap';
+// import './bootstrap';
 
 // import Alpine from 'alpinejs';
-
+// import 'alpinejs';
 
 // window.Alpine = Alpine;
 
 // Alpine.start();
 
-
+function sayHello() {
+  console.log("Hello, World!");
+}
 
  /* global $*/
 // 参加リクエスト送信の処理
