@@ -35,6 +35,7 @@ class IndividualController extends Controller
             return abort(404);
         }
         
+        
         return view('individuals.show', compact('individual'));
     }
     

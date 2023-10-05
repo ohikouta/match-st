@@ -21,4 +21,9 @@ class MembershipRequest extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+    public function individual()
+    {
+        return $this->belongsTo(individual::class, 'individuals_id');
+    }
 }

@@ -39,12 +39,22 @@
                     </thead>
                     <tbody>
                         @foreach ($requests as $request)
+                            <h1 class="font-bold text-4xl">{{ $request->individuals_id }}</h1>
                             <tr class="border-b border-gray-300 hover:bg-gray-100">
                                 <td class="py-1 px-4 border">{{ $request->user->name }}</td>
                                 <td class="py-1 px-4 border">{{ $request->user->univ }}</td>
                                 <td class="py-1 px-4 border">{{ $request->user->grade }}</td>
+                                
                                 <td class="py-1 px-4 border">
-                                    <button class="bg-green-500 text-white px-2 py-1 rouded-lg hover:bg-green-600">許可</button>
+                                    <!-- 許可ボタンのフォーム -->
+                                    <form method="POST" action="{{ route('allow-Membership') }}">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ $request->user_id }}">
+                                        <input type="hidden" name="individual_id" value="{{ $request->individuals_id }}">
+                                        <button class="bg-green-500 text-white px-2 py-1 rounded-lg hover:bg-green-600"
+                                            id="allowMembershipButton" onclick="allowMembership(event, {{ $request->id }})" data-request-id="{{ $request->id }}">許可</button>
+                                        <div id="message"></div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -59,6 +69,5 @@
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>
-        
     </body>
 </html>
