@@ -43,7 +43,7 @@ class IndividualController extends Controller
         // リクエストを作成し、データベースに保存
         $membershipRequest = new MembershipRequest([
            'user_id' => auth()->user()->id,
-           'individual_id' => $individual->id,
+           'individuals_id' => $individual->id,
            'status' => 'pending',
         ]);
         $membershipRequest->save();
@@ -53,9 +53,11 @@ class IndividualController extends Controller
     
     public function showAdmin(MembershipRequest $membershiprequest, $id)
     {
-        // $requests = MembershipRequest::find($id);
+        $requests = MembershipRequest::where('individuals_id', $id)
+            ->where('status', 'pending')
+            ->get();
         
-        return view('individuals.show');
+        return view('individuals.admin', ['requests' => $requests]);
     }
     
 }

@@ -33,7 +33,7 @@
                 <p class="text-lg font-bold m-3">{{ $individual->summary }}</p>
                 <h2 class="text-xl font-bold border-l-4 border-blue-500 pl-4 mt-3">管理者</h2>
                 <p class="text-lg font-bold m-3">{{ $individual->user->name }}</p>
-                <a href="{{ url("individuals.admin", ['id' => $individual->id]) }}">管理者ページ</a>
+                <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}">管理者ページ</a>
                 <form id="myform" method="POST" action="{{ route('individuals.join', ['individual' => $individual->id]) }}">
                     @csrf
                     <button id="joinRequestButton" class="font-bold bg-green-500 text-white p-4 mb-4 rounded-lg">参加リクエスト送信</button>

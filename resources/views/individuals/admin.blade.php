@@ -17,13 +17,48 @@
             <!-- /users/create へのリンクを絶対URLで生成 -->
         </div>
         <!-- ナビゲーションセクション -->
+        <div class="bg-blue-500 p-4">
+            <!--<a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>-->
+            <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
+            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
+            <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
+        </div>
+        <img src='{{ asset("storage/community_admin.jpg") }}' class="h-100">
+        <div class="flex justify-center items-center p-10">
+            <!-- メインコンテンツ -->
+            <div class="flex flex-col items-center w-3/4 bg-red-500 p-8">
+                <h1 class="text-xl font-bold mb-4">参加リクエスト一覧</h1>
+                <table class="w-3/4 table-auto border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="">
+                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">名前</th>
+                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">大学</th>
+                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">学年</th>
+                            <th class="py-2 px-4 bg-blue-200 font-bold text-lg border text-center">許可</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($requests as $request)
+                            <tr class="border-b border-gray-300 hover:bg-gray-100">
+                                <td class="py-1 px-4 border">{{ $request->user->name }}</td>
+                                <td class="py-1 px-4 border">{{ $request->user->univ }}</td>
+                                <td class="py-1 px-4 border">{{ $request->user->grade }}</td>
+                                <td class="py-1 px-4 border">
+                                    <button class="bg-green-500 text-white px-2 py-1 rouded-lg hover:bg-green-600">許可</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- ナビゲーションセクション -->
         <!-- フッター -->
         <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>
-        <script>
-            var individualId = "{{ route('individuals.join', ['individual' => $individual->id]) }}"
-        </script>
+        
     </body>
 </html>
