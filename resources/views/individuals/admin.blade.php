@@ -39,7 +39,6 @@
                     </thead>
                     <tbody>
                         @foreach ($requests as $request)
-                            <h1 class="font-bold text-4xl">{{ $request->individuals_id }}</h1>
                             <tr class="border-b border-gray-300 hover:bg-gray-100">
                                 <td class="py-1 px-4 border">{{ $request->user->name }}</td>
                                 <td class="py-1 px-4 border">{{ $request->user->univ }}</td>

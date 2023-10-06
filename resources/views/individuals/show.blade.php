@@ -33,84 +33,98 @@
                 <p class="text-lg font-bold m-3">{{ $individual->summary }}</p>
                 <h2 class="text-xl font-bold border-l-4 border-blue-500 pl-4 mt-3">管理者</h2>
                 <p class="text-lg font-bold m-3">{{ $individual->user->name }}</p>
-                <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}">管理者ページ</a>
-                <form id="myform" method="POST" action="{{ route('individuals.join', ['individual' => $individual->id]) }}">
-                    @csrf
-                    <button id="joinRequestButton" class="font-bold bg-green-500 text-white p-4 mb-4 rounded-lg">参加リクエスト送信</button>
-                </form>
-                <!-- タイムライン一覧 -->
-                @if ($individual->posts->count() > 0)
-                <div class="flex flex-col items-center">
-                    <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
-                        <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
-                        <ul class="space-y-4 mt-6">
-                            @foreach ($individual->posts as $post)
-                                <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4">
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-3">投稿日時: {{ $post->created_at }}</p>
-                                        <p class="text-gray-800 mr-3">投稿者: {{ $post->user->name }}</p>
-                                    </div>
-                                    <p class="text-gray-800 p-2">{{ $post->content }}</p>
-                                    <!-- Replyボタン -->
-                                    
-                                    <button class="text-blue-500 block flex justify-between pl-15" id="reply-button">
-                                        <p class="inline ml-2">Reply</p>
-                                        <i class="far fa-comment-dots ml-2"></i>
-                                    </button>
-                                    
-                                    <!-- コメント表示（非表示）-->
-                                    <div id="comment-list" class="comment-section hidden">
-                                        <p class="font-bold text-lg m-4">返信一覧</p>
-                                        <!-- コメント一覧を表示（非表示） -->
-                                        @foreach ($post->comments as $comment)
-                                            <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
-                                                <div class="flex">
-                                                    <p class="text-gray-800 mr-3">返信日時: {{ $comment->created_at }}</p>
-                                                    <p class="text-gray-800 mr-3">返信者: {{ $comment->user->name }}</p>
-                                                </div>
-                                                <p class="p-2">{{ $comment->content }}</p>
-                                            </div>
-                                        @endforeach
-                                        <div id="comment-form" class="">
-                                            <form method="POST" action="/comment">
-                                                @csrf
-                                                <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
-                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                                <button type="submit" class="btn btn primary mt-2">送信</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- コメントフォーム（非表示） -->
-                                </li>
-                            @endforeach
-                            <!-- JS -->
-                            <script>
-                            document.querySelectorAll('#reply-button').forEach(function(button) {
-                                button.addEventListener('click', function() {
-                                    // 対応するコメントフォームとコメント表示を切
-                                    const commentSection = this.nextElementSibling;
-                            
-                                    commentSection.classList.toggle('hidden');
-                                });
-                            });
-                            </script>
-                        </ul>
-                        @else
-                            <div class="border border-gray-300 shadow-md p-3 text-center">
-                                <p class="font-bold">投稿はありません</p>
-                            </div>
-                        @endif
-                        <!-- 投稿フォーム -->
-                        <form method="POST" action="/timeline">
+                <!-- 管理者ページへの導線: 管理者のみ表示する -->
+                @if(auth()->check() && auth()->user()->id === $individual->admin_id)
+                    <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}">管理者ページ</a>
+                @endif
+                <!-- 未参加のユーザーのみ参加リクエストボタンを表示 -->
+                @if(auth()->check())
+                    @php
+                        $userIsMember = auth()->user()->communities->contains($individual->id);
+                    @endphp
+                    
+                    @if(!$userIsMember)
+                        <form id="myform" method="POST" action="{{ route('individuals.join', ['individual' => $individual->id]) }}">
                             @csrf
-                            <div class="form-group mt-3">
-                                <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
-                            </div>
-                            <input type="hidden" name="individual_id" value="{{ $individual->id }}">
-                            <button type="submit" class="btn btn-primary mt-3">投稿する</button>
+                            <button id="joinRequestButton" class="font-bold bg-green-500 text-white p-4 mb-4 rounded-lg">参加リクエスト送信</button>
                         </form>
+                    @endif
+                @endif
+                <!-- タイムライン一覧 -->
+                @if ($userIsMember)
+                    @if ($individual->posts->count() > 0)
+                    <div class="flex flex-col items-center">
+                        <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
+                            <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
+                            <ul class="space-y-4 mt-6">
+                                @foreach ($individual->posts as $post)
+                                    <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4">
+                                        <div class="flex">
+                                            <p class="text-gray-800 mr-3">投稿日時: {{ $post->created_at }}</p>
+                                            <p class="text-gray-800 mr-3">投稿者: {{ $post->user->name }}</p>
+                                        </div>
+                                        <p class="text-gray-800 p-2">{{ $post->content }}</p>
+                                        <!-- Replyボタン -->
+                                        
+                                        <button class="text-blue-500 block flex justify-between pl-15" id="reply-button">
+                                            <p class="inline ml-2">Reply</p>
+                                            <i class="far fa-comment-dots ml-2"></i>
+                                        </button>
+                                        
+                                        <!-- コメント表示（非表示）-->
+                                        <div id="comment-list" class="comment-section hidden">
+                                            <p class="font-bold text-lg m-4">返信一覧</p>
+                                            <!-- コメント一覧を表示（非表示） -->
+                                            @foreach ($post->comments as $comment)
+                                                <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
+                                                    <div class="flex">
+                                                        <p class="text-gray-800 mr-3">返信日時: {{ $comment->created_at }}</p>
+                                                        <p class="text-gray-800 mr-3">返信者: {{ $comment->user->name }}</p>
+                                                    </div>
+                                                    <p class="p-2">{{ $comment->content }}</p>
+                                                </div>
+                                            @endforeach
+                                            <div id="comment-form" class="">
+                                                <form method="POST" action="/comment">
+                                                    @csrf
+                                                    <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
+                                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                    <button type="submit" class="btn btn primary mt-2">送信</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- コメントフォーム（非表示） -->
+                                    </li>
+                                @endforeach
+                                <!-- JS -->
+                                <script>
+                                document.querySelectorAll('#reply-button').forEach(function(button) {
+                                    button.addEventListener('click', function() {
+                                        // 対応するコメントフォームとコメント表示を切
+                                        const commentSection = this.nextElementSibling;
+                                
+                                        commentSection.classList.toggle('hidden');
+                                    });
+                                });
+                                </script>
+                            </ul>
+                            @else
+                                <div class="border border-gray-300 shadow-md p-3 text-center">
+                                    <p class="font-bold">投稿はありません</p>
+                                </div>
+                            @endif
+                            <!-- 投稿フォーム -->
+                            <form method="POST" action="/timeline">
+                                @csrf
+                                <div class="form-group mt-3">
+                                    <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                                </div>
+                                <input type="hidden" name="individual_id" value="{{ $individual->id }}">
+                                <button type="submit" class="btn btn-primary mt-3">投稿する</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
        

@@ -12,14 +12,28 @@
     <body>
         <div class="bg-blue-500 text-white p-4">
             <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
+            <form action="/postss" method="POST" enctype="multipart/form-data">
+                <button>Cloudinary</button>
+                <div class="image">
+                    <input type="file" name="image">
+                </div>
+            </form>
             <!-- /users/create へのリンクを絶対URLで生成 -->
         </div>
         <!-- ナビゲーションセクション -->
-        <div class="bg-blue-500 p-4">
-            <!--<a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>-->
-            <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
-            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
-            <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
+        <div class="bg-blue-500 p-4 flex justify-between">
+            <div>
+                <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
+                <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
+                <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
+            </div>
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <!-- ログアウトボタン -->
+            <button type="submit" class="underline text-sm text-gray-600 bg-green-300 p-2 rounded-lg hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <i class="fas fa-sign-out-alt"></i>{{ __('Log Out') }}
+            </button>
+        </form>
         </div>
         <!-- メインコンテンツ -->
         <div class="flex justify-center items-center">
