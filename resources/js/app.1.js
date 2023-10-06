@@ -22,7 +22,6 @@ $(document).ready(function() {
 })
 
  /* global individualId*/
- /* global alm*/
  
  
 // 外部JavaScriptファイル（external.js）内
@@ -107,18 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Hello, あろーするぜ");
     
     // allowMembershipが押されたときにallowMembershipを呼び出す
-    var requestId = allowMembershipButton.getAttribute('data-request-id');
-    allowMembershipButton.addEventListener('click', function(event) {
-        event.preventDefault(); // フォームのデフォルトの送信を防ぐ
-        
-        // ユーザーIDと個別IDを取得
-        var userId = document.querySelector('input[name="user_id"]').value;
-        var individualId = document.querySelector('input[name="individual_id"]').value;
-        
-        allowMembership(requestId, userId, individualId);
+    allowMembershipButton.addEventListener('click', function() {
+        var requestId = allowMembershipButton.getAttribute('data-request-id');
+        allowMembership(requestId);
     });
     
-    function allowMembership(requestId, userId, individualId) {
+    function allowMembership(requestId) {
         
         console.log("ハッカなのだ");
         
@@ -131,10 +124,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('csrf-tokenのmeta要素が存在しません。');
             return;
         }
-        
+
         // XHRを使用してリクエストを送信
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/allow-membership', true);
+        xhr.open('POST', '/allow-membership/' + requestId, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken); // CSRFトークンを設定
         
@@ -143,21 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(xhr.statusText);
 
         xhr.onload = function () {
-            console.log(xhr.status);
             if (xhr.status === 201) {
                 try {
                     console.log("確実に成功フラグ");
                     var response = JSON.parse(xhr.responseText);
                     // 成功時にメッセージを表示
-                    if (response.message) {
-                        // ポップアップメッセージを表示
-                        alert('参加リクエストを許可しました: ' + response.message);
-                        
-                    } else {
-                        // エラーメッセージを表示
-                        alert('リクエストできません');
-                    }
-                    
+                    document.getElementById('message').innerHTML = response.message;
                     // リクエストをビューから削除
                     var requestElement = document.getElementById('request-' + requestId);
                     if (requestElement) {
@@ -177,10 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('ネットワークエラーが発生しました');
         };
         
-        var requestData = JSON.stringify({
-            user_id: userId,
-            individual_id: individualId
-        });
+        var requestData = JSON.stringify({});
         
         xhr.send(requestData);
     }

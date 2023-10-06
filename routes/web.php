@@ -1,5 +1,8 @@
 <?php
 
+
+ini_set('display_errors',1);
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\UserController;
@@ -8,6 +11,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\MembershipRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +75,7 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
     Route::get('/individuals/{individual}', 'showResult');
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
     Route::post('/individuals/{individual}/join}', 'sendJoinRequest')->name('individuals.join');
+    Route::get('/individuals/admin/{id}', 'showAdmin')->name('individuals.admin');
 });
 
 Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){
@@ -78,6 +83,14 @@ Route::controller(TimelineController::class)->middleware(['auth'])->group(functi
     Route::post('/comment', 'addComment');
 });
 
+Route::controller(MembershipRequestController::class)->middleware(['auth'])->group(function(){
+    Route::post('/allow-membership', 'allowMembership')->name('allow-Membership');
+    
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

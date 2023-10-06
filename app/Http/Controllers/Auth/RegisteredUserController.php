@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Cloudinary;
 
 class RegisteredUserController extends Controller
 {
@@ -33,21 +35,30 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'image' => ['required', 'image', 'max:2048'],
             'birthdate' => ['required', 'date'],
             'univ' => ['required', 'string'],
             'grade' => ['required', Rule::in(['学部1年', '学部2年', '学部3年', '学部4年', '修士1年', '修士2年', '博士1年', '博士2年', '博士3年'])],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'birthdate' => $request->birthdate,
-            'univ' => $request->univ,
-            'grade' => $request->grade,
-            'password' => Hash::make($request->password),
+        
+        if ($request->hasFile('image')) {
+            // Cloudinaryに画像をアップロードし、そのURLを取得
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
             
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'image' => $image_url, // 画像のURLを保存
+                'birthdate' => $request->birthdate,
+                'univ' => $request->univ,
+                'grade' => $request->grade,
+                'password' => Hash::make($request->password),
+                
+            ]);
+            
+        }
+
 
         event(new Registered($user));
 
