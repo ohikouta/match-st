@@ -12,12 +12,6 @@
     <body>
         <div class="bg-blue-500 text-white p-4">
             <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
-            <form action="/postss" method="POST" enctype="multipart/form-data">
-                <button>Cloudinary</button>
-                <div class="image">
-                    <input type="file" name="image">
-                </div>
-            </form>
             <!-- /users/create へのリンクを絶対URLで生成 -->
         </div>
         <!-- ナビゲーションセクション -->
@@ -28,28 +22,31 @@
                 <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
             </div>
             <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <!-- ログアウトボタン -->
-            <button type="submit" class="underline text-sm text-gray-600 bg-green-300 p-2 rounded-lg hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <i class="fas fa-sign-out-alt"></i>{{ __('Log Out') }}
-            </button>
-        </form>
+                @csrf
+                <!-- ログアウトボタン -->
+                <button type="submit" class="underline text-sm text-gray-600 bg-green-300 p-2 rounded-lg hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-sign-out-alt"></i>{{ __('Log Out') }}
+                </button>
+            </form>
         </div>
         <!-- メインコンテンツ -->
         <div class="flex justify-center items-center">
             <div class="flex justify-between w-3/4">
                 <!-- コミュニティとイベントセクション -->
                 <div class="flex flex-col flex-7">
-                    <div class="communities border border-solid border-gray-300 shadow-md p-5 mt-5 rounded-lg">
-                        <h3 class="text-2xl font-bold bg-yellow-200 p-4 flex justify-center">コミュニティ</h3>
-                        <div class="">
+                    <div class="communities border border-solid border-gray-300 shadow-md mt-5 rounded-lg">
+                        <h3 class="py-30 text-4xl font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/community_show.jpg") }}'); background-position: center center;">
+                            コミュニティ
+                        </h3>
+                        <div class="p-5">
                             <div>
                                 <h4 class="text-xl font-bold text-center">～資格～</h4>
                                 <div class="flex justify-center p-4">
                                     @foreach ($qualificationData as $qualification)
                                         <a href="{{ route('individuals.show', ['individual' => $qualification->id]) }}">
-                                            <div class="bg-cover bg-center h-48 w-48 relative flex flex-col items-center justify-center mx-4" style="background-image: url('{{ asset($qualification->image) }}')">
-                                                <div class="text-white bg-blue-400 bg-opacity-90 w-full text-center rounded-md">
+                                            <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
+                                                <img src='{{ asset($qualification->image) }}' class="h-48 w-48">
+                                                <div class="bg-black text-white bg-opacity-50 h-20">
                                                     <h5 class="text-lg font-bold">{{ $qualification->title }}</h5>
                                                     <p class="text-sm">{{ $qualification->summary }}</p>
                                                 </div>
@@ -65,16 +62,18 @@
                                 <h4 class="text-xl font-bold text-center">～製品～</h4>
                                 <div class="flex justify-center my-4">
                                     @foreach ($productData as $product)
-                                        <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
-                                            <img src='{{ asset($product->image) }}' class="h-48 w-48">
-                                            <div class="bg-black text-white bg-opacity-50 h-20">
-                                                <h5 class="text-lg font-bold">{{ $product->title }}</h5>
-                                                <p class="text-sm">{{ $product->summary }}</p>
+                                        <a href="{{ route('individuals.show', ['individual' => $product->id]) }}">
+                                            <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
+                                                <img src='{{ asset($product->image) }}' class="h-48 w-48">
+                                                <div class="bg-black text-white bg-opacity-50 h-20">
+                                                    <h5 class="text-lg font-bold">{{ $product->title }}</h5>
+                                                    <p class="text-sm">{{ $product->summary }}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
-                                <div class="pagination flex justify-center">
+                                <div class="pagination">
                                     {{ $productData->links() }}
                                 </div>
                             </div>
@@ -82,16 +81,18 @@
                                 <h4 class="text-xl font-bold text-center">～話題～</h4>
                                 <div class="flex justify-center my-4">
                                     @foreach ($topicData as $topic)
-                                        <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
-                                            <img src='{{ asset($topic->image) }}' class="h-48 w-48">
-                                            <div class="bg-black text-white bg-opacity-50 h-20">
-                                                <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
-                                                <p class="text-sm">{{ $topic->summary }}</p>
+                                        <a href="{{ route('individuals.show', ['individual' => $topic->id]) }}">
+                                            <div class="flex flex-col text-center w-48 mx-4 border border-gray-500 shadow-md">
+                                                <img src='{{ asset($topic->image) }}' class="h-48 w-48">
+                                                <div class="bg-black text-white bg-opacity-50 h-20">
+                                                    <h5 class="text-lg font-bold">{{ $topic->title }}</h5>
+                                                    <p class="text-sm">{{ $topic->summary }}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
-                                <div class="pagination flex justify-center">
+                                <div class="pagination">
                                     {{ $topicData->links() }}
                                 </div>
                             </div>

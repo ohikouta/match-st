@@ -7,6 +7,7 @@ use App\Models\Individual;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\MembershipRequest;
+use Cloudinary;
 
 class IndividualController extends Controller
 {
@@ -54,11 +55,45 @@ class IndividualController extends Controller
     
     public function showAdmin(MembershipRequest $membershiprequest, $id)
     {
+        // individualsテーブルからレコードを取得
+        $individual = Individual::find($id);
+    
+        if (!$individual) {
+            // $idに基づくindividualsレコードが存在しない場合のエラーハンドリング
+            abort(404);
+        }
+            
         $requests = MembershipRequest::where('individuals_id', $id)
             ->where('status', 'pending')
             ->get();
         
-        return view('individuals.admin', ['requests' => $requests]);
+        return view('individuals.admin', ['individual' => $individual, 'requests' => $requests]);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        // バリデーションルールを定義することをお勧めします
+        $request->validate([
+            'title' => 'required|max:50',
+            'summary' => 'required',
+            'image' => 'nullable|image', // 画像のアップロードを許可する場合
+        ]);
+
+        // データベースを更新
+        $individual = Individual::find($id);
+        $individual->title = $request->input('title');
+        $individual->summary = $request->input('summary');
+
+        
+        if ($request->hasFile('image')) {
+            // Cloudinaryに画像をアップロードし、そのURLを取得
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $individual->image = $image_url;
+        }
+            
+        $individual->save();
+
+        return redirect()->route('individuals.admin', $id)->with('success', '編集が完了しました');
     }
     
 }
