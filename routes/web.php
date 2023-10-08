@@ -48,7 +48,7 @@ Route::controller(BaseController::class)->middleware(['auth'])->group(function()
 });
 
 Route::controller(UserController::class)->middleware(['auth'])->group(function(){
-   Route::get('/users/profile', [UserController::class, 'profile'])->name('users.profile');
+   Route::get('/users/profile', 'profile')->name('users.profile');
    Route::post('/users', 'store')->name('users.store');
    Route::get('/users/{base}', 'show'); 
 });
