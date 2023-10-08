@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Community;
 use App\Models\Event;
 use App\Models\Individual;
+use Cloudinary;
 
 class BaseController extends Controller
 {

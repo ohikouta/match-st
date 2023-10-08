@@ -23,9 +23,37 @@
             <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
-        <img src='{{ asset("storage/pic_fix/community_admin.jpg") }}' class="h-100">
-        <div class="flex justify-center items-center p-10">
+        <div class="w-full h-64 overflow-hidden">
+            <img src='{{ asset("storage/pic_fix/community_admin.jpg") }}' class="object-center object-cover w-full h-full">
+        </div>
+        
+        <div class="flex flex-col justify-center items-center p-10">
             <!-- メインコンテンツ -->
+            <div class="container">
+                <form action="{{ route('individuals.update', ['id' => $individual->id]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                  
+                    
+                    <div class="form-group">
+                        <label for="title">タイトル</label>
+                        <input type="text" name="title" id="title" class="form-control" value="{{ $individual->title }}" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="summary">サマリー</label>
+                        <textarea name="summary" id="summary" class="form-control" required>{{ $individual->summary }}</textarea>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="image">画像</label>
+                        <input type="file" name="image" id="image" class="form-control-file">
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary">更新</button>
+                </form>
+            </div>
+            
+            
             <div class="flex flex-col items-center w-3/4 bg-red-500 p-8">
                 <h1 class="text-xl font-bold mb-4">参加リクエスト一覧</h1>
                 <table class="w-3/4 table-auto border-collapse border border-gray-300">

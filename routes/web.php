@@ -76,6 +76,7 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
     Route::post('/individuals/{individual}/join}', 'sendJoinRequest')->name('individuals.join');
     Route::get('/individuals/admin/{id}', 'showAdmin')->name('individuals.admin');
+    Route::post('/individuals/update/{id}', 'update')->name('individuals.update');
 });
 
 Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){
