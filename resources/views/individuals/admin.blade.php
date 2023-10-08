@@ -23,7 +23,7 @@
             <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
-        <img src='{{ asset("storage/community_admin.jpg") }}' class="h-100">
+        <img src='{{ asset("storage/pic_fix/community_admin.jpg") }}' class="h-100">
         <div class="flex justify-center items-center p-10">
             <!-- メインコンテンツ -->
             <div class="flex flex-col items-center w-3/4 bg-red-500 p-8">

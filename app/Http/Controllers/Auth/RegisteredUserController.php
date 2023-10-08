@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'image' => ['required', 'image', 'max:2048'],
+            'image' => ['image', 'max:2048'],
             'birthdate' => ['required', 'date'],
             'univ' => ['required', 'string'],
             'grade' => ['required', Rule::in(['学部1年', '学部2年', '学部3年', '学部4年', '修士1年', '修士2年', '博士1年', '博士2年', '博士3年'])],

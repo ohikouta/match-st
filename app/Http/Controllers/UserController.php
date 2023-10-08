@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         // ログインユーザーの情報を取得
         $user = Auth::user();
-        return view('users.profile', ['user' => $user]);
+        return view('profile.edit', ['user' => $user]);
     }
     
     public function show(Base $base)
