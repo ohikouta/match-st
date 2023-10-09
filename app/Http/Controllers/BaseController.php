@@ -26,7 +26,12 @@ class BaseController extends Controller
     
     public function index(Request $request, Base $base, Community $community, Individual $individual, Event $event, User $user)
     {
+        // ユーザー情報を取得
         $user = auth()->user();
+        
+        // ユーザーが所属しているコミュニティを取得
+        $userCommunities = $user->communities;
+        
         $communitiesData = $community->getDataSomehow();
         
         $qualificationData = Individual::where('category', 'qualification')->paginate(3, ["*"], 'qualification-page')
@@ -51,6 +56,7 @@ class BaseController extends Controller
                 'futureEvent' => $futureEvent,
                 'pastEvent' => $pastEvent,
                 'userData' => $user,
+                'userCommunities' => $userCommunities, // ユーザーが所属するコミュニティをビューに渡す
                 ]);
     }
 }
