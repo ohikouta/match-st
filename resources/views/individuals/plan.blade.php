@@ -31,49 +31,50 @@
             </div>
         </header>
         <main class="flex justify-center">
-            <div class="m-10 p-10 w-3/4 flex flex-col items-center bg-gray-200 border border-solid shadow-mg rounded-lg">
-                <h1 class="text-4xl font-bold ">コミュニティ作成ページ</h1>
+            <div class="m-12 p-10 w-3/4 flex flex-col items-center bg-gray-200 border border-solid shadow-mg rounded-lg">
+                <h1 class="text-4xl font-bold border-l-4 border-blue-500 pl-4">コミュニティ作成ページ</h1>
                 <form method="POST" action="{{ route('individuals.store') }}" enctype="multipart/form-data">
                     @csrf
                     
-                    <div class="form-group">
-                        <label for="image" class="block">コミュニティ画像</label>
+                    <div class="form-group mt-5">
+                        <label for="image" class="block text-lg font-bold">コミュニティ画像</label>
                         <input type="file" name="image" id="image" class="form-control-file">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="title" class="block">コミュニティ名</label>
-                        <input type="text" name="individual[title]" id="title" class="form-control" required>
+                    <div class="form-group mt-5">
+                        <label for="title" class="block text-lg font-bold">コミュニティ名</label>
+                        <input type="text" name="title" id="title" class="form-control w-full" required>
                     </div>
             
-                    <div class="form-group">
-                        <label for="summary" class="block">コミュニティ概要</label>
-                        <textarea name="individual[summary]" id="summary" class="form-control"></textarea>
+                    <div class="form-group mt-5">
+                        <label for="summary" class="block text-lg font-bold">コミュニティ概要</label>
+                        <textarea name="summary" id="summary" class="form-control w-full"></textarea>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="category" class="block">カテゴリー</label>
-                        <select id="category" name=individual[category] required>
+                    <div class="form-group mt-5">
+                        <label for="category" class="block text-lg font-bold">カテゴリー</label>
+                        <select id="category" name="category" required>
                             <option value="qualification">資格</option>
                             <option value="product">製品</option>
                             <option value="topic">話題</option>
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="admin_id" class="block">管理者ID</label>
-                        <input type="text" id="admin_id" name=individual[admin_id] required>
+                    <div class="form-group mt-5">
+                        <label for="admin_id" class="block text-lg font-bold">管理者ID</label>
+                        <p>自身のIDを入力してください</p>
+                        <input type="text" id="admin_id" name="admin_id" required>
                     </div>
             
             
-                    <button type="submit" class="btn btn-primary">登録</button>
+                    <button type="submit" class="mt-6 btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">登録</button>
                 </form>
             </div>
         </main>
         
         
         <!-- フッター -->
-        <footer class="fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-blue-500 p-10">
+        <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>

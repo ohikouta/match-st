@@ -16,10 +16,34 @@ class IndividualController extends Controller
         return view('individuals.plan');
     }
     
-    public function store(Request $request, individual $individual)
+    public function store(Request $request)
     {
-        $input = $request['individual'];
-        $individual->fill($input)->save();
+        // フォームの入力を検証・バリデーションする
+        $validatedData = $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーションルール
+            'title' => 'required|string|max:255',
+            'summary' => 'nullable|string',
+            'category' => 'required|in:qualification,product,topic',
+            'admin_id' => 'required|numeric', // 管理者IDのバリデーションルール
+        ]);
+    
+        // 画像ファイルの処理（アップロードなど）
+        if ($request->hasFile('image')) {
+            $imagePath = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath(); // 適切なディレクトリにアップロード
+        } else {
+            $imagePath = null; // 画像がアップロードされなかった場合
+        }
+    
+        // レコードを作成しデータベースに挿入
+        $individual = new Individual;
+        $individual->image = $imagePath;
+        $individual->title = $validatedData['title'];
+        $individual->summary = $validatedData['summary'];
+        $individual->category = $validatedData['category'];
+        $individual->admin_id = $validatedData['admin_id'];
+        $individual->save();
+    
+        // 成功した場合のリダイレクトなどを行う
         return redirect('/individuals/' . $individual->id);
     }
     

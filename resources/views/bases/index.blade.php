@@ -19,7 +19,7 @@
             <div class="bg-blue-500 p-4 flex justify-between">
                 <div>
                     <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
-                    <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
+                    <a href="{{ route('events.plan') }}" class="font-bold text-white">イベントを企画する</a>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

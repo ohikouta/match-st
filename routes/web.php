@@ -58,9 +58,8 @@ Route::controller(UnivController::class)->middleware(['auth'])->group(function()
 });
 
 Route::controller(EventController::class)->middleware(['auth'])->group(function(){
-   Route::get('/events/index', 'index');
    Route::get('/events/look', 'look');
-   Route::get('/events/plan', 'show');
+   Route::get('/events/plan', 'show')->name('events.plan');
    Route::post('/events', 'store');
    Route::get('/events/{event}', 'showResult');
 });
@@ -72,7 +71,7 @@ Route::controller(CommunityController::class)->middleware(['auth'])->group(funct
 Route::controller(IndividualController::class)->middleware(['auth'])->group(function(){
     Route::get('/individuals/plan', 'show')->name('individuals.plan');
     Route::post('/individuals', 'store')->name('individuals.store');
-    Route::get('/individuals/{individual}', 'showResult');
+    Route::get('/individuals/{individual}', 'showResult')->name('individuals.result');
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
     Route::post('/individuals/{individual}/join}', 'sendJoinRequest')->name('individuals.join');
     Route::get('/individuals/admin/{id}', 'showAdmin')->name('individuals.admin');
