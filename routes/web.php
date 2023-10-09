@@ -70,8 +70,8 @@ Route::controller(CommunityController::class)->middleware(['auth'])->group(funct
 });
 
 Route::controller(IndividualController::class)->middleware(['auth'])->group(function(){
-    Route::get('/individuals/plan', 'show');
-    Route::post('/individuals', 'store');
+    Route::get('/individuals/plan', 'show')->name('individuals.plan');
+    Route::post('/individuals', 'store')->name('individuals.store');
     Route::get('/individuals/{individual}', 'showResult');
     Route::get('individuals/show/{individual}', 'showDetail')->name('individuals.show');
     Route::post('/individuals/{individual}/join}', 'sendJoinRequest')->name('individuals.join');
