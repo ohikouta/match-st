@@ -60,8 +60,11 @@ Route::controller(UnivController::class)->middleware(['auth'])->group(function()
 Route::controller(EventController::class)->middleware(['auth'])->group(function(){
    Route::get('/events/look', 'look');
    Route::get('/events/plan', 'show')->name('events.plan');
-   Route::post('/events', 'store');
+   Route::post('/events', 'store')->name('events.store');
+   Route::get('/events/{eventid}', 'showDetail')->name('events.showdt');
    Route::get('/events/{event}', 'showResult');
+   Route::get('/event/{event}', 'showResult')->name('event.result');
+   // API
 });
 
 Route::controller(CommunityController::class)->middleware(['auth'])->group(function(){

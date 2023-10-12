@@ -29,6 +29,7 @@
                     </button>
                 </form>
             </div>
+            
         </header>
         <!-- メインコンテンツ -->
         <main class="flex-grow">
@@ -37,13 +38,13 @@
                 <div class="flex justify-between w-3/4">
                     <!-- コミュニティとイベントセクション -->
                     <div class="flex flex-col flex-7">
-                        <div class="communities border border-solid border-gray-300 shadow-md mt-5 rounded-lg">
-                            <h3 class="py-30 text-4xl font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/community_show.jpg") }}'); background-position: center center;">
+                        <div class="border border-solid border-gray-300 shadow-md mt-5 rounded-lg">
+                            <h3 class="py-20 text-4xl text-white font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/community_show.jpg") }}'); background-position: center center;">
                                 コミュニティ
                             </h3>
                             <div class="p-5">
-                                <div>
-                                    <h4 class="text-xl font-bold text-center">～資格～</h4>
+                                <div class="mt-4">
+                                    <h4 class="text-xl font-bold border-l-4 border-blue-500 pl-4">資格</h4>
                                     <div class="flex justify-center p-4">
                                         @foreach ($qualificationData as $qualification)
                                             <a href="{{ route('individuals.show', ['individual' => $qualification->id]) }}">
@@ -61,8 +62,8 @@
                                         {{ $qualificationData->links() }}
                                     </div>
                                 </div>
-                                <div>
-                                    <h4 class="text-xl font-bold text-center">～製品～</h4>
+                                <div class="mt-4">
+                                    <h4 class="text-xl font-bold  border-l-4 border-blue-500 pl-4">製品</h4>
                                     <div class="flex justify-center my-4">
                                         @foreach ($productData as $product)
                                             <a href="{{ route('individuals.show', ['individual' => $product->id]) }}">
@@ -80,8 +81,8 @@
                                         {{ $productData->links() }}
                                     </div>
                                 </div>
-                                <div>
-                                    <h4 class="text-xl font-bold text-center">～話題～</h4>
+                                <div class="mt-4">
+                                    <h4 class="text-xl font-bold border-l-4 border-blue-500 pl-4">話題</h4>
                                     <div class="flex justify-center my-4">
                                         @foreach ($topicData as $topic)
                                             <a href="{{ route('individuals.show', ['individual' => $topic->id]) }}">
@@ -102,11 +103,13 @@
                             </div>
                         <!-- イベントレイアウト -->
                         </div>
-                        <div class="events border border-solid border-gray-300 shadow-md p-5 mt-5 rounded-lg">
-                            <h3 class="text-2xl font-bold bg-yellow-200 p-4 mx-auto">イベント</h3>
-                            <div class="">
+                        <div class="border border-solid border-gray-300 shadow-md mt-5 mb-5 rounded-lg">
+                            <h3 class="py-20 text-4xl text-white font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/community_show.jpg") }}'); background-position: center center;">
+                                イベント
+                            </h3>
+                            <div class="p-5">
                                 <h4 class="text-xl font-bold flex justify-center p-6">募集中のイベント</h4>
-                                <table class="border-collapse border-b">
+                                <table class="border-collapse border-b w-full">
                                     <thead class="">
                                         <tr>
                                             <th class="border-b-4 border-blue-500 p-2">イベント名</th>
@@ -117,22 +120,39 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($futureEvent as $event)
-                                    <tr class="">
-                                        <td class="font-bold border-b p-4">{{ $event->name }}</td>
-                                        <td class="border-b p-4">{{ $event->event_date }}</td>
-                                        <td class="border-b p-4">{{ $event->summary }}</td>
-                                        <td class="border-b p-4">募集中</td>
-                                    </tr>
+                                        <tr class="">
+                                            <td class="font-bold border-b p-4">{{ $event->name }}</td>
+                                            <td class="border-b p-4">{{ $event->event_date }}</td>
+                                            <td class="border-b p-4">{{ $event->summary }}</td>
+                                            <td class="border-b p-4 text-blue"><a href="{{ route('events.showdt', ['eventid' => $event->id]) }}">詳細を見る</a></td>
+                                        </tr>
                                     @endforeach
                                         
                                     </tbody>
                                 </table>
                                 
                                 <h4 class="text-xl font-bold flex justify-center p-6">過去のイベント</h4>
-                                @foreach ($pastEvent as $event)
-                                    <h5 class="text-lg font-bold">{{ $event->name }}</h5>
-                                    <p class="">{{ $event->summary }}</p>
-                                @endforeach
+                                <table class="border-collapse border-b w-full">
+                                    <thead class="">
+                                        <tr>
+                                            <th class="border-b-4 border-blue-500 p-2">イベント名</th>
+                                            <th class="border-b-4 border-blue-500 p-2">開催日</th>
+                                            <th class="border-b-4 border-blue-500 p-2">概要</th>
+                                            <th class="border-b-4 border-blue-500 p-2">ステータス</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($pastEvent as $event)
+                                        <tr class="">
+                                            <td class="font-bold border-b p-4">{{ $event->name }}</td>
+                                            <td class="border-b p-4">{{ $event->event_date }}</td>
+                                            <td class="border-b p-4">{{ $event->summary }}</td>
+                                            <td class="border-b p-4 text-blue"><a href="{{ route('events.showdt', ['eventid' => $event->id]) }}">詳細を見る</a></td>
+                                        </tr>
+                                    @endforeach
+                                        
+                                    </tbody>
+                                </table>
                                 
                             </div>
                         </div>

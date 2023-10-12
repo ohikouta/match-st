@@ -188,6 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
 // // 参加リクエスト送信の処理
 // function sendJoinRequest() {
 //     // フォームのdataを取得

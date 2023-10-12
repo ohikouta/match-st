@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Individual;
+use App\Models\Event;
 
 class User extends Authenticatable
 {
@@ -51,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Individual::class);
     }
+    
+    // User.php モデル
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+    
+    
+    
+    
 }

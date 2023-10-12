@@ -7,7 +7,9 @@
         <link href="https://googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="https://kit.fontawesome.com/48447305da.js" crossorigin="anonymous"></script>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css'])
+        <script src="https://code.jquery.com/jquery.js"></script> 
+        <script src="{{ asset('/js/map.js') }}"></script>
     </head>
     <body>
         <header>
@@ -31,41 +33,34 @@
             </div>
         </header>
         <main class="flex justify-center">
-            <div class="m-12 p-10 w-3/4 flex flex-col items-center bg-gray-200 border border-solid shadow-mg rounded-lg">
-                <h1 class="text-4xl font-bold border-l-4 border-blue-500 pl-4">イベントの作成</h1>
-                <form id="yourForm" method="POST" action="{{ route('events.store') }}">
-                    @csrf
-                    
-                    <div class="form-group mt-5">
-                        <label for="name" class="block text-lg font-bold">イベントタイトル</label>
-                        <input type="text" name="name" id="name" class="form-control w-full" required>
-                    </div>
-            
-                    <div class="form-group mt-5">
-                        <label for="summary" class="block text-lg font-bold">イベント概要</label>
-                        <textarea name="summary" id="summary" class="form-control w-full"></textarea>
-                    </div>
-                    
-                    <div class="form-group mt-5">
-                        <label for="summary" class="block text-lg font-bold">開催日</label>
-                        <input type="date" name="event_date" id="event_date" class="form-control w-full" required>
-                    </div>
-                    
-                    <div class="form-group mt-5">
-                        <label for="address" class="block text-lg font-bold">住所</label>
-                        <input type="text" name="address" id="address" class="form-control w-full" required>
-                    </div>
-                    
-                    <!-- 登録ボタン -->
-                    <button id="yourEventButton" type="submit" class="mt-6 btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">登録</button>
-                </form>
+            <!-- map表示のためのアドレス指定 -->
+            <div class="hidden">
+                <span id="eventAddress">{{ $event->address }}</span>
             </div>
+            <div class="w-3/4 my-10 p-5 flex justify-center border border-solid rounded-lg shadow-md">
+                <div class="flex-col ">
+                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">タイトル</h2>
+                    <p class="font-bold mb-4 pl-4">{{ $event->name }}</p>
+                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">概要</h2>
+                    <p class="font-bold mb-4 pl-4">{{ $event->summary }}</p>
+                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">開催日時</h2>
+                    <p class="font-bold mb-4 pl-4">{{ $event->event_date }}</p>
+                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">住所</h2>
+                    <p class="font-bold mb-4 pl-4">{{ $event->address }}</p>
+                    <div id="map" class="flex items-center mb-4" style="height:500px; width:500px;"></div>
+                </div>
+            </div>
+            
         </main>
+        <!-- 他のイベント情報を表示 -->
         
+    
         <!-- フッター -->
         <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
+        <script src="{{ asset('/js/map.js') }}"></script>
     </body>
 </html>
