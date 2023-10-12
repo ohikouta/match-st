@@ -52,7 +52,7 @@
                 @endif
 
                 <!-- タイムライン一覧 -->
-                @if ($userIsMember || $userIsAdmin)
+                @if ($userIsMember && $userIsAdmin)
                     @if ($individual->posts->count() > 0)
                     <div class="flex flex-col items-center">
                         <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
@@ -109,22 +109,22 @@
                                 });
                                 </script>
                             </ul>
+                            @else
+                                <div class="border border-gray-300 shadow-md p-3 text-center">
+                                    <p class="font-bold">投稿はありません</p>
+                                </div>
+                            @endif
+                            <!-- 投稿フォーム -->
+                            <form method="POST" action="/timeline">
+                                @csrf
+                                <div class="form-group mt-3">
+                                    <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                                </div>
+                                <input type="hidden" name="individual_id" value="{{ $individual->id }}">
+                                <button type="submit" class="btn btn-primary mt-3">投稿する</button>
+                            </form>
                         </div>
                     </div>
-                    @else
-                    <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
-                        <p class="font-bold">投稿はありません</p>
-                    </div>
-                    @endif
-                    <!-- 投稿フォーム -->
-                    <form method="POST" action="/timeline">
-                        @csrf
-                        <div class="form-group mt-3">
-                            <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
-                        </div>
-                        <input type="hidden" name="individual_id" value="{{ $individual->id }}">
-                        <button type="submit" class="btn btn-primary mt-3">投稿する</button>
-                    </form>
                 @endif
             </div>
         </div>
