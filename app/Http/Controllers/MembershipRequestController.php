@@ -12,7 +12,6 @@ class MembershipRequestController extends Controller
     {
         // コミュニティ参加許可のロジックを実装
 
-        
         // リクエストを送信したユーザーの情報を取得
         $userId = $request->input('user_id');
 

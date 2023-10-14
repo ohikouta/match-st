@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Base;
 use App\Models\User;
-// eventデータベースの情報も使いたいから
 use App\Models\Community;
 use App\Models\Event;
 use App\Models\Individual;
@@ -31,6 +30,13 @@ class BaseController extends Controller
         
         // ユーザーが所属しているコミュニティを取得
         $userCommunities = $user->communities;
+        $userEvents = $user->events;
+        
+        // ログインユーザーのIDを取得
+        $userId = $user->id;
+        
+        // ログインユーザーが管理者として関連付けられているコミュニティを取得
+        $adminIndividuals = Individual::where('admin_id', $userId)->get();
         
         $communitiesData = $community->getDataSomehow();
         
@@ -44,7 +50,13 @@ class BaseController extends Controller
                                                                 ->appends(["qualification-page" => $request->input('qualification-page')])
                                                                 ->appends(["product-page" => $request->input('product-page')]);
         $futureEvent = Event::where('event_date', '>', now())->get();
+        foreach ($futureEvent as $event) {
+            $event->numberOfApplicants = $event->users->count();
+        }
         $pastEvent = Event::where('event_date', '<', now())->get();
+        foreach ($pastEvent as $event) {
+            $event->numberOfApplicants = $event->users->count();
+        }
         
         return view('bases.index')
         ->with(['bases' => $base->getPaginateByLimit(3), 
@@ -57,6 +69,8 @@ class BaseController extends Controller
                 'pastEvent' => $pastEvent,
                 'userData' => $user,
                 'userCommunities' => $userCommunities, // ユーザーが所属するコミュニティをビューに渡す
+                'userEvents' => $userEvents,
+                'adminIndividuals' => $adminIndividuals, // ユーザーが管理者として関連付けられているコミュニティ
                 ]);
     }
 }

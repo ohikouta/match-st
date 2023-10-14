@@ -12,57 +12,60 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
-         <div class="bg-blue-500 text-white p-4">
-            <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
-            <!-- /users/create へのリンクを絶対URLで生成 -->
+        <div class="bg-blue-500 text-white p-4">
+            <a href="{{ route('users.index') }}" class="block text-4xl font-bold">IEEE ～仲間をつくる～</a>
         </div>
         <!-- ナビゲーションセクション -->
         <div class="bg-blue-500 p-4">
             <!--<a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>-->
             <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
-            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
+        <!-- ページ上部イメージ -->
         <div class="w-full h-64 overflow-hidden">
             <img src='{{ asset("storage/pic_fix/community_admin.jpg") }}' class="object-center object-cover w-full h-full">
         </div>
         
         <div class="flex flex-col justify-center items-center p-10">
             <!-- メインコンテンツ -->
-            <div class="container">
+            <div class="container flex flex-col items-center border border-solid rounded-lg shadow-md">
                 <form action="{{ route('individuals.update', ['id' => $individual->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                  
+                    <div class="form-group">
+                        <label for="title" class="block font-bold text-xl border-l-4 border-blue-500 pl-2 mt-5 mb-3">タイトル</label>
+                        <input type="text" name="title" id="title" class="block form-control w-full" value="{{ $individual->title }}" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="summary" class="block font-bold text-xl border-l-4 border-blue-500 pl-2 mt-5 mb-3">概要</label>
+                        <textarea name="summary" id="summary" class="block form-control w-full" required>{{ $individual->summary }}</textarea>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="image" class="block font-bold text-xl border-l-4 border-blue-500 pl-2 mt-5 mb-3">画像</label>
+                        <input type="file" name="image" id="image" class="block form-control-file">
+                    </div>
                     
-                    <div class="form-group">
-                        <label for="title">タイトル</label>
-                        <input type="text" name="title" id="title" class="form-control" value="{{ $individual->title }}" required>
+                    <div class="flex justify-center">
+                        <button type="submit" class="my-5 block btn btn-primary font-bold text-white bg-green-500 py-2 px-10 rounded-md hover:bg-green-600">更新</button>
                     </div>
-            
-                    <div class="form-group">
-                        <label for="summary">サマリー</label>
-                        <textarea name="summary" id="summary" class="form-control" required>{{ $individual->summary }}</textarea>
-                    </div>
-            
-                    <div class="form-group">
-                        <label for="image">画像</label>
-                        <input type="file" name="image" id="image" class="form-control-file">
-                    </div>
-            
-                    <button type="submit" class="btn btn-primary">更新</button>
                 </form>
             </div>
             
             
-            <div class="flex flex-col items-center w-3/4 bg-red-500 p-8">
-                <h1 class="text-xl font-bold mb-4">参加リクエスト一覧</h1>
-                <table class="w-3/4 table-auto border-collapse border border-gray-300">
+            <div class="flex flex-col items-center w-3/4 p-8 border border-solid shadow-md rounded-lg mt-5">
+                <h1 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-4">参加リクエスト一覧</h1>
+                
+                @if ($requests->count() === 0)
+                    <p class="font-bold text-center text-xl">現在、参加リクエストはありません</p>
+                @else
+                    <table class="w-3/4 table-auto border-collapse">
                     <thead>
                         <tr class="">
-                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">名前</th>
-                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">大学</th>
-                            <th class="py-2 px-4 bg-blue-200 font-bold text-left text-lg text-center border">学年</th>
-                            <th class="py-2 px-4 bg-blue-200 font-bold text-lg border text-center">許可</th>
+                            <th class="py-2 px-4 font-bold text-left text-lg text-center border-b-4 border-blue-500">名前</th>
+                            <th class="py-2 px-4 font-bold text-left text-lg text-center border-b-4 border-blue-500">大学</th>
+                            <th class="py-2 px-4 font-bold text-left text-lg text-center border-b-4 border-blue-500">学年</th>
+                            <th class="py-2 px-4 font-bold text-lg border-b-4 border-blue-500 text-center">許可</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +91,8 @@
                         
                     </tbody>
                 </table>
+                @endif
+                
             </div>
         </div>
         <!-- ナビゲーションセクション -->

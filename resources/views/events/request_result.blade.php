@@ -14,7 +14,7 @@
     <body>
         <header>
             <div class="bg-blue-500 text-white p-4">
-                <a href="{{ route('users.index') }}" class="block text-4xl font-bold">IEEE ～仲間をつくる～</a>
+                <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
                 <!-- /users/create へのリンクを絶対URLで生成 -->
             </div>
             <!-- ナビゲーションセクション -->
@@ -32,33 +32,12 @@
                 </form>
             </div>
         </header>
-            <!-- ページ上部イメージ -->
-            <div class="w-full h-64 overflow-hidden">
-                <img src='{{ asset("storage/pic_fix/event_detail.jpg") }}' class="object-center object-cover w-full h-full">
-            </div>
         <main class="flex justify-center">
-            <!-- map表示のためのアドレス指定 -->
-            <div class="hidden">
-                <span id="eventAddress">{{ $event->address }}</span>
-            </div>
-            <div class="w-3/4 my-10 p-5 flex flex-col items-center border border-solid rounded-lg shadow-md">
-                <div class="flex-col ">
-                    <!-- 管理者のみ表示 -->
-                    @if(auth()->check() && $event->admin_id === auth()->user()->id)
-                        <a href="{{ route('events.admin', ['id' => $event->id]) }}" class="block text-center text-white  font-bold bg-green-500 font-bold mb-10 rounded-md hover:bg-green-600">管理者ページ</a>
-                    @endif
-                    <!-- 全員表示 -->
-                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">タイトル</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $event->name }}</p>
-                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">概要</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $event->summary }}</p>
-                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">開催日時</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $event->event_date }}</p>
-                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">住所</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $event->address }}</p>
-                    <div id="map" class="flex items-center mb-4" style="height:500px; width:500px;"></div>
-                </div>
-                <a href="{{ route('events.requestResult', ['eventid' => $event->id]) }}" class="font-bold text-white bg-green-500 px-10 py-2 rounded-md hover:bg-green-600">応募する</a>
+            <div>
+                <p>下記のイベントに応募しました</p>
+                <p>{{ $event->name }}</p>
+                <p>{{ $event->summary }}</p>
+                <p>{{ $event->date }}</p>
             </div>
             
         </main>

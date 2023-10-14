@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('admin_id');
-            $table->foreign('admin_id')->references('id')->on('users'); // 管理者IDをusersテーブルのIDに関連付ける例
+        Schema::create('event_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('event_id');
+            $table->timestamps();
+            
+            $table->unique(['user_id', 'event_id']);
         });
     }
 
@@ -27,9 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
-            
-        });
+        Schema::dropIfExists('event_user');
     }
 };

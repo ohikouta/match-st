@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="bg-blue-500 text-white p-4">
-            <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
+            <a href="{{ route('users.index') }}" class="block text-4xl font-bold">IEEE ～仲間をつくる～</a>
             <!-- /users/create へのリンクを絶対URLで生成 -->
         </div>
         <!-- ナビゲーションセクション -->
