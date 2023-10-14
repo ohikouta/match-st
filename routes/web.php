@@ -64,6 +64,9 @@ Route::controller(EventController::class)->middleware(['auth'])->group(function(
    Route::get('/events/{eventid}', 'showDetail')->name('events.showdt');
    Route::get('/events/{event}', 'showResult');
    Route::get('/event/{event}', 'showResult')->name('event.result');
+   Route::get('/eventsRequest/{eventid}', 'showRequestResult')->name('events.requestResult');
+   Route::get('/events/admin/{id}', 'showAdmin')->name('events.admin');
+   Route::post('/events/update/{id}', 'update')->name('events.update');
    // API
 });
 
