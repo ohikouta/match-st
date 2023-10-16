@@ -40,15 +40,9 @@ class BaseController extends Controller
         
         $communitiesData = $community->getDataSomehow();
         
-        $qualificationData = Individual::where('category', 'qualification')->paginate(3, ["*"], 'qualification-page')
-                                                                ->appends(["product-page" => $request->input('product-page')])
-                                                                ->appends(["topic-page" => $request->input('topic-page')]);
-        $productData = Individual::where('category', 'product')->paginate(3, ["*"], 'product-page')
-                                                                ->appends(["qualification-page" => $request->input('qualification-page')])
-                                                                ->appends(["topic-page" => $request->input('topic-page')]);
-        $topicData = Individual::where('category', 'topic')->paginate(3, ["*"], 'topic-page')
-                                                                ->appends(["qualification-page" => $request->input('qualification-page')])
-                                                                ->appends(["product-page" => $request->input('product-page')]);
+        $qualificationData = Individual::where('category', 'qualification')->get();
+        $productData = Individual::where('category', 'product')->get();
+        $topicData = Individual::where('category', 'topic')->get();
         $futureEvent = Event::where('event_date', '>', now())->get();
         foreach ($futureEvent as $event) {
             $event->numberOfApplicants = $event->users->count();
