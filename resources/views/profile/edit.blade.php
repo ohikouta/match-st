@@ -18,9 +18,7 @@
         </div>
         <!-- ナビゲーションセクション -->
         <div class="bg-blue-500 p-4">
-            <!--<a href="{{ url('/users/profile') }}" class="font-bold text-white">プロフィール編集</a>-->
             <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
-            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
         <div class="w-full h-64 overflow-hidden">
