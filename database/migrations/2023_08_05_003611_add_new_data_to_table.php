@@ -17,12 +17,7 @@ return new class extends Migration
             //
         });
         
-        DB::table('univs')->insert([
-            'univ_name' => 'ChibaUniversityofCommerce',
-            'locate' => 'Chiba',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        
     }
 
     /**
