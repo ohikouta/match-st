@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        // テーブル作成
         Schema::create('individuals', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
