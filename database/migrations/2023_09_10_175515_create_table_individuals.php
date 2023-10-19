@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 50);
             $table->text('summary', 200);
             $table->enum('category', ['qualification', 'product', 'topic']);
-            $table->int('admin_id');
+            $table->integer('admin_id');
             $table->string('image')->nullable();
             $table->timestamps();
         });
