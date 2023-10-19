@@ -13,17 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('univ', function (Blueprint $table) {
-            //
-        });
-        
-        // データを追加する
-        DB::table('univs')->insert([
-            'univ_name' => 'ChibaUniversityofCommerce',
-            'locate' => 'Chiba',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        if (Schema::hasTable('univs')) {
+            Schema::table('univs', function (Blueprint $table) {
+                // テーブルが存在する場合にカラムの追加やデータの挿入を行います
+                // 今回は何も追加するカラムがないため、空のままにします
+            });
+
+            // データを挿入します
+            DB::table('univs')->insert([
+                'univ_name' => 'ChibaUniversityofCommerce',
+                'locate' => 'Chiba',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 
     /**
@@ -33,8 +36,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('univ', function (Blueprint $table) {
-            //
-        });
+        if (Schema::hasTable('univs')) {
+            Schema::table('univs', function (Blueprint $table) {
+                // テーブルが存在する場合に必要な処理を行います
+            });
+        }
     }
 };
