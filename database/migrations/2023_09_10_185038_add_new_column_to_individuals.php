@@ -13,10 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('individuals', function (Blueprint $table) {
-            $table->integer('admin_id');
-            $table->string('image')->nullable();
-        });
+        // 
     }
 
     /**
