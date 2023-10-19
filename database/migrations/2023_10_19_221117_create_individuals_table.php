@@ -15,11 +15,6 @@ return new class extends Migration
     {
         Schema::create('individuals', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50);
-            $table->text('summary', 200);
-            $table->enum('category', ['qualification', 'product', 'topic']);
-            $table->integer('admin_id');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
