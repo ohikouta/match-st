@@ -95,7 +95,7 @@ Route::controller(MembershipRequestController::class)->middleware(['auth'])->gro
     
 });
 
-Route::controller(ImageRequestController::class)->middleware(['auth'])->group(function(){
+Route::controller(ImageController::class)->middleware(['auth'])->group(function(){
     Route::get('/test-idx', 'view')->name('images.show');
     Route::post('/image-post', 'store')->name('images.store');
     
