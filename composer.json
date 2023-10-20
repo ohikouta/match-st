@@ -8,7 +8,7 @@
         "php": "^8.0.2",
         "cloudinary-labs/cloudinary-laravel": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.52.10",
+        "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"
     },
@@ -60,6 +60,7 @@
         }
     },
     "config": {
+        "bin-dir": "vender/bin",
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
