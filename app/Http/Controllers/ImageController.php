@@ -30,7 +30,7 @@ class ImageController extends Controller
     
         // レコードを作成しデータベースに挿入
         $image = new Image;
-        $image->image = $imagePath;
+        $image->url = $imagePath;
         $image->save();
         
     
