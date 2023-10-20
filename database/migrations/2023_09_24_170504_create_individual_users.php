@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::create('individuals_users', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('user_id');
-        //     $table->unsignedBigInteger('individual_id');
-        //     $table->timestamps();
+        Schema::create('individuals_users', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('individual_id');
+            $table->timestamps();
             
-        //     // usersテーブルとの外部キー制約を設定
-        //     $table->foreign('user_id')->references('id')->on('users');
+            // usersテーブルとの外部キー制約を設定
+            $table->foreign('user_id')->references('id')->on('users');
             
-        //     // individualsテーブルとの外部キー制約を指定
-        //     $table->foreign('individual_id')->references('id')->on('individuals');
-        // });
+            // individualsテーブルとの外部キー制約を指定
+            $table->foreign('individual_id')->references('id')->on('individuals');
+        });
     }
 
     /**
