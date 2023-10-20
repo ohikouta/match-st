@@ -9,7 +9,7 @@ class ImageController extends Controller
 {
     public function view()
     {
-        return view("images.exs");
+        return view("exs.exs");
     }
     
     public function store(Request $request)
