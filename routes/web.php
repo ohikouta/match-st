@@ -11,6 +11,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MembershipRequestController;
 use Illuminate\Support\Facades\Route;
 
