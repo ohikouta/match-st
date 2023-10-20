@@ -34,6 +34,9 @@
         </header>
         <!-- メインコンテンツ -->
         <main class="">
+            <div>
+                <a href="{{ route('images.show') }}">アプリ画像登録</a>
+            </div>
             <div class="">
                 <div class="sm:flex sm:flex-col sm:bg-red-500 md:flex md:flex-col md:bg-blue-500 lg:w-5/6 lg:flex lg:flex-row lg:justify-between lg:bg-green-500 xl:flex xl:w-4/5 xl:flex-row xl:justify-between xl:bg-yellow-500 mx-auto">
                     <!-- コミュニティとイベント: 中央セクション -->
