@@ -23,6 +23,10 @@
                 <label for="image" class="block text-lg font-bold">alt_text</label>
                 <input type="text" name="image" id="image" class="form-control-file">
             </div>
+                <label for="alt_text" class="block text-lg font-bold">alt_text</label>
+                <input type="text" name="alt_text" id="alt_text" class="form-control-file">
+            </div>
+            <button type="submit" class="mt-6 btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">登録</button>
         </form>
     </body>
 </html>

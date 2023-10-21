@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Cloudinary;
 
 class ImageController extends Controller
 {
     public function view()
     {
-        return view("images.exs");
+        return view("exs.exs");
     }
     
     public function store(Request $request)
@@ -29,7 +30,8 @@ class ImageController extends Controller
     
         // レコードを作成しデータベースに挿入
         $image = new Image;
-        $image->image = $imagePath;
+        $image->url = $imagePath;
+        $image->alt_text = $request["alt_text"];
         $image->save();
         
     

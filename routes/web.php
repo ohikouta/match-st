@@ -11,6 +11,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MembershipRequestController;
 use Illuminate\Support\Facades\Route;
 
@@ -94,7 +95,7 @@ Route::controller(MembershipRequestController::class)->middleware(['auth'])->gro
     
 });
 
-Route::controller(ImageRequestController::class)->middleware(['auth'])->group(function(){
+Route::controller(ImageController::class)->middleware(['auth'])->group(function(){
     Route::get('/test-idx', 'view')->name('images.show');
     Route::post('/image-post', 'store')->name('images.store');
     
