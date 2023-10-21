@@ -102,7 +102,7 @@
                         </div>
                             <!-- イベントセクション -->
                             <div class="border border-solid border-gray-300 shadow-md mt-5 mb-5 rounded-lg w-full">
-                                <h3 class="sm:text-lg py-10 lg:py-20 text-4xl text-white font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/event_show.jpg") }}'); background-position: center center;">
+                                <h3 class="sm:text-lg py-10 lg:py-20 text-4xl text-white font-bold bg-yellow-200 flex justify-center" style="background-image: url('{{ asset($eventImage->url) }}'); background-position: center center;">
                                     イベント
                                 </h3>
                                 <div class="p-5">
