@@ -20,6 +20,9 @@
                 <input type="file" name="image" id="image" class="form-control-file">
             </div>
             <div class="">
+                <label for="image" class="block text-lg font-bold">alt_text</label>
+                <input type="text" name="image" id="image" class="form-control-file">
+            </div>
                 <label for="alt_text" class="block text-lg font-bold">alt_text</label>
                 <input type="text" name="alt_text" id="alt_text" class="form-control-file">
             </div>
