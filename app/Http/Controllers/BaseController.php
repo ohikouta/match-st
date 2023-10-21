@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Community;
 use App\Models\Event;
 use App\Models\Individual;
+use App\Models\Image;
 use Cloudinary;
 
 class BaseController extends Controller
@@ -44,6 +45,12 @@ class BaseController extends Controller
         $productData = Individual::where('category', 'product')->get();
         $topicData = Individual::where('category', 'topic')->get();
         $futureEvent = Event::where('event_date', '>', now())->get();
+        
+        // 固定画像の取得
+        $individualImage = Image::find(3);
+        $eventImage = Image::find(6);
+        
+        
         foreach ($futureEvent as $event) {
             $event->numberOfApplicants = $event->users->count();
         }
@@ -62,6 +69,9 @@ class BaseController extends Controller
                 'futureEvent' => $futureEvent,
                 'pastEvent' => $pastEvent,
                 'userData' => $user,
+                // 固定画像
+                'individualImage' => $individualImage,
+                'eventImage' => $eventImage,
                 'userCommunities' => $userCommunities, // ユーザーが所属するコミュニティをビューに渡す
                 'userEvents' => $userEvents,
                 'adminIndividuals' => $adminIndividuals, // ユーザーが管理者として関連付けられているコミュニティ

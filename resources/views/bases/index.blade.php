@@ -44,7 +44,7 @@
                         <div class="flex flex-col">
                             <!-- コミュニティセクション -->
                             <div class="border border-solid border-gray-300 shadow-md mt-5 rounded-lg">
-                                <h3 class="sm:text-lg py-10 lg:py-20 text-4xl text-white font-bold flex justify-center" style="background-image: url('{{ asset("storage/pic_fix/community_show.jpg") }}'); background-position: center center;">
+                                <h3 class="sm:text-lg py-10 lg:py-20 text-4xl text-white font-bold flex justify-center" style="background-image: url('{{ asset($individualImage->url) }}'); background-position: center center;">
                                     コミュニティ
                                 </h3>
                                 <div class="p-5">

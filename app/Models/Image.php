@@ -12,5 +12,6 @@ class Image extends Model
     
     protected $fillable = [
         'url',
+        'alt_text',
         ];
 }
