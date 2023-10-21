@@ -19,6 +19,10 @@
                 <label for="image" class="block text-lg font-bold">test画像</label>
                 <input type="file" name="image" id="image" class="form-control-file">
             </div>
+            <div class="">
+                <label for="image" class="block text-lg font-bold">alt_text</label>
+                <input type="text" name="image" id="image" class="form-control-file">
+            </div>
         </form>
     </body>
 </html>
