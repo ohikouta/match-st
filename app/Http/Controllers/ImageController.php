@@ -31,6 +31,7 @@ class ImageController extends Controller
         // レコードを作成しデータベースに挿入
         $image = new Image;
         $image->url = $imagePath;
+        $image->alt_text = $request["alt_text"];
         $image->save();
         
     
