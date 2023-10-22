@@ -90,12 +90,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('ネットワークエラーが発生しました');
         };
         
-        var requestData = JSON.stringify({
-            content: content,
-            individual_id: individual_id
-        });
         
-        xhr.send(requestData);
+        
+        xhr.send();
         }
 });
 
