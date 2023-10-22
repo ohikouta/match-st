@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // ボタン要素を取得
     var allowMembershipButton = document.getElementById('allowMembershipButton');
-    console.log("Hello, あろーするぜ");
+    console.log("Hello, あろーするぜってなんで？");
     
     // allowMembershipが押されたときにallowMembershipを呼び出す
     var requestId = allowMembershipButton.getAttribute('data-request-id');
