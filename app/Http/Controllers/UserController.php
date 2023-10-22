@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         // ログインユーザーの情報を取得
         $user = Auth::user();
-        $profileImage = Image::find(4)
+        $profileImage = Image::find(4);
         return view('profile.edit', ['user' => $user, 'profileImage' => $profileImage]);
     }
     
