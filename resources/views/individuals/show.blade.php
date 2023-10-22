@@ -18,7 +18,6 @@
         <!-- ナビゲーションセクション -->
         <div class="bg-blue-500 p-4">
             <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
-            <a href="{{ url('/events/look') }}" class="font-bold text-white">イベント一覧</a>
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
         <div class="w-full h-64 flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-100 to-blue-500">
@@ -33,7 +32,7 @@
                 <p class="text-lg font-bold m-3">{{ $individual->user->name }}</p>
                 <!-- 管理者ページへの導線: 管理者のみ表示する -->
                 @if(auth()->check() && auth()->user()->id === $individual->admin_id)
-                    <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}">管理者ページ</a>
+                    <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}" class="inline-block p-4 font-bold font-white bg-green-500 rounded-md hover:bg-green-600"><i class="fas fa-key"></i>管理者ページ</a>
                 @endif
                 <!-- 未参加のユーザーのみ参加リクエストボタンを表示 -->
                 @if(auth()->check())
@@ -122,7 +121,7 @@
                             <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
                         </div>
                         <input type="hidden" name="individual_id" value="{{ $individual->id }}">
-                        <button type="submit" class="btn btn-primary mt-3">投稿する</button>
+                        <button type="submit" class="btn btn-primary mt-3 inline-block text-center p-4 text-white font-bold bg-green-500 rounded-md hover:bg-green-600">投稿する</button>
                     </form>
                 @endif
             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Individual;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Image;
 use App\Models\MembershipRequest;
 use Cloudinary;
 
@@ -81,6 +82,7 @@ class IndividualController extends Controller
     {
         // individualsテーブルからレコードを取得
         $individual = Individual::find($id);
+        $adminImage = Image::find(1);
     
         if (!$individual) {
             // $idに基づくindividualsレコードが存在しない場合のエラーハンドリング
@@ -91,7 +93,7 @@ class IndividualController extends Controller
             ->where('status', 'pending')
             ->get();
         
-        return view('individuals.admin', ['individual' => $individual, 'requests' => $requests]);
+        return view('individuals.admin', ['individual' => $individual, 'requests' => $requests, 'adminImage' => $adminImage]);
     }
     
     public function update(Request $request, $id)
