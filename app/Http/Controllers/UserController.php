@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Base; // Baseモデルをインポート
 use App\Models\Univ; // Univモデルをインポート
 use App\Models\User; // Userモデルをインポート
+use App\Models\Image;
 use Illuminate\Support\Facades\DB; // DBクラスをインポート
 use Illuminate\Support\Facades\Auth; // ログインユーザーの情報取得
 
@@ -16,7 +17,8 @@ class UserController extends Controller
     {
         // ログインユーザーの情報を取得
         $user = Auth::user();
-        return view('profile.edit', ['user' => $user]);
+        $profileImage = Image::find(4)
+        return view('profile.edit', ['user' => $user, 'profileImage' => $profileImage]);
     }
     
     public function show(Base $base)
