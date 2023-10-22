@@ -35,7 +35,7 @@ $(document).ready(function() {
  
  
 // 外部JavaScriptファイル（external.js）内
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function() {
     // ボタン要素を取得
     var joinRequestButton = document.getElementById('joinRequestButton');
     console.log("Hello, World!")
