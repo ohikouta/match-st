@@ -56,7 +56,7 @@ class ProfileController extends Controller
         if ($request->hasFile('image')) {
             // Cloudinaryに画像をアップロードし、そのURLを取得
             $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-            $request->image = $image_url;
+            $request->user()->update(['image' => $image_url]);
         }
     
         $request->user()->save();
