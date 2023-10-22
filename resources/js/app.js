@@ -15,9 +15,6 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-let str1 = "Tom";
-console.log(str1); // -> Tom
-
 
  /* global $*/
 $(document).ready(function() {
@@ -43,12 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // sendJoinRequest関数の定義（ここに関数本体を記述）
     function sendJoinRequest() {
-        // 関数の中身はそのまま残してください
-        // フォームのdataを取得
-        var content = document.querySelector('textarea[name="content"]').value;
-        var individual_id = document.querySelector('input[name="individual_id"]').value;
         
-        console.log("sendJoinRequestが発火していますよ");
+        console.log("sendJoinRequestが発火していますよ20231022");
         
         // LaravelからCSRFトークンを取得
         var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
