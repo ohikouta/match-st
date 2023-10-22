@@ -18,10 +18,6 @@ Alpine.start();
 let str1 = "Tom";
 console.log(str1); // -> Tom
 
-function sayHello() {
-  console.log("Hello, World!");
-}
-
 
  /* global $*/
 $(document).ready(function() {
@@ -33,12 +29,12 @@ $(document).ready(function() {
  /* global individualId*/
  /* global alm*/
  
- 
-// 外部JavaScriptファイル（external.js）内
-window.addEventListener('DOMContentLoaded', function() {
+ // 参加リクエスト送信のAjax
+
+document.addEventListener('DOMContentLoaded', function() {
     // ボタン要素を取得
     var joinRequestButton = document.getElementById('joinRequestButton');
-    console.log("Hello, World!")
+    console.log("参加リクエスト送信のAjaxが動いています")
     
     // ボタンがクリックされたときにsendJoinRequest関数を呼び出す
     joinRequestButton.addEventListener('click', function() {
@@ -110,6 +106,8 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 });
 
+
+// 参加リクエストを許可するAjax処理
 document.addEventListener('DOMContentLoaded', function() {
     // ボタン要素を取得
     var allowMembershipButton = document.getElementById('allowMembershipButton');
@@ -195,19 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function sayHello() {
-  console.log("Hello, World!");
-}
+// 以下のコードは～～で用いられる
 
  /* global $*/
 // 参加リクエスト送信の処理
 function sendJoinRequest() {
     
+    console.log("jsファイル3つめのAjaxが発火していますが、このイベントは、投稿時に発火するイベントです");
+    
     // フォームのdataを取得
     var content = document.querySelector('textarea[name="content"]').value;
     var individual_id = document.querySelector('input[name="individual_id"]').value;
     
-    console.log("sendJoinRequestが発火していますよ");
     $.ajax({
         type: "POST",
         url: '/timeline', //リクエストを送信するURLを指定する
