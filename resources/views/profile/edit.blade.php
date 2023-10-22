@@ -22,7 +22,7 @@
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
         <div class="w-full h-64 overflow-hidden">
-            <img src='{{ asset("storage/pic_fix/bg_pic_edit_profile.jpg") }}' class="object-center object-cover w-full h-full">
+            <img src='{{ asset($profileImage->url) }}' class="object-center object-cover w-full h-full">
         </div>
 
         <div class="py-12">
