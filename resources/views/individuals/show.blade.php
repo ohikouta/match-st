@@ -33,7 +33,7 @@
                 <p class="text-lg font-bold m-3">{{ $individual->user->name }}</p>
                 <!-- 管理者ページへの導線: 管理者のみ表示する -->
                 @if(auth()->check() && auth()->user()->id === $individual->admin_id)
-                    <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}">管理者ページ</a>
+                    <a href="{{ route('individuals.admin', ['id' => $individual->id]) }}" class="inline-block p-4 font-bold font-white bg-green-500 rounded-md hover:bg-green-600"><i class="fas fa-key"></i>管理者ページ</a>
                 @endif
                 <!-- 未参加のユーザーのみ参加リクエストボタンを表示 -->
                 @if(auth()->check())
