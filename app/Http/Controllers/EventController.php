@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Image;
 
 class EventController extends Controller
 {
@@ -74,9 +75,10 @@ class EventController extends Controller
     {
         // $eventid を使用して、データベースから個別のイベント情報を取得
         $event = Event::find($eventid);
+        $eventImage = Image::find(5);
     
         // イベント情報をビューに渡す
-        return view('events.showdt', ['event' => $event]);
+        return view('events.showdt', ['event' => $event, 'eventImage' => $eventImage]);
     }
     
     public function showRequestResult($eventid)

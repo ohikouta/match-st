@@ -34,7 +34,7 @@
         </header>
             <!-- ページ上部イメージ -->
             <div class="w-full h-64 overflow-hidden">
-                <img src='{{ asset("storage/pic_fix/event_detail.jpg") }}' class="object-center object-cover w-full h-full">
+                <img src='{{ asset($eventsImage->url) }}' class="object-center object-cover w-full h-full">
             </div>
         <main class="flex justify-center">
             <!-- map表示のためのアドレス指定 -->
