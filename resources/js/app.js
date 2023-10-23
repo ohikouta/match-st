@@ -243,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 try{
                     console.log("確実に成功フラグ");
                     var response = JSON.parse(xhr.responseText);
+                    console.log(response);
                     if (response.message) {
                         // 新しい投稿を生成
                         var newPost = document.greateElement('li');
