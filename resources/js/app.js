@@ -212,11 +212,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         
         // 関数呼び出し
-        postTimeline();
+        postTimeline(requestData);
            
     });
        
-    function postTimeline() {
+    function postTimeline(requestData) {
         
         console.log("発火しているpostTimeline")
         // LaravelからCSRFトークンを取得
@@ -263,8 +263,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         
         
-        
-        /* global requestData */
         // リクエストを送信
         xhr.send(requestData);
        
