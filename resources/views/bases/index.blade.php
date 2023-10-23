@@ -133,7 +133,7 @@
                                         </div>
                                         
                                         <!-- デスクトップレイアウトボディ -->
-                                        <div class="invisible md:visible lg:visible xl:visible">
+                                        <div class="invisible md:visible lg:visible xl:visible w-full">
                                             @foreach ($futureEvent as $event)
                                             <div class="hidden md:block md:w-full md:flex md:justify-between md:items-center border-b p-2">
                                                 <div class="w-1/4 mr-6 text-sm">{{ $event->name }}</div>
