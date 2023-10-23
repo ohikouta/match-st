@@ -241,9 +241,18 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(xhr.status);
             if (xhr.status === 201) {
                 try{
-                   console.log("確実に成功フラグ");
-                   var response = JSON.parse(xhr.responseText);
-                   if (response.message) {
+                    console.log("確実に成功フラグ");
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.message) {
+                        // 新しい投稿を生成
+                        var newPost = document.greateElement('li');
+                        newPost.className = 'post';
+                        newPost.innerHTML = '<strong>${response.user}</strong> - ${response.created_at}<br>${response.content}';
+                        
+                        // 新しい投稿を投稿欄に追加
+                        var postContainer = document.getElementById('postContainer');
+                        postContainer.appendChild(newPost);
+                       
                        alert('投稿が成功しました');
                    } else {
                        alert('投稿に失敗しました');
