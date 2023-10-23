@@ -209,6 +209,7 @@ document.getElementById('postForm').addEventListener('click', function (event) {
    
    // レスポンスの処理
    xhr.onload = function () {
+       console.log(xhr.status);
        if (xhr.status >= 200 && xhr.status < 300) {
            var response = JSON.parse(xhr.responseText);
            if (response.message) {
