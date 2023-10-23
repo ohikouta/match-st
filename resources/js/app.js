@@ -264,8 +264,9 @@ document.addEventListener('DOMContentLoaded', function () {
         
         
         
+        /* global requestData */
         // リクエストを送信
-        xhr.send();
+        xhr.send(requestData);
        
     }
    
