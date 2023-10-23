@@ -26,7 +26,7 @@ class TimelineController extends Controller
             $responseData = [
                 'message' => '投稿が成功しました',
                 'content' => $post->content,
-                'created_at' => $post->created_at,
+                'created_at' => Carbon::parse($post->created_at)->format('Y-m-d H:i:s'),
                 'user' => $post->user->name,
             ];
             return response()->json($responseData, 201);
