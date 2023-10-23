@@ -20,7 +20,7 @@ class TimelineController extends Controller
         $post->individual_id = $request->input('individual_id');
         $post->save();
         
-        // ポストが正常に保存された場合
+        // ポストが確実に保存された場合!
         if ($post) {
             return response()->json(['message' => '投稿が成功しました'], 201);
         } else {
