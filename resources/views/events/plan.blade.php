@@ -34,25 +34,30 @@
                 <h1 class="text-4xl font-bold border-l-4 border-blue-500 pl-4">イベントの作成</h1>
                 <form id="yourForm" method="POST" action="{{ route('events.store') }}">
                     @csrf
-                    
+                    <!-- タイトル -->
                     <div class="form-group mt-5">
                         <label for="name" class="block text-lg font-bold">イベントタイトル</label>
                         <input type="text" name="name" id="name" class="form-control w-full" required>
                     </div>
-            
+                    <!-- 概要 -->
                     <div class="form-group mt-5">
                         <label for="summary" class="block text-lg font-bold">イベント概要</label>
                         <textarea name="summary" id="summary" class="form-control w-full"></textarea>
                     </div>
-                    
+                    <!-- 開催日 -->
                     <div class="form-group mt-5">
                         <label for="summary" class="block text-lg font-bold">開催日</label>
                         <input type="date" name="event_date" id="event_date" class="form-control w-full" required>
                     </div>
-                    
+                    <!-- 住所 -->
                     <div class="form-group mt-5">
                         <label for="address" class="block text-lg font-bold">住所</label>
                         <input type="text" name="address" id="address" class="form-control w-full" required>
+                    </div>
+                    <!-- 募集人数 -->
+                    <div class="form-group mt-5">
+                        <label for="max_participants" class="block text-lg font-bold">募集人数</label>
+                        <input type="number" name="max_participants" id="max_participants" class="form-control w-full" required>
                     </div>
                     
                     <!-- 登録ボタン -->

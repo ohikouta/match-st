@@ -25,17 +25,14 @@ class EventController extends Controller
     
     public function store(Request $request)
     {
-        
-        
         // 入力バリデーション
         $request->validate([
             'name' => 'required|max:255',
             'summary' => 'nullable',
             'event_date' => 'required|date',
             'address' => 'required',
+            'max_participants' => 'required|integer',
         ]);
-        
-        
         
         // ログインユーザーのIDを取得
         $admin_id = Auth::id();
@@ -47,8 +44,8 @@ class EventController extends Controller
             'event_date' => $request->input('event_date'),
             'admin_id' => $admin_id,
             'address' => $request->input('address'),
+            'max_participants' => $request->input('max_participants'),
         ]);
-        
         
         $event->save();
         

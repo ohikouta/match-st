@@ -66,8 +66,6 @@
                     <p class="font-bold mb-4 pl-4">{{ $event->name }}</p>
                     <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">概要</h2>
                     <p class="font-bold mb-4 pl-4">{{ $event->summary }}</p>
-                    <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">開催日時</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $event->date }}</p>
                 </div>
                 <a href="{{ route('users.index') }}" class="font-bold text-white bg-green-500 px-10 py-2 rounded-md hover:bg-green-600">ホームに戻る</a>
             </div>
