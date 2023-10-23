@@ -22,7 +22,14 @@ class TimelineController extends Controller
         
         // ポストが確実に保存された場合!
         if ($post) {
-            return response()->json(['message' => '投稿が成功しました'], 201);
+            // 必要な情報を連想配列に追加
+            $responseData = [
+                'message' => '投稿が成功しました',
+                'content' => $post->content,
+                'created_at' => $post->created_at,
+                'user' => $post->user->name,
+            ];
+            return response()->json($responseData, 201);
         } else {
             return response()->json(['message' => '投稿に失敗しました'], 400);
         }
