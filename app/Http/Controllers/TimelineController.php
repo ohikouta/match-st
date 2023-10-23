@@ -20,7 +20,12 @@ class TimelineController extends Controller
         $post->individual_id = $request->input('individual_id');
         $post->save();
         
-        return redirect('/')->with('success', '投稿が成功しました。');
+        // ポストが正常に保存された場合
+        if ($post) {
+            return response()->json(['message' => '投稿が成功しました']);
+        } else {
+            return response()->json(['message' => '投稿に失敗しました'], 400);
+        }
     }
     
     public function addComment(Request $request)

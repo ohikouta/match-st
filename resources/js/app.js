@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // これ、タイムライン投稿のAjaxだな。
 
 // フォームが送信されるときにイベントをリッスン
-document.getElementById('postForm').addEventListener('submit', function (event) {
+document.getElementById('postForm').addEventListener('click', function (event) {
    event.preventDefault(); // デフォルトのフォーム送信動作を無効化
    
    console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
