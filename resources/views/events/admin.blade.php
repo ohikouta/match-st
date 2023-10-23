@@ -24,7 +24,7 @@
             <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
         </div>
         <div class="w-full h-64 overflow-hidden">
-            <img src='{{ asset("storage/pic_fix/community_admin.jpg") }}' class="object-center object-cover w-full h-full">
+            <img src='{{ asset($adminImage->url) }}' class="object-center object-cover w-full h-full">
         </div>
         
         <div class="flex flex-col justify-center items-center p-10">

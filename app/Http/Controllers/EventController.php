@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Image;
+use Cloudinary;
 
 class EventController extends Controller
 {
@@ -99,8 +100,9 @@ class EventController extends Controller
     public function showAdmin($id)
     {
         $event = Event::find($id);
+        $adminImage = Image::find(1);
         
-        return view('events.admin', ['event' => $event]);
+        return view('events.admin', ['event' => $event, 'adminImage' => $adminImage]);
     }
     
     public function update(Request $request, $id)

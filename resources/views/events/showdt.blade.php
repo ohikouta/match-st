@@ -43,10 +43,6 @@
             </div>
             <div class="w-3/4 my-10 p-5 flex flex-col items-center border border-solid rounded-lg shadow-md">
                 <div class="flex-col ">
-                    <!-- 管理者のみ表示 -->
-                    @if(auth()->check() && $event->admin_id === auth()->user()->id)
-                        <a href="{{ route('events.admin', ['id' => $event->id]) }}" class="block text-center text-white  font-bold bg-green-500 font-bold mb-10 rounded-md hover:bg-green-600">管理者ページ</a>
-                    @endif
                     <!-- 全員表示 -->
                     <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">タイトル</h2>
                     <p class="font-bold mb-4 pl-4">{{ $event->name }}</p>
@@ -58,7 +54,15 @@
                     <p class="font-bold mb-4 pl-4">{{ $event->address }}</p>
                     <div id="map" class="flex items-center mb-4" style="height:500px; width:500px;"></div>
                 </div>
-                <a href="{{ route('events.requestResult', ['eventid' => $event->id]) }}" class="font-bold text-white bg-green-500 px-10 py-2 rounded-md hover:bg-green-600">応募する</a>
+                <!-- 管理者のみ表示 -->
+                @if(auth()->check() && $event->admin_id === auth()->user()->id)
+                    <a href="{{ route('events.admin', ['id' => $event->id]) }}" class="block text-center text-white  font-bold bg-green-500 font-bold mb-10 rounded-md hover:bg-green-600">管理者ページ</a>
+                @endif
+                <!-- 管理者には表示しない -->
+                @if(!auth()->check() || $event->admin_id !== auth()->user()->id)
+                    <!-- ここに管理者以外の場合に表示させたいコンテンツを配置 -->
+                    <a href="{{ route('events.requestResult', ['eventid' => $event->id]) }}" class="font-bold text-white bg-green-500 px-10 py-2 rounded-md hover:bg-green-600">応募する</a>
+                @endif
             </div>
             
         </main>
