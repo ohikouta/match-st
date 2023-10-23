@@ -199,27 +199,37 @@ document.getElementById('postForm').addEventListener('click', function (event) {
    var individual_id = document.querySelector('input[name="individual_id"]').value;
    
    
-   $.ajax({
-       type: "POST",
-       url: '/timeline',
-       data: {
-           content: content,
-           individual_id: individual_id,
-           _token: '{{ csrf_token() }}',
-       },
-       success: function (response) {
+   // XHRオブジェクトを作成
+   var xhr = new XMLHttpRequest();
+   
+   // リクエストを設定
+   xhr.open("POST", "/timeline", true);
+   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   xhr.setRequestHeader("X-CSRF-TOKEN", '{{ csrf_token() }}');
+   
+   // レスポンスの処理
+   xhr.onload = function () {
+       if (xhr.status >= 200 && xhr.status < 300) {
+           var response = JSON.parse(xhr.responseText);
            if (response.message) {
                alert('投稿が成功しました');
            } else {
                alert('投稿に失敗しました');
            }
-           
-       },
-       error: function (error) {
-           console.error(error);
-       },
-       
-   });
+       } else {
+           console.error(xhr.statusText);
+       }
+   };
+   
+   // エラーハンドリング
+   xhr.onerror = function () {
+       console.error("リクエスト中にエラーが発生しました");
+   };
+   
+   // リクエストを送信
+   var data = "content=" + encodeURIComponent(content) + "&individual_id=" + individual_id; 
+   xhr.send(data);
+   
 });
 
 
