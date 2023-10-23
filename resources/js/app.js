@@ -227,8 +227,7 @@ document.getElementById('postForm').addEventListener('click', function (event) {
    };
    
    // リクエストを送信
-   var data = "content=" + encodeURIComponent(content) + "&individual_id=" + individual_id; 
-   xhr.send(data);
+   xhr.send();
    
 });
 
