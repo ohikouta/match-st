@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
        
        
-    var postTimelineButton = document.getElementById('postForm');
+    var postTimelineButton = document.getElementById('postFormButton');
     console.log("get-post-form");
        
     postTimelineButton.addEventListener('click', function (event) {
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // リクエストを設定
         xhr.open("POST", "/timeline", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
         
         // レスポンスの処理
