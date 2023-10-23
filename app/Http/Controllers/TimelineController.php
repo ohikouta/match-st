@@ -22,7 +22,7 @@ class TimelineController extends Controller
         
         // ポストが正常に保存された場合
         if ($post) {
-            return response()->json(['message' => '投稿が成功しました']);
+            return response()->json(['message' => '投稿が成功しました'], 201);
         } else {
             return response()->json(['message' => '投稿に失敗しました'], 400);
         }

@@ -189,47 +189,79 @@ document.addEventListener('DOMContentLoaded', function() {
 // これ、タイムライン投稿のAjaxだな。
 
 // フォームが送信されるときにイベントをリッスン
-document.getElementById('postForm').addEventListener('click', function (event) {
-   event.preventDefault(); // デフォルトのフォーム送信動作を無効化
+
+document.addEventListener('DOMContentLoaded', function () {
    
-   console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
-   console.log("ちゃんと変わってるのか気になるわね,buildされているか");
-   
-   // フォームのデータを取得
-   var content = document.querySelector('textarea[name="content"]').value;
-   var individual_id = document.querySelector('input[name="individual_id"]').value;
-   
-   
-   // XHRオブジェクトを作成
-   var xhr = new XMLHttpRequest();
-   
-   // リクエストを設定
-   xhr.open("POST", "/timeline", true);
-   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-   xhr.setRequestHeader("X-CSRF-TOKEN", '{{ csrf_token() }}');
-   
-   // レスポンスの処理
-   xhr.onload = function () {
-       console.log(xhr.status);
-       if (xhr.status >= 200 && xhr.status < 300) {
-           var response = JSON.parse(xhr.responseText);
-           if (response.message) {
-               alert('投稿が成功しました');
+    console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
+       
+       
+    var postTimelineButton = document.getElementById('postForm');
+    console.log("get-post-form");
+       
+    postTimelineButton.addEventListener('click', function (event) {
+        event.preventDefault(); // デフォルトのフォーム送信動作を無効化
+        
+        // フォームのデータを取得
+        var content = document.querySelector('textarea[name="content"]').value;
+        var individual_id = document.querySelector('input[name="individual_id"]').value;
+        
+        // 関数呼び出し
+        postTimeline();
+           
+    });
+       
+    function postTimeline() {
+        
+        console.log("発火しているpostTimeline")
+        // LaravelからCSRFトークンを取得
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        if (csrfTokenElement) {
+            var csrfToken = csrfTokenElement.getAttribute('content');
+            // ここでcsrfTokenを使用する処理を行う
+        } else {
+            // csrfTokenElementが存在しない場合のエラーハンドリング
+            console.error('csrf-tokenのmeta要素が存在しません。');
+        }
+        
+        // XHRオブジェクトを作成
+        var xhr = new XMLHttpRequest();
+        
+        // リクエストを設定
+        xhr.open("POST", "/timeline", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
+        
+        // レスポンスの処理
+        xhr.onload = function () {
+            console.log(xhr.status);
+            if (xhr.status === 201) {
+                try{
+                   console.log("確実に成功フラグ");
+                   var response = JSON.parse(xhr.responseText);
+                   if (response.message) {
+                       alert('投稿が成功しました');
+                   } else {
+                       alert('投稿に失敗しました');
+                   }
+                } catch (e) {
+                    console.error('JSONデータのパースエラー:', e);
+                }
+           
            } else {
-               alert('投稿に失敗しました');
+               console.error(xhr.statusText);
            }
-       } else {
-           console.error(xhr.statusText);
-       }
-   };
+        };
+        
+        // エラーハンドリング
+        xhr.onerror = function () {
+           console.error("リクエスト中にエラーが発生しました");
+        };
+        
+        // リクエストを送信
+        xhr.send();
+       
+    }
    
-   // エラーハンドリング
-   xhr.onerror = function () {
-       console.error("リクエスト中にエラーが発生しました");
-   };
-   
-   // リクエストを送信
-   xhr.send();
    
 });
 
