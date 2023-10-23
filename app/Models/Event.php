@@ -17,6 +17,7 @@ class Event extends Model
         'event_date',
         'admin_id',
         'address',
+        'max_participants',
         ];
         
     public function getPaginateByLimit(int $limit_count=5)
