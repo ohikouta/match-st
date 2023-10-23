@@ -199,6 +199,7 @@ return [
         
         // 追記
         CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
+        Carbon\Laravel\ServiceProvider::class,
 
     ],
 
@@ -215,6 +216,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Carbon' => \Carbon\Carbon::class,
     ])->toArray(),
 
 ];
