@@ -191,37 +191,72 @@ document.addEventListener('DOMContentLoaded', function() {
 // 以下のコードは～～で用いられる
 
  /* global $*/
-// 参加リクエスト送信の処理
-function sendJoinRequest() {
+// これ、タイムライン投稿のAjaxだな。
+
+// フォームが送信されるときにイベントをリッスン
+document.getElementById('postForm').addEventListener('submit', function (event) {
+   event.preventDefault(); // デフォルトのフォーム送信動作を無効化
+   
+   console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
+   
+   // フォームのデータを取得
+   var content = document.querySelector('textarea[name="content"]').value;
+   var individual_id = document.querySelector('input[name="individual_id"]').value;
+   
+   
+   $.ajax({
+       type: "POST",
+       url: '/timeline',
+       data: {
+           content: content,
+           individual_id: individual_id,
+           _token: '{{ csrf_token() }}',
+       },
+       success: function (response) {
+           if (response.message) {
+               alert('投稿が成功しました');
+           } else {
+               alert('投稿に失敗しました');
+           }
+           
+       },
+       error: function (error) {
+           console.error(error);
+       },
+       
+   });
+});
+
+// function sendJoinRequest() {
     
-    console.log("jsファイル3つめのAjaxが発火していますが、このイベントは、投稿時に発火するイベントです");
+//     console.log("jsファイル3つめのAjaxが発火していますが、このイベントは、投稿時に発火するイベントです");
     
-    // フォームのdataを取得
-    var content = document.querySelector('textarea[name="content"]').value;
-    var individual_id = document.querySelector('input[name="individual_id"]').value;
+//     // フォームのdataを取得
+//     var content = document.querySelector('textarea[name="content"]').value;
+//     var individual_id = document.querySelector('input[name="individual_id"]').value;
     
-    $.ajax({
-        type: "POST",
-        url: '/timeline', //リクエストを送信するURLを指定する
-        data: {
-            // リクエストデータをここに追加
-            content: content,
-            individual_id: individual_id,
-            _token: '{{ csrf_token() }}', // CSRFトークンを送信
-        },
-        success: function (response) {
-            // サーバーからの応答を処理する
-            if (response.message) {
-                // ポップアップメッセージを表示
-                alert('投稿が成功しました');
-            } else {
-                // エラーメッセージを表示
-                alert('投稿に失敗しました');
-            }
-        },
-        error: function (error) {
-            // エラーハンドリング
-            console.error(error);
-        },
-    });
-}
+//     $.ajax({
+//         type: "POST",
+//         url: '/timeline', //リクエストを送信するURLを指定する
+//         data: {
+//             // リクエストデータをここに追加
+//             content: content,
+//             individual_id: individual_id,
+//             _token: '{{ csrf_token() }}', // CSRFトークンを送信
+//         },
+//         success: function (response) {
+//             // サーバーからの応答を処理する
+//             if (response.message) {
+//                 // ポップアップメッセージを表示
+//                 alert('投稿が成功しました');
+//             } else {
+//                 // エラーメッセージを表示
+//                 alert('投稿に失敗しました');
+//             }
+//         },
+//         error: function (error) {
+//             // エラーハンドリング
+//             console.error(error);
+//         },
+//     });
+// }
