@@ -193,6 +193,7 @@ document.getElementById('postForm').addEventListener('click', function (event) {
    event.preventDefault(); // デフォルトのフォーム送信動作を無効化
    
    console.log("タイムライン投稿がされている！これが終わればほぼゴールやでえ");
+   console.log("ちゃんと変わってるのか気になるわね,buildされているか");
    
    // フォームのデータを取得
    var content = document.querySelector('textarea[name="content"]').value;
