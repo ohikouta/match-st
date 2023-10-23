@@ -56,7 +56,7 @@
                 </div>
                 <!-- 管理者のみ表示 -->
                 @if(auth()->check() && $event->admin_id === auth()->user()->id)
-                    <a href="{{ route('events.admin', ['id' => $event->id]) }}" class="block text-center text-white  font-bold bg-green-500 font-bold mb-10 rounded-md hover:bg-green-600">管理者ページ</a>
+                    <a href="{{ route('events.admin', ['id' => $event->id]) }}" class="font-bold text-white bg-green-500 px-10 py-2 rounded-md hover:bg-green-600">管理者ページ</a>
                 @endif
                 <!-- 管理者には表示しない -->
                 @if(!auth()->check() || $event->admin_id !== auth()->user()->id)
