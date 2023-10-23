@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(response);
                     if (response.message) {
                         // 新しい投稿を生成
-                        var newPost = document.greateElement('li');
+                        var newPost = document.createElement('li');
                         newPost.className = 'post';
                         newPost.innerHTML = '<strong>${response.user}</strong> - ${response.created_at}<br>${response.content}';
                         
