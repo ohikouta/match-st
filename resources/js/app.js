@@ -245,10 +245,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     var response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.message) {
+                        console.log(response)
                         // 新しい投稿を生成
                         var newPost = document.createElement('li');
                         newPost.className = 'post';
-                        newPost.innerHTML = '<strong>${response.user}</strong> - ${response.created_at}<br>${response.content}';
+                        newPost.innerHTML = `<strong>${response.user}</strong> - ${response.created_at}<br>${response.content}`;
                         
                         // 新しい投稿を投稿欄に追加
                         var postContainer = document.getElementById('postContainer');
