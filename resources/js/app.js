@@ -205,6 +205,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var content = document.querySelector('textarea[name="content"]').value;
         var individual_id = document.querySelector('input[name="individual_id"]').value;
         
+        // リクエストデータをjson文字列に変換
+        var requestData = JSON.stringify({
+            content: content,
+            individual_id: individual_id
+        });
+        
         // 関数呼び出し
         postTimeline();
            
@@ -223,10 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('csrf-tokenのmeta要素が存在しません。');
         }
         
+        
         // XHRオブジェクトを作成
         var xhr = new XMLHttpRequest();
-        
-        // リクエストを設定
         xhr.open("POST", "/timeline", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
@@ -256,6 +261,8 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onerror = function () {
            console.error("リクエスト中にエラーが発生しました");
         };
+        
+        
         
         // リクエストを送信
         xhr.send();

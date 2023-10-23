@@ -115,7 +115,7 @@
                     </div>
                     @endif
                     <!-- 投稿フォーム -->
-                    <form id="postForm"　method="POST" action="/timeline">
+                    <form id="postForm"　method="POST" action="{{ route('timeline.store') }}">
                         @csrf
                         <div class="form-group mt-3">
                             <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
