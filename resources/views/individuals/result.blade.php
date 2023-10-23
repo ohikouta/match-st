@@ -6,6 +6,11 @@
         <title>Individual-Result</title>
         <!--Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script type="module" src="{{ asset('js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://kit.fontawesome.com/48447305da.js" crossorigin="anonymous"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <header>
