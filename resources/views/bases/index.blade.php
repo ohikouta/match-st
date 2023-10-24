@@ -106,7 +106,6 @@
                                     イベント
                                 </h3>
                                 <div class="p-5">
-                                    
                                     <!-- 募集中のイベントセクション -->
                                     <div class="flex flex-col items-center">
                                         <h4 class="text-xl font-bold p-6">募集中のイベント</h4>
