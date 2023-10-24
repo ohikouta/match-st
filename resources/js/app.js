@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 関数呼び出し
         postTimeline(requestData);
         
-        content.value = '';
+        document.querySelector('textarea[name="content"]').value = '';
            
     });
     
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 関数呼び出し
         addComment(requestData);
         
-        content.value = '';
+        document.querySelector('textarea[name="comment_content"]').value = '';
     });
        
     function postTimeline(requestData) {
@@ -386,9 +386,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         // 新しいコメントをコメント一覧に追加
                         var commentList = document.querySelector('#comment-list');
                         commentList.append(newComment);
-        
-                        /* global content */
-                        content.value = '';
                         
                         alert('コメントが追加されました');
                     } else {
@@ -409,8 +406,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
         xhr.send(requestData);
     }
-
-   
 });
 
 
