@@ -46,7 +46,7 @@ class TimelineController extends Controller
         $comment = new Comment;
         $comment->user_id = auth()->user()->id;
         $comment->post_id = $request->input('post_id');
-        $comment->content = $request->input('comment_content');
+        $comment->content = $request->input('content');
         $comment->save();
         
         if ($comment) {
