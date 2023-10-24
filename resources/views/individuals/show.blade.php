@@ -90,7 +90,7 @@
                                                     @csrf
                                                     <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
                                                     <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                                    <button type="submit" class="btn btn primary mt-2">送信</button>
+                                                    <button id="postCommentButton" type="submit" class="btn btn primary mt-2">送信</button>
                                                 </form>
                                             </div>
                                         </div>

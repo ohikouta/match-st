@@ -183,10 +183,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// 以下のコードは～～で用いられる
 
- /* global $*/
-// これ、タイムライン投稿のAjaxだな。
+// タイムライン投稿のAjax
 
 // フォームが送信されるときにイベントをリッスン
 
@@ -196,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
        
        
     var postTimelineButton = document.getElementById('postFormButton');
+    var postCommentButton = document.getElementById('postCommentButton');
     console.log("get-post-form");
        
     postTimelineButton.addEventListener('click', function (event) {
@@ -215,6 +214,22 @@ document.addEventListener('DOMContentLoaded', function () {
         postTimeline(requestData);
            
     });
+    
+    postCommentButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        
+        var content = document.querySelector('textarea[name="comment_content"]').value;
+        var post_id = document.querySelector('input[name="post_id"]').value;
+        
+        // リクエストデータをjson文字列に変換
+        var requestData = JSON.stringify({
+            content: content,
+            post_id: post_id
+        });
+        
+        // 関数呼び出し
+        addComment(requestData);
+    })
        
     function postTimeline(requestData) {
         
