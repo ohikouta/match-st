@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.message) {
-                        console.log(response)
+                        console.log("response.messageは通過しています")
                         // 新しい投稿を生成
                         var newPostContainer = document.createElement('li');
                         newPostContainer.className = 'post bg-white p4 shadow-md rounded-lg p-4 mb-4';
@@ -293,6 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
                      
                        alert('投稿が成功しました');
                    } else {
+                       console.error('受信したjsonはnullまたは不正な形式です.')
                        alert('投稿に失敗しました');
                    }
                 } catch (e) {
