@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // 関数呼び出し
         addComment(requestData);
-    })
+    });
        
     function postTimeline(requestData) {
         
