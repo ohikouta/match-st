@@ -56,7 +56,7 @@
                         <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
                             <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
                             <ul id="postContainer" class="space-y-4 mt-6">
-                                @foreach (array_reverse($individual->posts->toArray()) as $post)
+                                @foreach ($posts as $post)
                                     <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4">
                                         <div class="flex">
                                             <p class="text-gray-800 mr-3">投稿日時: {{ $post->created_at }}</p>

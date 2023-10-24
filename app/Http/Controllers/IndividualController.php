@@ -61,8 +61,10 @@ class IndividualController extends Controller
             return abort(404);
         }
         
+        $posts = $individual->posts->reverse();
         
-        return view('individuals.show', compact('individual'));
+        
+        return view('individuals.show', compact('individual', 'posts'));
     }
     
     public function sendJoinRequest(Request $request, Individual $individual)
