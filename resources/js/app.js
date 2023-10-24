@@ -371,10 +371,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         newComment.className = 'border border-gray-300 shadow-md p-4 rounded-lg m-2';
                         var contentHTML = `
                             <div class="flex">
-                                <p class="text-gray-800 mr-3">返信日時: ${response.comment.created_at}</p>
-                                <p class="text-gray-800 mr-3">返信者: ${response.comment.user.name}</p>
+                                <p class="text-gray-800 mr-3">返信日時: ${response.created_at}</p>
+                                <p class="text-gray-800 mr-3">返信者: ${response.user.name}</p>
                             </div>
-                            <p class="p-2">${response.comment.content}
+                            <p class="p-2">${response.content}
                         `;
                         newComment.innerHTML = contentHTML;
                         console.log("【コメントver】contentHTMLが追加されました。");
