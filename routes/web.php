@@ -87,7 +87,7 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
 
 Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){
     Route::post('/timeline', 'store')->name('timeline.store');
-    Route::post('/comment', 'addComment');
+    Route::post('/comment', 'addComment')->name('timeline.addComment');
 });
 
 Route::controller(MembershipRequestController::class)->middleware(['auth'])->group(function(){

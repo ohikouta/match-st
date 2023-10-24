@@ -71,10 +71,10 @@
                                         </button>
                                         
                                         <!-- コメント表示（非表示）-->
-                                        <div id="comment-list" class="comment-section hidden">
+                                        <div id="comment" class="comment-section hidden">
                                             <p class="font-bold text-lg m-4">返信一覧</p>
                                             <!-- コメント一覧を表示（非表示） -->
-                                            <div id="comment-list-body">
+                                            <div id="comment-list">
                                                 @foreach ($post->comments as $comment)
                                                     <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
                                                         <div class="flex">
@@ -86,11 +86,11 @@
                                                 @endforeach
                                             </div>
                                             <div id="comment-form" class="">
-                                                <form method="POST" action="/comment">
+                                                <form method="POST" action="{{ route('timeline.addComment') }}">
                                                     @csrf
                                                     <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
                                                     <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                                    <button id="postCommentButton" type="submit" class="btn btn primary mt-2">送信</button>
+                                                    <button id="postCommentButton" type="button" class="btn btn primary mt-2">送信</button>
                                                 </form>
                                             </div>
                                         </div>
