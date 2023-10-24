@@ -268,6 +268,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             <p class="inline ml-2">Reply</p>
                             <i class="far fa-comment-dots ml-2"></i>
                         `;
+                        
+                        // クリックイベント割当
+                        replyButton.addEventListener('click', function () {
+                            // 対応するコメントセクションとコメント表示を切り替え
+                            var commentSection = newPostContainer.querySelector('.comment-section');
+                            commentSection.classList.toggle('hidden');
+                        });
                 
                         newPostContainer.appendChild(replyButton);
                         console.log("replybuttonが追加されました。");
