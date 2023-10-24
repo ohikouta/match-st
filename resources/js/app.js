@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
        
     var postTimelineButton = document.getElementById('postFormButton');
     var postCommentButton = document.getElementById('postCommentButton');
-    console.log("get-post-form");
        
     postTimelineButton.addEventListener('click', function (event) {
         event.preventDefault(); // デフォルトのフォーム送信動作を無効化
@@ -361,6 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
     
         xhr.onload = function () {
+            console.log(xhr.status);
             if (xhr.status === 201) {
                 try {
                     var response = JSON.parse(xhr.responseText);
