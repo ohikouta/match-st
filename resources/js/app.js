@@ -20,8 +20,8 @@ Alpine.start();
 $(document).ready(function() {
     $("#myform").submit(function(event) {
         event.preventDefault();
-    })
-})
+    });
+});
 
  /* global individualId*/
  
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(xhr.responseText);
                 try {
                     var response = JSON.parse(xhr.responseText);
-                    console.log(response)
+                    console.log(response);
                     if (response.message) {
                         // ポップアップメッセージを表示
                         alert('参加リクエストを送信しました');
@@ -88,9 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // エラーハンドリング
             console.error('ネットワークエラーが発生しました');
         };
-        
-        
-        
         xhr.send();
         }
 });
@@ -267,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                             <p class="text-gray-800 p-2">${response.content}
                         
-                        `
+                        `;
                         newPostContainer.innerHTML = contentHTML;
                         console.log("contentHTMLが追加されました。");
                         
@@ -308,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         var postsContainer = document.querySelector('#posts-container');
                         postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
                    } else {
-                       console.error('受信したjsonはnullまたは不正な形式です.')
+                       console.error('受信したjsonはnullまたは不正な形式です.');
                        alert('投稿に失敗しました');
                    }
                 } catch (e) {
