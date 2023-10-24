@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
                         // 新しいコメントをコメント一覧に追加
                         var commentList = document.querySelector('#comment-list-body');
-                        commentList.appendChild(newComment, commentList.firstChild);
+                        commentList.insertBefore(newComment, commentList.firstChild);
         
                         alert('コメントが追加されました');
                     } else {
