@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.log("conmmentsectionが追加されました。");
                 
                         // 新しい投稿を投稿欄に追加
-                        var postsContainer = document.querySelector('posts-container');
+                        var postsContainer = document.querySelector('#posts-container');
                         postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
                                         
                      
