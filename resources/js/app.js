@@ -353,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // csrfTokenElementが存在しない場合のエラーハンドリング
             console.error('csrf-tokenのmeta要素が存在しません。');
         }
+        console.log("発火しているaddComment");
         
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/comment", true);
