@@ -316,9 +316,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         // 新しい投稿を投稿欄に追加
                         var postsContainer = document.querySelector('#posts-container');
                         postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
-                                        
-                     
-                       alert('投稿が成功しました');
                    } else {
                        console.error('受信したjsonはnullまたは不正な形式です.')
                        alert('投稿に失敗しました');
@@ -387,7 +384,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         var commentList = document.querySelector('#comment-list');
                         commentList.append(newComment);
                         
-                        alert('コメントが追加されました');
                     } else {
                         console.error('受信した JSON は null または不正な形式です.');
                         alert('コメントの追加に失敗しました');
