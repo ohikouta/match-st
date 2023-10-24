@@ -375,10 +375,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             <p class="p-2">${response.comment.content}
                         `;
                         newComment.innerHTML = contentHTML;
+                        console.log("【コメントver】contentHTMLが追加されました。");
         
                         // 新しいコメントをコメント一覧に追加
-                        var commentList = document.querySelector('#comment-list-body');
-                        commentList.insertBefore(newComment, commentList.firstChild);
+                        var commentList = document.querySelector('#comment-list');
+                        commentList.append(newComment);
         
                         alert('コメントが追加されました');
                     } else {
