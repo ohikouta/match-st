@@ -387,6 +387,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         var commentList = document.querySelector('#comment-list');
                         commentList.append(newComment);
         
+                        /* global content */
+                        content.value = '';
+                        
                         alert('コメントが追加されました');
                     } else {
                         console.error('受信した JSON は null または不正な形式です.');
