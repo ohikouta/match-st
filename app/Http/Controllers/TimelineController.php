@@ -39,7 +39,7 @@ class TimelineController extends Controller
     public function addComment(Request $request)
     {
         $request->validate([
-            'comment_content' => 'required|max:255',
+            'content' => 'required|max:255',
         ]);
         
         // コメントを保存
