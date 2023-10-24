@@ -247,14 +247,50 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.message) {
                         console.log(response)
                         // 新しい投稿を生成
-                        var newPost = document.createElement('li');
-                        newPost.className = 'post';
-                        newPost.innerHTML = `<strong>${response.user}</strong> - ${response.created_at}<br>${response.content}`;
+                        var newPostContainer = document.createElement('li');
+                        newPostContainer.className = 'post bg-white p4 shadow-md rounded-lg p-4 mb-4';
                         
+                        // 
+                        var contentHTML = `
+                            <div class="flex">
+                                <p class="text-gray-800 mr-3">投稿日時: ${response.created_at}</p>
+                                <p class="text-gray-800 mr-3">投稿者: ${response.user}</p>
+                            </div>
+                            <p class="text-gray-800 p-2">${response.content}
+                        
+                        `
+                        newPostContainer.innerHTML = contentHTML;
+                        
+                        var replyButton = document.createElement('button');
+                        replyButton.className = 'text-blue-500 block flex justify-between pl-15 reply-button';
+                        replyButton.innerHTML = `
+                            <p class="inline ml-2">Reply</p>
+                            <i class="far fa-comment-dots ml-2"></i>
+                        `;
+                
+                        newPostContainer.appendChild(replyButton);
+                
+                        var commentSection = document.createElement('div');
+                        commentSection.className = 'comment-section hidden';
+                        commentSection.innerHTML = `
+                            <p class="font-bold text-lg m-4">返信一覧</p>
+                            <div id="comment-form" class="">
+                                <form method="POST" action="/comment">
+                                    @csrf
+                                    <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <button type="submit" class="btn btn primary mt-2">送信</button>
+                                </form>
+                            </div>
+                        `;
+                
+                        newPostContainer.appendChild(commentSection);
+                
                         // 新しい投稿を投稿欄に追加
-                        var postContainer = document.getElementById('postContainer');
-                        postContainer.appendChild(newPost);
-                       
+                        var postsContainer = document.querySelector('.posts-container');
+                        postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
+                                        
+                     
                        alert('投稿が成功しました');
                    } else {
                        alert('投稿に失敗しました');
