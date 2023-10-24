@@ -55,7 +55,7 @@
                     <div class="flex flex-col items-center">
                         <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
                             <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
-                            <ul id="postContainer" class="space-y-4 mt-6">
+                            <ul id="posts-Container" class="space-y-4 mt-6">
                                 @foreach ($posts as $post)
                                     <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4">
                                         <div class="flex">
