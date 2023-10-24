@@ -364,6 +364,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (xhr.status === 201) {
                 try {
                     var response = JSON.parse(xhr.responseText);
+                    console.log(response);
                     if (response.message) {
                         // 新しいコメントを生成して表示エリアに追加
                         var newComment = document.createElement('div');
