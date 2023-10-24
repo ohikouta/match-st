@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         
                         `
                         newPostContainer.innerHTML = contentHTML;
+                        console.log("contentHTMLが追加されました。");
                         
                         var replyButton = document.createElement('button');
                         replyButton.className = 'text-blue-500 block flex justify-between pl-15 reply-button';
@@ -269,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         `;
                 
                         newPostContainer.appendChild(replyButton);
+                        console.log("replybuttonが追加されました。");
                 
                         var commentSection = document.createElement('div');
                         commentSection.className = 'comment-section hidden';
@@ -285,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         `;
                 
                         newPostContainer.appendChild(commentSection);
+                        console.log("conmmentsectionが追加されました。");
                 
                         // 新しい投稿を投稿欄に追加
                         var postsContainer = document.querySelector('.posts-container');
