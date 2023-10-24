@@ -285,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             <p class="font-bold text-lg m-4">返信一覧</p>
                             <div id="comment-form" class="">
                                 <form method="POST" action="/comment">
-                                    @csrf
                                     <textarea name="comment_content" class="w-full" rows="1" placeholder="コメントを入力"></textarea>
                                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                                     <button type="submit" class="btn btn primary mt-2">送信</button>
@@ -326,6 +325,66 @@ document.addEventListener('DOMContentLoaded', function () {
        
     }
    
+    // コメント追加のAjax
+    // コメントを追加する Ajax リクエスト
+    function addComment(requestData) {
+        
+        // LaravelからCSRFトークンを取得
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        if (csrfTokenElement) {
+            var csrfToken = csrfTokenElement.getAttribute('content');
+            // ここでcsrfTokenを使用する処理を行う
+        } else {
+            // csrfTokenElementが存在しない場合のエラーハンドリング
+            console.error('csrf-tokenのmeta要素が存在しません。');
+        }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/comment", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
+    
+        xhr.onload = function () {
+            if (xhr.status === 201) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.message) {
+                        // 新しいコメントを生成して表示エリアに追加
+                        var newComment = document.createElement('div');
+                        newComment.className = 'border border-gray-300 shadow-md p-4 rounded-lg m-2';
+                        var contentHTML = `
+                            <div class="flex">
+                                <p class="text-gray-800 mr-3">返信日時: ${response.comment.created_at}</p>
+                                <p class="text-gray-800 mr-3">返信者: ${response.comment.user.name}</p>
+                            </div>
+                            <p class="p-2">${response.comment.content}
+                        `;
+                        newComment.innerHTML = contentHTML;
+        
+                        // 新しいコメントをコメント一覧に追加
+                        var commentList = document.querySelector('#comment-list-body');
+                        commentList.appendChild(newComment, commentList.firstChild);
+        
+                        alert('コメントが追加されました');
+                    } else {
+                        console.error('受信した JSON は null または不正な形式です.');
+                        alert('コメントの追加に失敗しました');
+                    }
+                } catch (e) {
+                    console.error('JSONデータのパースエラー', e);
+                }
+            } else {
+                console.error(xhr.statusText);
+            }
+        };
+    
+        xhr.onerror = function () {
+            console.error("リクエスト中にエラーが発生しました");
+        };
+    
+        xhr.send(requestData);
+    }
+
    
 });
 

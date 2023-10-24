@@ -49,7 +49,16 @@ class TimelineController extends Controller
         $comment->content = $request->input('comment_content');
         $comment->save();
         
-        // 成功時のリダイレクト
-        return redirect('/');
+        if ($comment) {
+            $responseData = [
+                'message' => 'コメントを送信しました',
+                'content' => $comment->content,
+                'created_at' => Carbon::parse($comment->created_at)->format('Y-m-d H:i:s'),
+                'user' => $comment->user->name,
+            ];
+            return response()->json($responseData, 201);
+        } else {
+            return response()->json(['message' => 'コメント送信に失敗しました'], 400);
+        }
     }
 }

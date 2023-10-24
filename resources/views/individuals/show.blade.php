@@ -74,15 +74,17 @@
                                         <div id="comment-list" class="comment-section hidden">
                                             <p class="font-bold text-lg m-4">返信一覧</p>
                                             <!-- コメント一覧を表示（非表示） -->
-                                            @foreach ($post->comments as $comment)
-                                                <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
-                                                    <div class="flex">
-                                                        <p class="text-gray-800 mr-3">返信日時: {{ $comment->created_at }}</p>
-                                                        <p class="text-gray-800 mr-3">返信者: {{ $comment->user->name }}</p>
+                                            <div id="comment-list-body">
+                                                @foreach ($post->comments as $comment)
+                                                    <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
+                                                        <div class="flex">
+                                                            <p class="text-gray-800 mr-3">返信日時: {{ $comment->created_at }}</p>
+                                                            <p class="text-gray-800 mr-3">返信者: {{ $comment->user->name }}</p>
+                                                        </div>
+                                                        <p class="p-2">{{ $comment->content }}</p>
                                                     </div>
-                                                    <p class="p-2">{{ $comment->content }}</p>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                             <div id="comment-form" class="">
                                                 <form method="POST" action="/comment">
                                                     @csrf
