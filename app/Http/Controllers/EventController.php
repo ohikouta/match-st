@@ -19,7 +19,9 @@ class EventController extends Controller
     // 入力欄表示 → 登録 → 結果表示
     public function show()
     {
-        return view('events.plan');
+        $planImage = Image::find(2);
+        
+        return view('events.plan', ['planImage' => $planImage]);
     }
     
     
@@ -58,16 +60,8 @@ class EventController extends Controller
     
     public function showResult(Event $event)
     {
-        return view('events.show')->with(['event' => $event]);
+        return view('events.result')->with(['event' => $event]);
     }
-
-    // イベント一覧を表示する
-    public function look(Event $event)
-    {
-        return view('events.look')->with(['events' => $event->getPaginateBylimit(5)]);
-    }
-    
-    
     
     public function showDetail($eventid) 
     {
@@ -105,7 +99,6 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         
-        
         $request->validate([
             'name' => 'required|max:255',
             'summary' => 'nullable',
@@ -113,14 +106,11 @@ class EventController extends Controller
             'address' => 'required',
         ]);
         
-        
-        
         $event = Event::find($id);
         $event->name = $request->input('name');
         $event->summary = $request->input('summary');
         $event->event_date = $request->input('event_date');
         $event->address = $request->input('address');
-        
         
         $event->save();
         

@@ -36,9 +36,9 @@
         <main class="flex justify-center">
             <div class="w-3/4 my-10 p-5 flex flex-col items-center border border-solid rounded-lg shadow-md">
                 <div class="flex-col ">
-                    <p>以下のコミュニティが作成されました</p>
+                    <p class="my-4 font-bold">以下のコミュニティが作成されました</p>
                     <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">タイトル</h2>
-                    <p class="font-bold mb-4 pl-4">{{ $individual->name }}</p>
+                    <p class="font-bold mb-4 pl-4">{{ $individual->title }}</p>
                     <h2 class="border-l-4 border-blue-500 pl-2 text-xl font-bold mb-2">概要</h2>
                     <p class="font-bold mb-4 pl-4">{{ $individual->summary }}</p>
                 </div>
@@ -47,7 +47,7 @@
         </main>
         
         <!-- フッター -->
-        <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
+        <footer class="fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>

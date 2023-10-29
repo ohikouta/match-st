@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         var contentHTML = `
                             <div class="flex">
                                 <p class="text-gray-800 mr-3">返信日時: ${response.created_at}</p>
-                                <p class="text-gray-800 mr-3">返信者: ${response.name}</p>
+                                <p class="text-gray-800 mr-3">返信者: ${response.user}</p>
                             </div>
                             <p class="p-2">${response.content}
                         `;

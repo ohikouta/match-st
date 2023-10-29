@@ -14,7 +14,9 @@ class IndividualController extends Controller
 {
     public function show()
     {
-        return view('individuals.plan');
+        $planImage = Image::find(2);
+        
+        return view('individuals.plan', ['planImage' => $planImage]);
     }
     
     public function store(Request $request)

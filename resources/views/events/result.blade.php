@@ -47,7 +47,7 @@
         </main>
         
         <!-- フッター -->
-        <footer class="flex flex-col items-center justify-center bg-blue-500 p-10">
+        <footer class="fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-blue-500 p-10">
             <h1 class="text-4xl font-bold text-white">IEEESB ～仲間をつくる～</h1>
             <p class="text-lg font-bold text-white">All Rights Reserved.</p>
         </footer>
