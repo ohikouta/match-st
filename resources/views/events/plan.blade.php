@@ -29,6 +29,10 @@
                 </form>
             </div>
         </header>
+        <!-- 画像 -->
+        <div class="w-full h-64 overflow-hidden">
+            <img src='{{ asset($planImage->url) }}' class="object-center object-cover w-full h-full">
+        </div>
         <main class="flex justify-center">
             <div class="m-12 p-10 w-3/4 flex flex-col items-center bg-gray-200 border border-solid shadow-mg rounded-lg">
                 <h1 class="text-4xl font-bold border-l-4 border-blue-500 pl-4">イベントの作成</h1>

@@ -34,11 +34,11 @@
         </header>
         <!-- メインコンテンツ -->
         <main class="">
-            <div>
-                <a href="{{ route('images.show') }}">アプリ画像登録</a>
-            </div>
+            <!--<div>-->
+            <!--    <a href="{{ route('images.show') }}">アプリ画像登録</a>-->
+            <!--</div>-->
             <div class="">
-                <div class="sm:flex sm:flex-col sm:bg-red-500 md:flex md:flex-col md:bg-blue-500 lg:w-5/6 lg:flex lg:flex-row lg:justify-between lg:bg-green-500 xl:flex xl:w-4/5 xl:flex-row xl:justify-between xl:bg-yellow-500 mx-auto">
+                <div class="sm:flex sm:flex-col md:flex md:flex-col lg:w-5/6 lg:flex lg:flex-row lg:justify-between  xl:flex xl:w-4/5 xl:flex-row xl:justify-between mx-auto">
                     <!-- コミュニティとイベント: 中央セクション -->
                     <div class="sm:order-2 md:order-2 lg:order-1 lg:flex-6 lg:w-3/5 mx-4">
                         <div class="flex flex-col">
@@ -118,15 +118,6 @@
                                                 <div class="w-5/12 mr-6 text-center text-sm">概要</div>
                                                 <div class="w-1/12 mr-6 text-center text-sm">定員</div>
                                                 <div class="w-1/12 mr-6 text-center text-sm">リンク</div>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <!-- テストサンプルコード -->
-                                        <!-- 以下のdiv要素をsm:非表示、md,lg,xl:表示に設定する -->
-                                        <div class="invisible md:visible">
-                                            <div class="hidden md:block">
-                                                <p>サンプルテキスト</p>
                                             </div>
                                             
                                         </div>

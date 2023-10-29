@@ -12,14 +12,13 @@
     <body>
         <header>
             <div class="bg-blue-500 text-white p-4">
-                <h1 class="text-4xl font-bold">IEEE ～仲間をつくる～</h1>
-                <!-- /users/create へのリンクを絶対URLで生成 -->
+                <a href="{{ route('users.index') }}" class="sm:text-2xl md:text-4xl block font-bold">IEEE ～仲間をつくる～</a>
             </div>
             <!-- ナビゲーションセクション -->
             <div class="bg-blue-500 p-4 flex justify-between">
                 <div>
                     <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
-                    <a href="{{ url('/events/index') }}" class="font-bold text-white">イベントを企画する</a>
+                    <a href="{{ route('events.plan') }}" class="font-bold text-white">イベントを企画する</a>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -30,6 +29,9 @@
                 </form>
             </div>
         </header>
+        <div class="w-full h-64 overflow-hidden">
+            <img src='{{ asset($planImage->url) }}' class="object-center object-cover w-full h-full">
+        </div>
         <main class="flex justify-center">
             <div class="m-12 p-10 w-3/4 flex flex-col items-center bg-gray-200 border border-solid shadow-mg rounded-lg">
                 <h1 class="text-4xl font-bold border-l-4 border-blue-500 pl-4">コミュニティ作成ページ</h1>
