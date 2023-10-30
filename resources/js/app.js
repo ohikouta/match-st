@@ -194,11 +194,30 @@ document.addEventListener('DOMContentLoaded', function () {
         var content = document.querySelector('textarea[name="content"]').value;
         var individual_id = document.querySelector('input[name="individual_id"]').value;
         
+        // 正規表現を使用して、content内の@usernameを抽出
+        var mentionMatches = content.match(/@[\w]+/g);
+        console.log(mentionMatches);
+        var mentionsData = [];
+        console.log(mentionsData);
+        
+        if (mentionMatches) {
+            mentionsData = mentionMatches.map(function (mention) {
+                // @を削除してユーザー名のみ取得
+                return mention.substring(1);
+            });
+            
+            console.log(mentionsData);
+        }
+        
         // リクエストデータをjson文字列に変換
         var requestData = JSON.stringify({
             content: content,
-            individual_id: individual_id
+            individual_id: individual_id,
+            mentions: mentionsData,
+            message: content,
         });
+        
+        console.log('kkkkkkkkkk');
         
         // 関数呼び出し
         postTimeline(requestData);
@@ -213,10 +232,23 @@ document.addEventListener('DOMContentLoaded', function () {
         var content = document.querySelector('textarea[name="comment_content"]').value;
         var post_id = document.querySelector('input[name="post_id"]').value;
         
+        // 正規表現を使用して、content内の@usernameを抽出
+        var mentionMatches = content.match(/@[\w]+/g);
+        var mentionsData = [];
+        
+        
+        if (mentionMatches) {
+            mentionsData = mentionMatches.map(function (mention) {
+                // @を削除してユーザー名のみ取得
+                return mention.substring(1);
+            });
+        }
+        
         // リクエストデータをjson文字列に変換
         var requestData = JSON.stringify({
             content: content,
-            post_id: post_id
+            post_id: post_id,
+            mentions: mentionsData,
         });
         
         // 関数呼び出し
@@ -247,6 +279,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // レスポンスの処理
         xhr.onload = function () {
             console.log(xhr.status);
+            console.log("201が帰ってきてねえぜ");
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+            } 
             if (xhr.status === 201) {
                 try{
                     var response = JSON.parse(xhr.responseText);
@@ -390,3 +427,78 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send(requestData);
     }
 });
+
+
+
+// メンションの実装
+// document.addEventListener('DOMContentLoaded', function() {
+//     // メンション機能の実装
+//     const messageInput = document.getElementById('message');
+//     messageInput.addEventListener('input', function () {
+//         const message = this.value;
+//         const mentions = message.match(/@(\w+)/g);
+
+//         const xhr = new XMLHttpRequest();
+//         xhr.open("POST", "/timeline", true);
+//         xhr.setRequestHeader("Content-Type", "application/json");
+//         xhr.setRequestHeader("X-CSRF-TOKEN", "{{ csrf_token() }}");
+
+//         xhr.onload = function() {
+//             if (xhr.status === 201) {
+//                 const response = JSON.parse(xhr.responseText);
+//                 console.log(response);
+//             }
+//         };
+
+//         const requestData = JSON.stringify({
+//             _token: "{{ csrf_token() }}",
+//             mentions: mentions,
+//             content: message,
+//         });
+
+//         xhr.send(requestData);
+//     });
+// });
+
+
+
+// function getNotifications() {
+//     $.get('/get-notifications', function(data) {
+//         // データを処理して通知を表示
+//         const notificationContainer = document.getElementById('notificationContainer');
+//         notificationContainer.innerHTML = '';
+        
+//         data.forEach(function(notification) {
+//             // 各通知を表示する処理を追加
+//             const notificationItem = document.createElement('div');
+//             notificationItem.textContent = notification.message;
+//             notificationContainer.appendChild(notificationItem);
+            
+//         });
+//     });
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

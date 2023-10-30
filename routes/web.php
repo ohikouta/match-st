@@ -100,6 +100,10 @@ Route::controller(ImageController::class)->middleware(['auth'])->group(function(
     Route::post('/image-post', 'store')->name('images.store');
     
 });
+Route::controller(NotificationController::class)->middleware(['auth'])->group(function(){
+    Route::post('/send-notification', 'NotificationController@sendNotification');
+    Route::get('/get-notifications', 'getNotifications');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

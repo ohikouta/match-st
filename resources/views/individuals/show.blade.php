@@ -120,7 +120,8 @@
                     <form id="postForm"　method="POST" action="{{ route('timeline.store') }}">
                         @csrf
                         <div class="form-group mt-3">
-                            <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                            <textarea id="message" name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                            <div id="mentionList"></div>
                         </div>
                         <input type="hidden" name="individual_id" value="{{ $individual->id }}">
                         <button type="button" id="postFormButton" class="btn btn-primary mt-3 inline-block text-center py-4 px-8 text-white font-bold bg-green-500 rounded-md hover:bg-green-600">投稿する</button>
