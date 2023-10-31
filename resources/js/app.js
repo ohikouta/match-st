@@ -194,11 +194,31 @@ document.addEventListener('DOMContentLoaded', function () {
         var content = document.querySelector('textarea[name="content"]').value;
         var individual_id = document.querySelector('input[name="individual_id"]').value;
         
+        // 正規表現を使用して、content内の@usernameを抽出
+        var mentionMatches = content.match(/@[\w]+/g);
+        console.log(mentionMatches);
+        var mentionsData = [];
+        console.log(mentionsData);
+        
+        if (mentionMatches) {
+            mentionsData = mentionMatches.map(function (mention) {
+                // @を削除してユーザー名のみ取得
+                return mention.substring(1);
+            });
+            
+            console.log(mentionsData);
+        }
+        
         // リクエストデータをjson文字列に変換
         var requestData = JSON.stringify({
             content: content,
-            individual_id: individual_id
+            individual_id: individual_id,
+            mentions: mentionsData,
+            message: content,
         });
+        
+        
+        console.log('kkkkkkkkkk');
         
         // 関数呼び出し
         postTimeline(requestData);
@@ -213,10 +233,23 @@ document.addEventListener('DOMContentLoaded', function () {
         var content = document.querySelector('textarea[name="comment_content"]').value;
         var post_id = document.querySelector('input[name="post_id"]').value;
         
+        // 正規表現を使用して、content内の@usernameを抽出
+        var mentionMatches = content.match(/@[\w]+/g);
+        var mentionsData = [];
+        
+        
+        if (mentionMatches) {
+            mentionsData = mentionMatches.map(function (mention) {
+                // @を削除してユーザー名のみ取得
+                return mention.substring(1);
+            });
+        }
+        
         // リクエストデータをjson文字列に変換
         var requestData = JSON.stringify({
             content: content,
-            post_id: post_id
+            post_id: post_id,
+            mentions: mentionsData,
         });
         
         // 関数呼び出し
@@ -247,6 +280,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // レスポンスの処理
         xhr.onload = function () {
             console.log(xhr.status);
+            console.log("201が帰ってきてねえぜ");
+            // if (xhr.status === 200) {
+            //     var response = JSON.parse(xhr.responseText);
+            //     console.log(response);
+            // } 
+
+            console.log(xhr.responseText);
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            
             if (xhr.status === 201) {
                 try{
                     var response = JSON.parse(xhr.responseText);
@@ -390,3 +433,6 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send(requestData);
     }
 });
+
+
+
