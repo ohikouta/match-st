@@ -29,6 +29,32 @@
                         <i class="fas fa-sign-out-alt"></i>{{ __('Log Out') }}
                     </button>
                 </form>
+                <div>
+                    <a id="notification-button" onclick="toggleNotification()" class="hover:text-gray-500"><i class="fas fa-bell"></i></a>
+                    <!-- クリックしたら表示する通知セクション -->
+                    <div id="notification-list" class="absolute top-40 right-0 z-10 border border-solid border-gray-500 shadow-md rounded-lg p-4 hidden bg-green-300">
+                        <p class="text-center text-lg font-bold p-2"><i class="fas fa-bell mr-2"></i>新着メッセージ</p>
+                        @foreach ($notificationData as $notification)
+                            <div class="border-b border-solid border-gray-700">
+                                <p class="text-sm text-gray-600">{{ $notification->created_at }}</p>
+                                <p class="text-blue">{{ '@' }}{{ $notification->individual->title }}</p>
+                                <p class="font-bold">{{ $notification->sender->name }}からメッセージ</p>
+                                <p>{{ $notification->message }}</p>
+                            </div>
+                        @endforeach
+                </div>
+                    <script>
+                        function toggleNotification() {
+                            var notificationList = document.getElementById("notification-list");
+                            if (notificationList.style.display === "none" || notificationList.style.display === "") {
+                                notificationList.style.display = "block";
+                            } else {
+                                notificationList.style.display = "none";
+                            }
+                        }
+                    </script>
+                    
+                </div>
             </div>
             
         </header>

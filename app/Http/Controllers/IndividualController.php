@@ -64,9 +64,10 @@ class IndividualController extends Controller
         }
         
         $posts = $individual->posts->reverse();
+        $userList = $individual->users->pluck('name')->all();
         
         
-        return view('individuals.show', compact('individual', 'posts'));
+        return view('individuals.show', compact('individual', 'posts', 'userList'));
     }
     
     public function sendJoinRequest(Request $request, Individual $individual)

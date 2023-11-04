@@ -12,6 +12,7 @@ use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\IndividualController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\MembershipRequestController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +89,8 @@ Route::controller(IndividualController::class)->middleware(['auth'])->group(func
 Route::controller(TimelineController::class)->middleware(['auth'])->group(function(){
     Route::post('/timeline', 'store')->name('timeline.store');
     Route::post('/comment', 'addComment')->name('timeline.addComment');
+    Route::delete('/posts/{id}', 'deletePost')->name('post.delete');
+    Route::delete('/comments/{id}', 'deleteComment')->name('comment.delete');
 });
 
 Route::controller(MembershipRequestController::class)->middleware(['auth'])->group(function(){
@@ -101,7 +104,7 @@ Route::controller(ImageController::class)->middleware(['auth'])->group(function(
     
 });
 Route::controller(NotificationController::class)->middleware(['auth'])->group(function(){
-    Route::post('/send-notification', 'NotificationController@sendNotification');
+    Route::post('/send-mention-notification', 'sendNotification');
     Route::get('/get-notifications', 'getNotifications');
 });
 
