@@ -27,7 +27,6 @@ class IndividualController extends Controller
             'title' => 'required|string|max:255',
             'summary' => 'nullable|string',
             'category' => 'required|in:qualification,product,topic',
-            'admin_id' => 'required|numeric', // 管理者IDのバリデーションルール
         ]);
     
         // 画像ファイルの処理（アップロードなど）
@@ -43,7 +42,7 @@ class IndividualController extends Controller
         $individual->title = $validatedData['title'];
         $individual->summary = $validatedData['summary'];
         $individual->category = $validatedData['category'];
-        $individual->admin_id = $validatedData['admin_id'];
+        $individual->admin_id = auth()->user()->id;
         $individual->save();
     
         // 成功した場合のリダイレクトなどを行う
@@ -64,9 +63,10 @@ class IndividualController extends Controller
         }
         
         $posts = $individual->posts->reverse();
+        $userList = $individual->users->pluck('name')->all();
         
         
-        return view('individuals.show', compact('individual', 'posts'));
+        return view('individuals.show', compact('individual', 'posts', 'userList'));
     }
     
     public function sendJoinRequest(Request $request, Individual $individual)

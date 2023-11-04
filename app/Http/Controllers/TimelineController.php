@@ -61,4 +61,28 @@ class TimelineController extends Controller
             return response()->json(['message' => 'コメント送信に失敗しました'], 400);
         }
     }
+    
+    public function deletePost($id)
+    {
+        $post = Post::find($id);
+        
+        if ($post) {
+            $post->delete();
+            return response('', 204);
+        } else {
+            return response('削除に失敗しました', 400);
+        }
+    }
+    
+    public function deleteComment($id) {
+        $comment = Comment::find($id);
+        
+        if ($comment) {
+            $comment->delete();
+            return response('', 204);
+        } else {
+            return response('削除に失敗しました', 400);
+        }
+    }
 }
+

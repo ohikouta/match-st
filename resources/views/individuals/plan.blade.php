@@ -61,14 +61,6 @@
                             <option value="topic">話題</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group mt-5">
-                        <label for="admin_id" class="block text-lg font-bold">管理者ID</label>
-                        <p>自身のIDを入力してください</p>
-                        <input type="text" id="admin_id" name="admin_id" required>
-                    </div>
-            
-            
                     <button type="submit" class="mt-6 btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">登録</button>
                 </form>
             </div>

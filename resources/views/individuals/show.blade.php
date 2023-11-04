@@ -24,6 +24,11 @@
             <img src='{{ asset($individual->image) }}' class="object-center object-cover h-full">
         </div>
         <!-- メインコンテンツ -->
+        <div>
+            @foreach ($userList as $user)
+                <p>{{ $user }}</p>
+            @endforeach
+        </div>
         <div class="flex justify-center items-center">
             <div class="w-3/4 flex flex-col border border-solid border-gray-300 shadow-md mt-10 mb-10 p-10">
                 <h1 class="border-l-4 border-blue-500 pl-4 font-bold text-4xl mt-3">{{ $individual->title }}</h1>
@@ -57,10 +62,17 @@
                             <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
                             <ul id="posts-container" class="space-y-4 mt-6">
                                 @foreach ($posts as $post)
-                                    <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4">
-                                        <div class="flex">
-                                            <p class="text-gray-800 mr-3">投稿日時: {{ $post->created_at }}</p>
-                                            <p class="text-gray-800 mr-3">投稿者: {{ $post->user->name }}</p>
+                                    <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4" id="post-{{ $post->id }}">
+                                        <div class="flex justify-between">
+                                            <div class="flex">
+                                                <p class="text-gray-800 mr-3">投稿日時: {{ $post->created_at }}</p>
+                                                <p class="text-gray-800 mr-3">投稿者: {{ $post->user->name }}</p>
+                                            </div>
+                                            <form method="POST" action="{{ route('post.delete', ['id' => $post->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-post-button" data-postId="{{ $post->id }}"><i class="fas fa-trash block"></i></button>
+                                            </form>
                                         </div>
                                         <p class="text-gray-800 p-2">{{ $post->content }}</p>
                                         <!-- Replyボタン -->
@@ -69,18 +81,29 @@
                                             <p class="inline ml-2">Reply</p>
                                             <i class="far fa-comment-dots ml-2"></i>
                                         </button>
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
                                         
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
                                         <!-- コメント表示（非表示）-->
                                         <div id="comment" class="comment-section hidden">
                                             <p class="font-bold text-lg m-4">返信一覧</p>
                                             <!-- コメント一覧を表示（非表示） -->
                                             <div id="comment-list">
                                                 @foreach ($post->comments as $comment)
-                                                    <div class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
+                                                    <div id="comment-{{ $comment->id }}" class="border border-gray-300 shadow-md p-4 rounded-lg m-2">
                                                         <div class="flex">
                                                             <p class="text-gray-800 mr-3">返信日時: {{ $comment->created_at }}</p>
                                                             <p class="text-gray-800 mr-3">返信者: {{ $comment->user->name }}</p>
                                                         </div>
+                                                        <i class="fas fa-trash"></i>
                                                         <p class="p-2">{{ $comment->content }}</p>
                                                     </div>
                                                 @endforeach
@@ -117,12 +140,15 @@
                     </div>
                     @endif
                     <!-- 投稿フォーム -->
-                    <form id="postForm"　method="POST" action="{{ route('timeline.store') }}">
+                    <form id="postForm" method="POST" action="{{ route('timeline.store') }}">
                         @csrf
                         <div class="form-group mt-3">
-                            <textarea name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                            <textarea id="message" name="content" class="form-control w-full" rows="3" placeholder="投稿内容を入力"></textarea>
+                            <div id="mentionList"></div>
                         </div>
+                        <!--  情報渡し -->
                         <input type="hidden" name="individual_id" value="{{ $individual->id }}">
+                        <input type="hidden" name="user_list" value="{{ json_encode($userList) }}">
                         <button type="button" id="postFormButton" class="btn btn-primary mt-3 inline-block text-center py-4 px-8 text-white font-bold bg-green-500 rounded-md hover:bg-green-600">投稿する</button>
                     </form>
                 @endif
