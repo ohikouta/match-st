@@ -51,10 +51,14 @@
 
                 <!-- タイムライン一覧 -->
                 @if ($userIsMember || $userIsAdmin)
-                    @if ($individual->posts->count() > 0)
-                    <div class="flex flex-col items-center">
+                    <div id="posts-information" class="flex flex-col items-center">
                         <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
                             <h2 class="font-bold text-xl border-l-4 border-blue-500 pl-4">投稿一覧</h2>
+                            @if ($individual->posts->count() === 0)
+                                <div id="no-posts-message" class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
+                                    <p class="font-bold">投稿はありません</p>
+                                </div>
+                            @endif
                             <ul id="posts-container" class="space-y-4 mt-6">
                                 @foreach ($posts as $post)
                                     <li class="bg-white p4 shadow-md rounded-lg p-4 mb-4" id="post-{{ $post->id }}">
@@ -129,11 +133,6 @@
                             </ul>
                         </div>
                     </div>
-                    @else
-                    <div id="no-posts-message" class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
-                        <p class="font-bold">投稿はありません</p>
-                    </div>
-                    @endif
                     <!-- 投稿フォーム -->
                     <form id="postForm" method="POST" action="{{ route('timeline.store') }}">
                         @csrf

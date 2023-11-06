@@ -187,6 +187,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var postCommentButton = document.getElementById('postCommentButton');
     var deletePostButtons = document.querySelectorAll('.delete-post-button');
     var deleteCommentButtons = document.querySelectorAll('.delete-comment-button');
+    var noPostsMessage = document.getElementById('no-posts-message');
+    var postsInformation = document.getElementById('posts-information');
     
     sendMentionButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -384,6 +386,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     var response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.message) {
+                        
+                        console.log(postsInformation);
+                        if (postsInformation) {
+                            postsInformation.style.display = "block";
+                        }
+                        
+                        console.log(noPostsMessage);
+                        if (noPostsMessage) {
+                            noPostsMessage.style.display = 'none';
+                        }
+                        
+                        
                         // 新しい投稿を生成
                         var newPostContainer = document.createElement('li');
                         newPostContainer.className = 'post bg-white p4 shadow-md rounded-lg p-4 mb-4';
@@ -437,10 +451,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         var postsContainer = document.querySelector('#posts-container');
                         postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
                         
-                        var noPostsMessage = document.getElementById('#no-posts-message');
-                        if (noPostsMessage) {
-                            noPostsMessage.style.display = 'none';
-                        }
                         
                    } else {
                        console.error('受信したjsonはnullまたは不正な形式です.');
