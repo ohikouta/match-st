@@ -15,18 +15,21 @@
                 <a href="{{ route('users.index') }}" class="block text-4xl font-bold">IEEE ～仲間をつくる～</a>
             </div>
             <!-- ナビゲーションセクション -->
-            <div class="bg-blue-500 p-4 flex justify-between">
+             <div class="bg-blue-500 p-4 flex justify-between">
                 <div>
-                    <a href="{{ url('/individuals/plan') }}" class="font-bold text-white">コミュニティをつくる</a>
-                    <a href="{{ route('events.plan') }}" class="font-bold text-white">イベントを企画する</a>
+                    <a href="{{ url('/individuals/plan') }}" class="sm:text-sm md:text-base font-bold text-white">コミュニティをつくる</a>
+                    <a href="{{ route('events.plan') }}" class="sm:text-sm md:text-base font-bold text-white">イベントを企画する</a>
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <div class="flex justify-between">
                     <!-- ログアウトボタン -->
-                    <button type="submit" class="underline text-sm text-gray-600 bg-green-300 p-2 rounded-lg hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <i class="fas fa-sign-out-alt"></i>{{ __('Log Out') }}
-                    </button>
-                </form>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <!-- ログアウトボタン -->
+                        <button type="submit" class="text-xl bg-green-500 p-2 rounded-md hover:bg-green-600">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </header>
         <!-- 画像 -->

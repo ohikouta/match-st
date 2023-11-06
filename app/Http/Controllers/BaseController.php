@@ -16,11 +16,28 @@ class BaseController extends Controller
 {
     public function start(Event $event, Individual $individual)
     {
+        
+        $qualificationData = Individual::where('category', 'qualification')->get();
+        $productData = Individual::where('category', 'product')->get();
+        $topicData = Individual::where('category', 'topic')->get();
+        $futureEvent = Event::where('event_date', '>', now())->get();
+        
+        foreach ($futureEvent as $event) {
+            $event->numberOfApplicants = $event->users->count();
+        }
+        $pastEvent = Event::where('event_date', '<', now())->get();
+        foreach ($pastEvent as $event) {
+            $event->numberOfApplicants = $event->users->count();
+        }
+        
         // return view('bases.index')->with(['bases' => $base->getPaginateByLimit(10)]);
         return view('start')
             ->with([
-                'events' => $event->getPaginateByLimit(5),
-                'individuals' => $individual->getPaginateByLimit(5)
+                'qualificationData' => $qualificationData,
+                'productData' => $productData,
+                'topicData' => $topicData,
+                'futureEvent' => $futureEvent,
+                'pastEvent' => $pastEvent,
                 ]);
             
     }
