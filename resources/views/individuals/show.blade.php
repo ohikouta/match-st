@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     @else
-                    <div class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
+                    <div id="no-posts-message" class="w-3/4 items-center bg-gray-100 border border-gray-300 shadow-md p-4">
                         <p class="font-bold">投稿はありません</p>
                     </div>
                     @endif

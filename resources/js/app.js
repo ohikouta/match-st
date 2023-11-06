@@ -374,10 +374,6 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onload = function () {
             console.log(xhr.status);
             console.log("201が帰ってきてねえぜ");
-            // if (xhr.status === 200) {
-            //     var response = JSON.parse(xhr.responseText);
-            //     console.log(response);
-            // } 
 
             console.log(xhr.responseText);
             var response = JSON.parse(xhr.responseText);
@@ -440,6 +436,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         // 新しい投稿を投稿欄に追加
                         var postsContainer = document.querySelector('#posts-container');
                         postsContainer.insertBefore(newPostContainer, postsContainer.firstChild);
+                        
+                        var noPostsMessage = document.getElementById('#no-posts-message');
+                        if (noPostsMessage) {
+                            noPostsMessage.style.display = 'none';
+                        }
+                        
                    } else {
                        console.error('受信したjsonはnullまたは不正な形式です.');
                        alert('投稿に失敗しました');
