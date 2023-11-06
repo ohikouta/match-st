@@ -24,11 +24,6 @@
             <img src='{{ asset($individual->image) }}' class="object-center object-cover h-full">
         </div>
         <!-- メインコンテンツ -->
-        <div>
-            @foreach ($userList as $user)
-                <p>{{ $user }}</p>
-            @endforeach
-        </div>
         <div class="flex justify-center items-center">
             <div class="w-3/4 flex flex-col border border-solid border-gray-300 shadow-md mt-10 mb-10 p-10">
                 <h1 class="border-l-4 border-blue-500 pl-4 font-bold text-4xl mt-3">{{ $individual->title }}</h1>
