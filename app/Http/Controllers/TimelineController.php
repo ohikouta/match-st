@@ -72,6 +72,7 @@ class TimelineController extends Controller
         }
     }
     
+<<<<<<< HEAD
     private function savePostToDatabase($postData)
     {
         $post = new Post();
@@ -114,5 +115,29 @@ class TimelineController extends Controller
     private function sendNotification($notification)
     {
         return Http::post('http://example.com/send-notification', $notification->toArray());
+=======
+    public function deletePost($id)
+    {
+        $post = Post::find($id);
+        
+        if ($post) {
+            $post->delete();
+            return response('', 204);
+        } else {
+            return response('削除に失敗しました', 400);
+        }
+    }
+    
+    public function deleteComment($id) {
+        $comment = Comment::find($id);
+        
+        if ($comment) {
+            $comment->delete();
+            return response('', 204);
+        } else {
+            return response('削除に失敗しました', 400);
+        }
+>>>>>>> origin/master
     }
 }
+

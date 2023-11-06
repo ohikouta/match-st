@@ -9,6 +9,7 @@ use App\Models\Community;
 use App\Models\Event;
 use App\Models\Individual;
 use App\Models\Image;
+use App\Models\Notification;
 use Cloudinary;
 
 class BaseController extends Controller
@@ -38,6 +39,7 @@ class BaseController extends Controller
         
         // ログインユーザーが管理者として関連付けられているコミュニティを取得
         $adminIndividuals = Individual::where('admin_id', $userId)->get();
+        $notificationData = Notification::where('user_id', $userId)->where('read', 0)->get();
         
         $communitiesData = $community->getDataSomehow();
         
@@ -69,6 +71,7 @@ class BaseController extends Controller
                 'futureEvent' => $futureEvent,
                 'pastEvent' => $pastEvent,
                 'userData' => $user,
+                'notificationData' => $notificationData,
                 // 固定画像
                 'individualImage' => $individualImage,
                 'eventImage' => $eventImage,

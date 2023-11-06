@@ -179,13 +179,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // タイムライン投稿のAjax
-
-// フォームが送信されるときにイベントをリッスン
-
 document.addEventListener('DOMContentLoaded', function () {
        
+    // トリガーの定義   
+    var sendMentionButton  = document.getElementById('postFormButton');
     var postTimelineButton = document.getElementById('postFormButton');
     var postCommentButton = document.getElementById('postCommentButton');
+    var deletePostButtons = document.querySelectorAll('.delete-post-button');
+    var deleteCommentButtons = document.querySelectorAll('.delete-comment-button');
+    
+    sendMentionButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        var content = document.querySelector('textarea[name="content"]').value;
+        var individual_id = document.querySelector('input[name="individual_id"]').value;
+        
+        // 正規表現を使用して、content内の@usernameを抽出
+        var mentionMatches = content.match(/@[\w]+/g);
+        var mentionedUsers = [];
+        
+        
+        if (mentionMatches) {
+            mentionedUsers = mentionMatches.map(function (mention) {
+                // @を削除してユーザー名のみ取得
+                return mention.substring(1);
+            });
+        }
+        console.log("mmmmmmmmmmmmmmmmmm");
+        console.log(mentionedUsers);
+        console.log("mmmmmmmmmmmmmmmmmm");
+        
+        // リクエストデータをjson文字列に変換
+        var requestData = JSON.stringify({
+            content: content,
+            mentionedUsers: mentionedUsers,
+            individual_id: individual_id,
+        });
+        
+        // 関数呼び出し
+        sendMentionNotification(requestData);
+    });
        
     postTimelineButton.addEventListener('click', function (event) {
         event.preventDefault(); // デフォルトのフォーム送信動作を無効化
@@ -218,8 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         
         
-        console.log('kkkkkkkkkk');
-        
+
         // 関数呼び出し
         postTimeline(requestData);
         
@@ -257,7 +288,69 @@ document.addEventListener('DOMContentLoaded', function () {
         
         document.querySelector('textarea[name="comment_content"]').value = '';
     });
+    
+    deletePostButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            var postId = button.getAttribute('data-postId');
+            
+            if (postId) {
+                console.log("success-getpostid");
+                deletePost(postId);
+            } else {
+                console.log("data-postId属性が見つからない");
+            }
+        });
+    });
+    
+    deleteCommentButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            var commentId = button.dataset.commentId;
+            deleteComment(commentId);
+        });
+    });
        
+    // 投稿ボタンがクリックされたときにメンションを送信
+    function sendMentionNotification(requestData) {
+        // CSRF処理
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        if (csrfTokenElement) {
+            var csrfToken = csrfTokenElement.getAttribute('content');
+        } else {
+            console.error('csrf-tokenのmeta要素が存在しません');
+        }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/send-mention-notification', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
+        
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4) {
+                console.log("readystateが4となり成功フラグ");
+                console.log("oooooooooooooooooooo");
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+                console.log("oooooooooooooooooooo");
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log('通知が送信されました:', response);
+                } else {
+                    console.error('通知の送信中にエラー');
+                }
+            } else {
+                console.log("なんか、、");
+            }
+        };
+        
+        
+        console.log("mentionedUsersの正体を暴く");
+        
+        xhr.send(requestData);
+    }
+    
     function postTimeline(requestData) {
         
         // LaravelからCSRFトークンを取得
@@ -371,8 +464,7 @@ document.addEventListener('DOMContentLoaded', function () {
        
     }
    
-    // コメント追加のAjax
-    // コメントを追加する Ajax リクエスト
+    // コメント追加
     function addComment(requestData) {
         
         // LaravelからCSRFトークンを取得
@@ -432,6 +524,77 @@ document.addEventListener('DOMContentLoaded', function () {
     
         xhr.send(requestData);
     }
+    
+    // 削除成功時に実行
+    function handleDeleteSuccess(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.display = 'none';
+    }
+    
+    // 削除失敗時に実行
+    function handleDeleteFailure(error) {
+        console.error('削除エラー:', error);
+        alert('削除に失敗しました');
+    }
+    
+    // 投稿削除リクエスト
+    function deletePost(postId) {
+        // LaravelからCSRFトークンを取得
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        if (csrfTokenElement) {
+            var csrfToken = csrfTokenElement.getAttribute('content');
+            // ここでcsrfTokenを使用する処理を行う
+        } else {
+            // csrfTokenElementが存在しない場合のエラーハンドリング
+            console.error('csrf-tokenのmeta要素が存在しません。');
+        }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/posts/' + postId, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                if (xhr.status === 204) {
+                    handleDeleteSuccess('post-' + postId);
+                } else {
+                    handleDeleteFailure(xhr.responseText);
+                }
+            }
+        };
+        xhr.send();
+    }
+    
+    // コメント削除リクエスト
+    function deleteComment(commentId) {
+        // LaravelからCSRFトークンを取得
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        if (csrfTokenElement) {
+            var csrfToken = csrfTokenElement.getAttribute('content');
+            // ここでcsrfTokenを使用する処理を行う
+        } else {
+            // csrfTokenElementが存在しない場合のエラーハンドリング
+            console.error('csrf-tokenのmeta要素が存在しません。');
+        }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/comments/' + commentId, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 204) {
+                    handleDeleteSuccess('comment-' + commentId);
+                } else {
+                    handleDeleteFailure(xhr.responseText);
+                }
+            }
+        };
+        xhr.send();
+    }
+    
 });
 
 
