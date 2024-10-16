@@ -1,0 +1,43 @@
+services:
+  database:
+    image: mysql:5.7  # Apple Silicon対応のイメージ
+    container_name: db_test_college
+    platform: linux/amd64 # この行を追記
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_mysql_test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./volumes/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"
+
+  php-apache:
+    container_name: php_apache_test_college
+    build:
+      context: ./php
+    ports:
+      - "8000:80" # localhost:8000でアクセスできる
+    volumes:
+      - ./src:/var/www/test
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database # databaseに後に実行する
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin  # Apple Silicon対応のイメージ
+    platform: linux/amd64 # この行を追記
+    depends_on:
+      - database
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=database
+      - PMA_USER=admin
+      - PMA_PASSWORD=password
+    ports:
+      - "3000:80"
+    volumes:
+      - ./volumes/docker/phpmyadmin/sessions:/sessions
