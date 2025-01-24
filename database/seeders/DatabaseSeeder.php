@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+# 怖いから残してるけど多分いらないコメントアウト
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // 他のシーダークラスを呼び出してデータを挿入する
+        $this->call([
+            UserSeeder::class,
+            ImageSeeder::class,
+            IndividualSeeder::class,
+            EventSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
+        ]);
     }
 }

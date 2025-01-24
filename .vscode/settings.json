@@ -1,10 +1,1 @@
-{
-    "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#0e5a5f",
-        "activityBarBadge.background": "#0e5a5f", // アクティビティバッジの背景色を青に設定
-        "activityBar.background": "#0e5a5f", // アクティビティバーの背景色を赤に設定（任意）
-        "sideBar.background": "#0e5a5f", // サイドバーの背景色を赤に設定（任意）
-        "statusBar.background": "#0e5a5f", // ステータスバーの背景色を設定
-        "statusBar.foreground": "#ffffff", // ステータスバーの文字色を設定
-    }
-}
+

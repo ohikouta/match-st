@@ -22,7 +22,7 @@ services:
     ports:
       - "8000:80" # localhost:8000でアクセスできる
     volumes:
-      - ./src:/var/www/test
+      - .:/var/www/test
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - database # databaseに後に実行する
