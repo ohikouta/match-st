@@ -21,6 +21,7 @@ services:
       context: ./php
     ports:
       - "8000:80" # localhost:8000でアクセスできる
+      - "5173:5173" # vite
     volumes:
       - .:/var/www/test
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
